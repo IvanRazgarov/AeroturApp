@@ -4,8 +4,17 @@
              x:Class="AeroturApp.MainPage">
 
     <StackLayout>
+        <StackLayout.Background>
+            <LinearGradientBrush EndPoint="0,1">
+                <GradientStop Color="#14589E" Offset="0.1"/>
+                <GradientStop Color="#297AC6" Offset="1"/>
+            </LinearGradientBrush>
+        </StackLayout.Background>
         <StackLayout>
-            <Label Text="Дешёвые авиабилеты онлайн" TextColor="White" HorizontalOptions="Center"/>
+            <StackLayout VerticalOptions="StartAndExpand" Margin="0,100,0,0">
+                <Label Text="Дешёвые" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
+                <Label Text="авиабилеты" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
+            </StackLayout>
         </StackLayout>
     </StackLayout>
 
