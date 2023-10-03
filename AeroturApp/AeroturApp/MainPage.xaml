@@ -14,6 +14,18 @@
             <StackLayout VerticalOptions="StartAndExpand" Margin="0,100,0,0">
                 <Label Text="Дешёвые" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
                 <Label Text="авиабилеты" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
+                <Label Text="онлайн" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
+            </StackLayout>
+            <StackLayout>
+                <Frame BackgroundColor="Orange" CornerRadius="12" Margin="30,30,30,0">
+                    <Frame.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Color="#F69747" Offset="0.1"/>
+                            <GradientStop Color="#FF5923" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                    <Button x:Name="PromoButton" Text="Промокод Uzbekistan Airways" BackgroundColor="#0000000" TextColor="White" FontAttributes="Bold" FontSize="20" />
+                </Frame>
             </StackLayout>
         </StackLayout>
     </StackLayout>
