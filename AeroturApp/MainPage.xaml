@@ -35,7 +35,6 @@
                                         <RadioButton Value="DirectionTwoWay" Content="Туда и обратно"/>
                                         <RadioButton Value="DirectionComplexWay" Content="Сложный маршрут"/>
                                     </StackLayout>
-
                                     <Entry x:Name="StartPointEntry"/>
                                     <Entry x:Name="EndPointEntry"/>
                                     <DatePicker x:Name="StartDatePicker"/>
