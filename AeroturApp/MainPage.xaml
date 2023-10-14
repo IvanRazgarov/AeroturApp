@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="AeroturApp.MainPage">
+    <!--<ContentPage.BindingContext>
+        <vm:MainViewModel/>
+    </ContentPage.BindingContext>-->
+    <ScrollView>
+        <StackLayout Background="{StaticResource PrimaryGradientBrushV}">
+            <StackLayout>
+                <Image Source="ic_plane.svg"/>
+                <StackLayout VerticalOptions="StartAndExpand" Margin="0,100,0,0">
+                    <Label Text="Дешёвые" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
+                    <Label Text="авиабилеты" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
+                    <Label Text="онлайн" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
+                </StackLayout>
+                <Frame BackgroundColor="Transparent" BorderColor="Transparent"/>
+                <StackLayout>
+                    <Button x:Name="PromoButton" 
+                            Text="Промокод Uzbekistan Airways" 
+                            BackgroundColor="Transparent" 
+                            TextColor="White" 
+                            FontAttributes="Bold" 
+                            FontSize="20" 
+                            Background="{StaticResource AccentGradientBrushV}"
+                            Margin="30,0,30,0"/>
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent"/>
+                    <StackLayout >
+                        <Frame CornerRadius="0">
+                            <StackLayout>
+                                <StackLayout>
+                                    <StackLayout RadioButtonGroup.GroupName="Direction">
+                                        <RadioButton Value="DirectionOneWay" Content="В одну сторону" IsChecked="True"/>
+                                        <RadioButton Value="DirectionTwoWay" Content="Туда и обратно"/>
+                                        <RadioButton Value="DirectionComplexWay" Content="Сложный маршрут"/>
+                                    </StackLayout>
+
+                                    <Entry x:Name="StartPointEntry"/>
+                                    <Entry x:Name="EndPointEntry"/>
+                                    <DatePicker x:Name="StartDatePicker"/>
+                                    <DatePicker x:Name="EndDatePicker"/>
+                                </StackLayout>
+                                <toolkit:Expander>
+                                    <toolkit:Expander.Header>
+                                        <StackLayout>
+                                            <Label Text="Пассажиры" HeightRequest="30"/>
+                                            <Rectangle BackgroundColor="Black"/>
+                                        </StackLayout>
+                                    </toolkit:Expander.Header>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="90" />
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="0.5*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50" />
+                                            <RowDefinition Height="50" />
+                                            <RowDefinition Height="50" />
+                                            <RowDefinition Height="50" />
+                                        </Grid.RowDefinitions>
+                                        <Label Text="Взрослые(старше 12 лет)" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="1" Text="Дети(2-12 лет)" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="2" Text="Младенци(до 2 лет)" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        <Label Grid.Row="3" Text="Младенци с местом( до 2 лет)" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+                                        <Stepper x:Name="over12_stepper" Grid.Column="1" Maximum="12" Minimum="1"/>
+                                        <Stepper x:Name="twoto12_stepper" Grid.Column="1" Grid.Row="1" Maximum="4" Minimum="0"/>
+                                        <Stepper x:Name="under2_stepper" Grid.Column="1" Grid.Row="2" Maximum="2" Minimum="0"/>
+                                        <Stepper x:Name="under2seat_stepper" Grid.Column="1" Grid.Row="3" Maximum="4" Minimum="0"/>
+
+                                        <Label Grid.Column="2" BindingContext="{x:Reference over12_stepper}" Text="{Binding Path=Value}"/>
+                                        <Label Grid.Column="2" Grid.Row="1" BindingContext="{x:Reference twoto12_stepper}" Text="{Binding Path=Value}"/>
+                                        <Label Grid.Column="2" Grid.Row="2" BindingContext="{x:Reference under2_stepper}" Text="{Binding Path=Value}"/>
+                                        <Label Grid.Column="2" Grid.Row="3" BindingContext="{x:Reference under2seat_stepper}" Text="{Binding Path=Value}"/>
+                                    </Grid>
+                                </toolkit:Expander>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
