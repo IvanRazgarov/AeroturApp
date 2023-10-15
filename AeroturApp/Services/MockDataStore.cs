@@ -1,4 +1,4 @@
-﻿using AeroturApp.Models;
+﻿using AeroturApp.Models.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

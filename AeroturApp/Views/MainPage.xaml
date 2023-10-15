@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="AeroturApp.MainPage">
+             xmlns:vm ="clr-namespace:AeroturApp.Models.ViewModels"
+             x:Class="AeroturApp.Views.MainPage">
     <!--<ContentPage.BindingContext>
         <vm:MainViewModel/>
     </ContentPage.BindingContext>-->
@@ -17,35 +18,42 @@
                 </StackLayout>
                 <Frame BackgroundColor="Transparent" BorderColor="Transparent"/>
                 <StackLayout>
-                    <Button x:Name="PromoButton" 
-                            Text="Промокод Uzbekistan Airways" 
+                    <Button Text="Промокод Uzbekistan Airways" 
                             BackgroundColor="Transparent" 
                             TextColor="White" 
                             FontAttributes="Bold" 
                             FontSize="20" 
                             Background="{StaticResource AccentGradientBrushV}"
-                            Margin="30,0,30,0"/>
+                            Margin="15,0,15,0"
+                            />
                     <Frame BackgroundColor="Transparent" BorderColor="Transparent"/>
                     <StackLayout >
-                        <Frame CornerRadius="0">
-                            <StackLayout>
+                        <!--<Frame CornerRadius="0">-->
+                            <StackLayout BackgroundColor="Transparent">
                                 <StackLayout>
-                                    <StackLayout RadioButtonGroup.GroupName="Direction">
+                                    <!--<StackLayout RadioButtonGroup.GroupName="Direction">
                                         <RadioButton Value="DirectionOneWay" Content="В одну сторону" IsChecked="True"/>
                                         <RadioButton Value="DirectionTwoWay" Content="Туда и обратно"/>
                                         <RadioButton Value="DirectionComplexWay" Content="Сложный маршрут"/>
-                                    </StackLayout>
-                                    <Entry x:Name="StartPointEntry"/>
-                                    <Entry x:Name="EndPointEntry"/>
-                                    <DatePicker x:Name="StartDatePicker"/>
-                                    <DatePicker x:Name="EndDatePicker"/>
+                                    </StackLayout>-->
+                                <Picker x:Name="VayVariantPicker" 
+                                        SelectedIndex="0" 
+                                        Title="Вид пути" 
+                                        BackgroundColor="White" 
+                                        Margin="15,15"/>
+                                    
+                                <Entry x:Name="StartPointEntry" BackgroundColor="White" Margin="15,15"/>
+                                <Entry x:Name="EndPointEntry" BackgroundColor="White" Margin="15,15"/>
+                                <DatePicker x:Name="StartDatePicker" BackgroundColor="White" Margin="15,15"/>
+                                <CheckBox x:Name="DeltaSearch" BackgroundColor="White" Margin="15,15"/>
+                                <DatePicker x:Name="EndDatePicker" BackgroundColor="White" Margin="15,15"/>
                                 </StackLayout>
-                                <toolkit:Expander>
+                            <toolkit:Expander BackgroundColor="White" Margin="15,15">
                                     <toolkit:Expander.Header>
                                         <StackLayout>
-                                            <Label Text="Пассажиры" HeightRequest="30"/>
-                                            <Rectangle BackgroundColor="Black"/>
-                                        </StackLayout>
+                                            <Label Text="Пассажиры" HeightRequest="15"/>
+                                        <Rectangle BackgroundColor="Black"/>
+                                    </StackLayout>
                                     </toolkit:Expander.Header>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -74,9 +82,15 @@
                                         <Label Grid.Column="2" Grid.Row="2" BindingContext="{x:Reference under2_stepper}" Text="{Binding Path=Value}"/>
                                         <Label Grid.Column="2" Grid.Row="3" BindingContext="{x:Reference under2seat_stepper}" Text="{Binding Path=Value}"/>
                                     </Grid>
-                                </toolkit:Expander>
-                            </StackLayout>
-                        </Frame>
+                            </toolkit:Expander>
+                            <Picker x:Name="PricingPicker" 
+                                    SelectedIndex="0" 
+                                    Title="Класс полёта" 
+                                    BackgroundColor="White" 
+                                    Margin="15,15"/>
+                            <Button Text="Найти" TextColor="White" BackgroundColor="LightGreen" Margin="15,15"/>
+                        </StackLayout>
+                        <!--</Frame>-->
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
