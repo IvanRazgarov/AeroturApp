@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="AeroturApp.Views.SearchResultPage"
+             Title="SearchResultPage">
+    <VerticalStackLayout>
+        <CollectionView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame>
+                        <StackLayout>
+                            <Image BackgroundColor="{StaticResource Gray200}"/>
+                            <Frame Margin="0" CornerRadius="6">
+                                <StackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="date placeholder" HorizontalOptions="Start"/>
+                                        <Label Text="passangers placeholder" Grid.Row="1" HorizontalOptions="End"/>
+                                    </HorizontalStackLayout>
+                                    <Frame CornerRadius="6">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.75*"/>
+                                                <ColumnDefinition Width="0.25*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="time placeholder"/>
+                                            <Label Text="dleta time placeholder" Grid.Row="1"/>
+                                            <Button Text="other trips" 
+                                                    Grid.Column="1" 
+                                                    Grid.RowSpan="2" 
+                                                    HorizontalOptions="CenterAndExpand" 
+                                                    VerticalOptions="Center"/>
+                                        </Grid>
+                                    </Frame>
+                                    <Grid>
+                                        <Label Text="transit delta time placeholder" HorizontalOptions="Start"/>
+                                        <Button Text="details placeholder"/>
+                                    </Grid>
+                                    <Label Text="dest placeholder"/>
+                                    <toolkit:Expander>
+                                        <toolkit:Expander.Header>
+                                            <HorizontalStackLayout>
+                                                <Label Text="billing name"/>
+                                                <!--иконка багажа-->
+                                                <Image/>
+                                                <!--иконка возврата-->
+                                                <Image/>
+                                                <!--анимированная стрелка-->
+                                                <Image/>
+                                            </HorizontalStackLayout>
+                                        </toolkit:Expander.Header>
+                                        <StackLayout>
+                                            <Label Text="hhluggage placeholder"/>
+                                            <Label Text="luggage placeholder"/>
+                                            <Rectangle BackgroundColor="LightGray"/>
+                                            <Label Text="rebook placeholder"/>
+                                            <Label Text="return placeholder"/>
+                                            <Button Text="About billing button"/>
+                                        </StackLayout>
+                                    </toolkit:Expander>
+                                    <HorizontalStackLayout>
+                                        <Frame>
+                                            <Button Text="change billing placeholder"/>
+                                        </Frame>
+                                        <Frame/>
+                                        <Frame>
+                                            <Button Text="buy this trip"/>
+                                        </Frame>
+                                    </HorizontalStackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
