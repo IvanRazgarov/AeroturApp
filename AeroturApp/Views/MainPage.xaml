@@ -10,8 +10,44 @@
     <ScrollView>
         <StackLayout Background="{StaticResource PrimaryGradientBrushV}">
             <StackLayout>
-                <Image Source="ic_plane.svg"/>
-                <StackLayout VerticalOptions="StartAndExpand" Margin="0,100,0,0">
+                <!--<Image Source="ic_plane.png" Scale="5"/>-->
+                <!--<Frame HeightRequest="100" WidthRequest="100" BorderColor="Transparent" BackgroundColor="Transparent">
+                    <Path Stroke="White" >
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathGeometry.Figures>
+                                    <PathFigureCollection>
+                                        <PathFigure IsClosed="True"
+                                StartPoint="5.2,15">
+                                            <PathFigure.Segments>
+                                                <PathSegmentCollection>
+                                                    <LineSegment Point="7.33,12.87"/>
+                                                    <LineSegment Point="3.59,-0.42"/>
+                                                    <LineSegment Point="9.09,-5.92"/>
+                                                    <QuadraticBezierSegment Point1="12.28,-9.11" Point2="10.79,-10.6" />
+                                                    <QuadraticBezierSegment Point1="6.11,-8.9" Point2="6.11,-8.9" />
+                                                    <LineSegment Point="0.61,-3.4"/>
+                                                    <LineSegment Point="-12.68,-7.14"/>
+                                                    <LineSegment Point="-14.81,-5.01"/>
+                                                    <LineSegment Point="-18.2,4.25"/>
+                                                    <LineSegment Point="-37.3,23.35"/>
+                                                    <LineSegment Point="-59.9,24.7"/>
+                                                    <LineSegment Point="-70.6,35.35"/>
+                                                    <LineSegment Point="-43.95,44.9"/>
+                                                    <LineSegment Point="-34.4,71.55"/>
+                                                    <LineSegment Point="-23.75,60.9"/>
+                                                    <LineSegment Point="-22.4,38.25"/>
+                                                    <LineSegment Point="-3.3,19.15"/>
+                                                </PathSegmentCollection>
+                                            </PathFigure.Segments>
+                                        </PathFigure>
+                                    </PathFigureCollection>
+                                </PathGeometry.Figures>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                </Frame>-->
+                <StackLayout VerticalOptions="StartAndExpand" Margin="0,0,0,0">
                     <Label Text="Дешёвые" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
                     <Label Text="авиабилеты" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
                     <Label Text="онлайн" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>

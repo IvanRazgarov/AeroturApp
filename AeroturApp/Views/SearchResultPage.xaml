@@ -12,7 +12,7 @@
                         <StackLayout>
                             <Image BackgroundColor="{StaticResource Gray200}"/>
                             <Frame Margin="0" CornerRadius="6">
-                                <StackLayout>
+                                <HorizontalStackLayout>
                                     <HorizontalStackLayout>
                                         <Label Text="date placeholder" HorizontalOptions="Start"/>
                                         <Label Text="passangers placeholder" Grid.Row="1" HorizontalOptions="End"/>
@@ -49,14 +49,14 @@
                                                 <Image/>
                                             </HorizontalStackLayout>
                                         </toolkit:Expander.Header>
-                                        <StackLayout>
+                                        <HorizontalStackLayout>
                                             <Label Text="hhluggage placeholder"/>
                                             <Label Text="luggage placeholder"/>
                                             <Rectangle BackgroundColor="LightGray"/>
                                             <Label Text="rebook placeholder"/>
                                             <Label Text="return placeholder"/>
                                             <Button Text="About billing button"/>
-                                        </StackLayout>
+                                        </HorizontalStackLayout>
                                     </toolkit:Expander>
                                     <HorizontalStackLayout>
                                         <Frame>
@@ -67,7 +67,7 @@
                                             <Button Text="buy this trip"/>
                                         </Frame>
                                     </HorizontalStackLayout>
-                                </StackLayout>
+                                </HorizontalStackLayout>
                             </Frame>
                         </StackLayout>
                     </Frame>
