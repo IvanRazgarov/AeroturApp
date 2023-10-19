@@ -18,6 +18,7 @@ namespace AeroturApp.Services
         private static string _airportsUrl = "";
         private static string _aeroturApiUrl = "https://api.aerotur.aero/";
         // Добавить получения CSRF токена из первого гет запроса и логин в сессию.
+        // <meta name="csrf-token" content="IihoPMNGKcDCkhweTxI9iarIelkppLlk3Pb74QKt">
         public WebAPIClients() 
         { 
             client = new HttpClient();
