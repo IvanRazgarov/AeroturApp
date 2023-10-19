@@ -124,7 +124,11 @@
                                     Title="Класс полёта" 
                                     BackgroundColor="White" 
                                     Margin="15,15"/>
-                            <Button Text="Найти" TextColor="White" BackgroundColor="LightGreen" Margin="15,15"/>
+                            <Button Text="Найти" 
+                                    TextColor="White" 
+                                    BackgroundColor="LightGreen" 
+                                    Margin="15,15" 
+                                    Clicked="OnButtonClicked"/>
                         </StackLayout>
                         <!--</Frame>-->
                     </StackLayout>

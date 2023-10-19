@@ -3,29 +3,32 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AeroturApp.Services
 {
-    class WebAPIClients
+    internal class WebAPIClients
     {
         //http://pics.avs.io/высота/ширина/ИАТА код.png для логотипов (для иос @2x)
-        static HttpClient client = new HttpClient();
+        private readonly HttpClient client;
 
-        static async Task<AirportCard> GetAirportAsync(string path)
-        {
-            AirportCard product = null;
-            HttpResponseMessage response = await client.GetAsync(path);
-            if (response.IsSuccessStatusCode)
-            {
-                JsonDocument JSONresponse = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-                product = new AirportCard();
+        private static string _flagsUrl = "";
+        private static string _airportsUrl = "";
+        private static string _aeroturApiUrl = "https://api.aerotur.aero/";
+        // Добавить получения CSRF токена из первого гет запроса и логин в сессию.
+        public WebAPIClients() 
+        { 
+            client = new HttpClient();
+            client.BaseAddress = new Uri(_aeroturApiUrl);
 
-                
-            }
-            return product;
         }
+        public async Task<SearchParams> GetSearchResult(SearchParams parameters)
+        {
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet) return null;
 
+            return await client.GetFromJsonAsync<SearchParams>($"flights/");
+        }
     }
 }

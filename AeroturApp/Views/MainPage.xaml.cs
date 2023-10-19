@@ -11,6 +11,11 @@ namespace AeroturApp.Views
             VayVariantPicker.ItemsSource = VayVariants;
             PricingPicker.ItemsSource = PricingTypes;
         }
+
+        async void OnButtonClicked(object sender, EventArgs args)
+        {
+            await Shell.Current.GoToAsync("///SearchResults");
+        }
     }
 
 }

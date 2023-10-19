@@ -5,7 +5,7 @@
              x:Class="AeroturApp.Views.SearchResultPage"
              Title="SearchResultPage">
     <VerticalStackLayout>
-        <CollectionView>
+        <CollectionView x:Name="ResultsView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame>
@@ -73,6 +73,20 @@
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <VerticalStackLayout>
+                    <Label Text="Nothing to see here? Go back."/>
+                    <Button BackgroundColor="{StaticResource Secondary}" Text="GO BACK" Clicked="Button_Clicked"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.EmptyViewTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout>
+                        <Label Text="Nothing to see here? Go back."/>
+                        <Button BackgroundColor="{StaticResource Secondary}" Text="GO BACK" Clicked="Button_Clicked"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.EmptyViewTemplate>
         </CollectionView>
     </VerticalStackLayout>
 </ContentPage>

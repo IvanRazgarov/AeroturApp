@@ -1,7 +1,11 @@
-﻿namespace AeroturApp.Models.DataModels
+﻿using SQLite;
+
+namespace AeroturApp.Models.DataModels
 {
     class AirportCard
     {
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
         public Dictionary<string, string> NameTranslation { get; set; }
         public string CityCode { get; set; }
         public string CountryCode { get; set; }
@@ -12,4 +16,5 @@
         public Dictionary<string, int> Coordinates { get; set; }
         public bool Flightable { get; set; } = true;
     }
+
 }
