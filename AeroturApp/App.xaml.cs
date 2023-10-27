@@ -1,15 +1,15 @@
 ﻿using AeroturApp.Services;
-using AeroturApp.Views;
-using System.Reflection;
 namespace AeroturApp
 {
     public partial class App : Application
     {
+        //public WebAPIClient Client = new WebAPIClient();
         public App()
         {
             InitializeComponent();
 
             MainPage = new AppShell();
+            //WebAPIClient();
 
             //var assembly = IntrospectionExtensions.GetTypeInfo(typeof(App)).Assembly;
             //using(Stream stream = assembly.GetManifestResourceStream($"AeroturApp.Services.{StaticDatabase.DatabaseFilename}"))
@@ -21,6 +21,5 @@ namespace AeroturApp
             //    }
             //}
         }
-
     }
 }
