@@ -367,3 +367,5 @@ FodyWeavers.xsd
 /WebTests/SearchParams.cs
 /WebTests/SearchReturn.cs
 /WebTests/RequestApiClient.cs
+/WebTests/SearchReturnNew.cs
+/WebTests/SearchReturnOld.cs
