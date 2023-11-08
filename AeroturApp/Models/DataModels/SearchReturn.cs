@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace AeroturApp.Models.DataModels
 {
+
     public class SearchReturn
     {
         public string request_id { get; set; }
         public Variant[] variants { get; set; }
         public Info info { get; set; }
-        public Tariffs tariffs { get; set; }
         public Airlines airlines { get; set; }
         public Airports airports { get; set; }
-        public Aircraft aircraft { get; set; }
+        public GenericAircraft aircraft { get; set; }
     }
 
     public class Info
@@ -22,6 +22,7 @@ namespace AeroturApp.Models.DataModels
         public string requestLog { get; set; }
         public string responseLog { get; set; }
         public int parsed_flight_count { get; set; }
+        public bool is_ext_mode { get; set; }
         public Msg[] msg { get; set; }
     }
 
@@ -32,99 +33,15 @@ namespace AeroturApp.Models.DataModels
         public string message { get; set; }
     }
 
-    public class Tariffs
-    {
-        public Tarrif _5NIBSOW { get; set; }
-        public Tarrif _5NILTOW { get; set; }
-        public Tarrif _5NISTOW { get; set; }
-        public Tarrif DPOAD { get; set; }
-        public Tarrif DPOALL { get; set; }
-        public Tarrif DPOMX { get; set; }
-        public Tarrif DPXAD { get; set; }
-        public Tarrif DPXALL { get; set; }
-        public Tarrif DPXMX { get; set; }
-        public Tarrif EKYRTRU7 { get; set; }
-        public Tarrif HYM12MRTNB { get; set; }
-        public Tarrif S7OBSRT { get; set; }
-        public Tarrif S7OPLRT { get; set; }
-        public Tarrif S7OSTRT { get; set; }
-        public Tarrif S7QBSRT { get; set; }
-        public Tarrif S7QPLRT { get; set; }
-        public Tarrif S7QSTRT { get; set; }
-        public Tarrif S7TPLRT { get; set; }
-        public Tarrif S7TSTRT { get; set; }
-        public Tarrif S7TBSRT { get; set; }
-        public Tarrif SUGNBR { get; set; }
-        public Tarrif SUNNBR { get; set; }
-        public Tarrif SURNBR { get; set; }
-        public Tarrif U6NECRT { get; set; }
-        public Tarrif U6NFLRT { get; set; }
-        public Tarrif U6NPRRT { get; set; }
-        public Tarrif U6ZBSRT { get; set; }
-        public Tarrif UTHFLEXRT { get; set; }
-        public Tarrif UTHLTRT { get; set; }
-        public Tarrif UTHSTDRT { get; set; }
-        public Tarrif UTKFLEXRT { get; set; }
-        public Tarrif UTKLTRT { get; set; }
-        public Tarrif UTKSTDRT { get; set; }
-        public Tarrif DPPROMOALL { get; set; }
-        public Tarrif DPPAD { get; set; }
-        public Tarrif DPPMX { get; set; }
-        public Tarrif S7NBSRT { get; set; }
-        public Tarrif S7NSTRT { get; set; }
-        public Tarrif S7NPLRT { get; set; }
-        public Tarrif _7RLCSLTOW { get; set; }
-        public Tarrif _7RUCSLTOW { get; set; }
-    }
-
-    public class Tarrif
-    {
-        public string id { get; set; }
-        public string airline_code { get; set; }
-        public string tariff_code { get; set; }
-        public string tariff_family_code { get; set; }
-        public string tariff_family_name { get; set; }
-        public string type { get; set; }
-        public bool is_fixed { get; set; }
-        public bool is_gds { get; set; }
-        public string carry_on_measure { get; set; }
-        public string carry_on_value { get; set; }
-        public string baggage_measure { get; set; }
-        public string baggage_value { get; set; }
-        public object created_at { get; set; }
-        public object updated_at { get; set; }
-        public bool is_baggage { get; set; }
-        public string baggage_state { get; set; }
-        public Description[] descriptions { get; set; }
-    }
-
-    public class Description
-    {
-        public string id { get; set; }
-        public string tariff_id { get; set; }
-        public string code { get; set; }
-        public string locale { get; set; }
-        public string need_to_pay { get; set; }
-        public string description_short { get; set; }
-        public string description_long { get; set; }
-        public object created_at { get; set; }
-        public object updated_at { get; set; }
-    }
-
     public class Airlines
     {
-        public Company SU { get; set; }
-        public Company S7 { get; set; }
-        public Company UT { get; set; }
-        public Company U6 { get; set; }
-        public Company _5N { get; set; }
-        public Company _7R { get; set; }
-        public Company DP { get; set; }
-        public Company EK { get; set; }
-        public Company HY { get; set; }
+        public GenericCompany S7 { get; set; }
+        public GenericCompany SU { get; set; }
+        public GenericCompany U6 { get; set; }
+        public GenericCompany YK { get; set; }
     }
 
-    public class Company
+    public class GenericCompany
     {
         public int id { get; set; }
         public string code { get; set; }
@@ -138,10 +55,10 @@ namespace AeroturApp.Models.DataModels
         public object updated_at { get; set; }
         public string name { get; set; }
         public string logo_url { get; set; }
-        public CompanyAliases[] names { get; set; }
+        public Name[] names { get; set; }
     }
 
-    public class CompanyAliases
+    public class Name
     {
         public int id { get; set; }
         public string locale { get; set; }
@@ -156,15 +73,14 @@ namespace AeroturApp.Models.DataModels
 
     public class Airports
     {
-        public Airport TAS { get; set; }
-        public Airport DME { get; set; }
-        public Airport VKO { get; set; }
-        public Airport LED { get; set; }
-        public Airport SVO { get; set; }
-        public Airport DXB { get; set; }
+        public GenericAirport DME { get; set; }
+        public GenericAirport LED { get; set; }
+        public GenericAirport OSS { get; set; }
+        public GenericAirport OVB { get; set; }
+        public GenericAirport SVO { get; set; }
     }
 
-    public class Airport
+    public class GenericAirport
     {
         public int id { get; set; }
         public string code { get; set; }
@@ -179,11 +95,11 @@ namespace AeroturApp.Models.DataModels
         public object created_at { get; set; }
         public object updated_at { get; set; }
         public string name { get; set; }
-        public AirportAliases[] names { get; set; }
-        public City city { get; set; }
+        public Name[] names { get; set; }
+        public GenericCity city { get; set; }
     }
 
-    public class City
+    public class GenericCity
     {
         public int id { get; set; }
         public string code { get; set; }
@@ -194,7 +110,7 @@ namespace AeroturApp.Models.DataModels
         public object created_at { get; set; }
         public object updated_at { get; set; }
         public string name { get; set; }
-        public CityAliases[] names { get; set; }
+        public Name[] names { get; set; }
         public Country country { get; set; }
     }
 
@@ -208,10 +124,10 @@ namespace AeroturApp.Models.DataModels
         public object created_at { get; set; }
         public object updated_at { get; set; }
         public string name { get; set; }
-        public CountryAliases[] names { get; set; }
+        public Name[] names { get; set; }
     }
 
-    public class CountryAliases
+    public class AirportName
     {
         public int id { get; set; }
         public string locale { get; set; }
@@ -223,53 +139,18 @@ namespace AeroturApp.Models.DataModels
         public object created_at { get; set; }
         public object updated_at { get; set; }
     }
-
-    public class CityAliases
-    {
-        public int id { get; set; }
-        public string locale { get; set; }
-        public string field { get; set; }
-        public string value { get; set; }
-        public object text { get; set; }
-        public string ownerable_type { get; set; }
-        public int ownerable_id { get; set; }
-        public object created_at { get; set; }
-        public object updated_at { get; set; }
-    }
-
-    public class AirportAliases
-    {
-        public int id { get; set; }
-        public string locale { get; set; }
-        public string field { get; set; }
-        public string value { get; set; }
-        public object text { get; set; }
-        public string ownerable_type { get; set; }
-        public int ownerable_id { get; set; }
-        public object created_at { get; set; }
-        public object updated_at { get; set; }
-    }
-
-    public class Aircraft
-    {
-        public GenericAircraft SU9 { get; set; }
-        public GenericAircraft _789 { get; set; }
-        public GenericAircraft _77W { get; set; }
-        public GenericAircraft _763 { get; set; }
-        public GenericAircraft _73H { get; set; }
-        public GenericAircraft _738 { get; set; }
-        public GenericAircraft _737 { get; set; }
-        public GenericAircraft _388 { get; set; }
-        public GenericAircraft _32N { get; set; }
-        public GenericAircraft _32B { get; set; }
-        public GenericAircraft _32A { get; set; }
-        public GenericAircraft _321 { get; set; }
-        public GenericAircraft _320 { get; set; }
-        public GenericAircraft _319 { get; set; }
-        public GenericAircraft _32Q { get; set; }
-    }
-
     public class GenericAircraft
+    {
+        public AircraftModel _320 { get; set; }
+        public AircraftModel _32A { get; set; }
+        public AircraftModel _32B { get; set; }
+        public AircraftModel _32N { get; set; }
+        public AircraftModel _32Q { get; set; }
+        public AircraftModel _733 { get; set; }
+        public AircraftModel _73H { get; set; }
+    }
+
+    public class AircraftModel
     {
         public int id { get; set; }
         public string code { get; set; }
@@ -285,53 +166,97 @@ namespace AeroturApp.Models.DataModels
         public object updated_at { get; set; }
         public object img_url { get; set; }
     }
-    
     public class Variant
     {
         public string flight_id { get; set; }
+        public string ident { get; set; }
         public string booking_url { get; set; }
-        public bool is_low_cost { get; set; }
-        public bool is_charter { get; set; }
-        public bool is_regular { get; set; }
+        public string flight_type { get; set; }
+        public string flight_direction_type { get; set; }
+        public bool is_direct_flight { get; set; }
         public int? seats { get; set; }
         public int? expected_ticket_count { get; set; }
-        public Supplier[] suppliers { get; set; }
-        public string[] price_detail { get; set; }
+        public string supplier_name { get; set; }
+        public string supplier_id { get; set; }
         public int price { get; set; }
         public string currency { get; set; }
-        public Segment[] segments { get; set; }
-        public string ident { get; set; }
-    }
-    public class Supplier
-    {
-        public string name { get; set; }
-        public int id { get; set; }
+        public string[] price_detail { get; set; }
+        public Baggage baggage { get; set; }
+        public Carry_On carry_on { get; set; }
+        public Exchange exchange { get; set; }
+        public Refund refund { get; set; }
+        public Leg[] legs { get; set; }
     }
 
+    public class Baggage
+    {
+        public bool is_baggage { get; set; }
+        public int value { get; set; }
+        public string measure { get; set; }
+        public object[] descriptions { get; set; }
+    }
+
+    public class Carry_On
+    {
+        public bool is_baggage { get; set; }
+        public int value { get; set; }
+        public string measure { get; set; }
+        public object[] descriptions { get; set; }
+    }
+
+    public class Exchange
+    {
+        public string type { get; set; }
+        public object[] descriptions { get; set; }
+    }
+
+    public class Refund
+    {
+        public string type { get; set; }
+        public object[] descriptions { get; set; }
+    }
+
+    public class Leg
+    {
+        public Segment[] segments { get; set; }
+        public Baggage baggage { get; set; }
+        public Carry_On carry_on { get; set; }
+        public Exchange exchange { get; set; }
+        public Refund refund { get; set; }
+    }
     public class Segment
     {
-        public int leg { get; set; }
+        public string ident { get; set; }
         public string flight_number { get; set; }
+        public string flight_number_full { get; set; }
         public string aircraft_type { get; set; }
-        public string marketing_company { get; set; }
-        public string operating_company { get; set; }
-        public string departure_date_time { get; set; }
-        public string arrival_date_time { get; set; }
-        public bool is_not_airplane { get; set; }
+        public string segment_type { get; set; }
         public int flight_time { get; set; }
-        public object[] stop_points { get; set; }
+        public string validating_airline { get; set; }
+        public string operating_company { get; set; }
+        public string marketing_company { get; set; }
+        public string departure_date_time { get; set; }
         public string departure_airport { get; set; }
         public string departure_terminal { get; set; }
         public string departure_utc { get; set; }
+        public string arrival_date_time { get; set; }
         public string arrival_airport { get; set; }
         public string arrival_terminal { get; set; }
         public string arrival_utc { get; set; }
+        public object[] stop_points { get; set; }
+        public Tariff tariff { get; set; }
+    }
+
+    public class Tariff
+    {
+        public string code { get; set; }
         public string booking_class { get; set; }
         public string booking_class_code { get; set; }
-        public string refundable { get; set; }
-        public bool isPrivateFare { get; set; }
-        public string validating_company { get; set; }
-        public string[] tariffIds { get; set; }
-        public string flight_number_full { get; set; }
+        public bool is_private_fare { get; set; }
+        public Baggage baggage { get; set; }
+        public Carry_On carry_on { get; set; }
+        public Exchange exchange { get; set; }
+        public Refund refund { get; set; }
+        public string[] logs { get; set; }
     }
 }

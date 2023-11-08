@@ -2,91 +2,98 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:AeroturApp.Models.ViewModels"
+             xmlns:m="clr-namespace:AeroturApp.Models.DataModels"
              x:Class="AeroturApp.Views.SearchResultPage"
-             Title="SearchResultPage">
-    <VerticalStackLayout>
-        <CollectionView x:Name="ResultsView">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame>
-                        <StackLayout>
-                            <Image BackgroundColor="{StaticResource Gray200}"/>
-                            <Frame Margin="0" CornerRadius="6">
-                                <HorizontalStackLayout>
-                                    <HorizontalStackLayout>
-                                        <Label Text="date placeholder" HorizontalOptions="Start"/>
-                                        <Label Text="passangers placeholder" Grid.Row="1" HorizontalOptions="End"/>
-                                    </HorizontalStackLayout>
-                                    <Frame CornerRadius="6">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="0.75*"/>
-                                                <ColumnDefinition Width="0.25*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Text="time placeholder"/>
-                                            <Label Text="dleta time placeholder" Grid.Row="1"/>
-                                            <Button Text="other trips" 
+             Title="SearchResultPage"
+             x:DataType="vm:SearchResultsViewModel">
+    
+    <Shell.BackButtonBehavior >
+        <BackButtonBehavior Command="{Binding ReturnToPreviousCommand}"/>
+    </Shell.BackButtonBehavior>
+    
+    <CollectionView x:Name="ResultsView" ItemsSource="{Binding Flights}" ItemsUpdatingScrollMode="KeepLastItemInView" RemainingItemsThreshold="3" RemainingItemsThresholdReached="ItemsTresholdReached">
+        <CollectionView.Header>
+            <Button Clicked="Return_Clicked" Text="Return to main page" Background="{StaticResource PrimaryGradientBrushV}"/>
+        </CollectionView.Header>
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="m:Variant">
+                <VerticalStackLayout>
+                    <!--<Image BackgroundColor="{StaticResource Gray200}"/>-->
+                    <Frame Margin="0" CornerRadius="6">
+                        <VerticalStackLayout>
+                            <VerticalStackLayout>
+                                <Label Text="Binding legs[0].segments[0].departure_airport}" HorizontalOptions="Start"/>
+                                <Label Text="expected_ticket_count}" Grid.Row="1" HorizontalOptions="End"/>
+                            </VerticalStackLayout>
+                            <Frame CornerRadius="6" IsClippedToBounds="True" Padding="2">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*"/>
+                                        <RowDefinition Height="0.5*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.75*"/>
+                                        <ColumnDefinition Width="0.25*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="departure_date_time}"/>
+                                    <Label Text="delta time placeholder" Grid.Row="1"/>
+                                    <Button Text="other trips" 
                                                     Grid.Column="1" 
                                                     Grid.RowSpan="2" 
                                                     HorizontalOptions="CenterAndExpand" 
-                                                    VerticalOptions="Center"/>
-                                        </Grid>
-                                    </Frame>
-                                    <Grid>
-                                        <Label Text="transit delta time placeholder" HorizontalOptions="Start"/>
-                                        <Button Text="details placeholder"/>
-                                    </Grid>
-                                    <Label Text="dest placeholder"/>
-                                    <toolkit:Expander>
-                                        <toolkit:Expander.Header>
-                                            <HorizontalStackLayout>
-                                                <Label Text="billing name"/>
-                                                <!--иконка багажа-->
-                                                <Image/>
-                                                <!--иконка возврата-->
-                                                <Image/>
-                                                <!--анимированная стрелка-->
-                                                <Image/>
-                                            </HorizontalStackLayout>
-                                        </toolkit:Expander.Header>
-                                        <HorizontalStackLayout>
-                                            <Label Text="hhluggage placeholder"/>
-                                            <Label Text="luggage placeholder"/>
-                                            <Rectangle BackgroundColor="LightGray"/>
-                                            <Label Text="rebook placeholder"/>
-                                            <Label Text="return placeholder"/>
-                                            <Button Text="About billing button"/>
-                                        </HorizontalStackLayout>
-                                    </toolkit:Expander>
-                                    <HorizontalStackLayout>
-                                        <Frame>
-                                            <Button Text="change billing placeholder"/>
-                                        </Frame>
-                                        <Frame/>
-                                        <Frame>
-                                            <Button Text="buy this trip"/>
-                                        </Frame>
-                                    </HorizontalStackLayout>
-                                </HorizontalStackLayout>
+                                                    VerticalOptions="Center"
+                                            Background="{StaticResource AccentGradientBrushV}"/>
+                                </Grid>
                             </Frame>
-                        </StackLayout>
+                            <Grid>
+                                <Label Text="transit delta time placeholder" HorizontalOptions="Start"/>
+                                <Button Text="details placeholder" Background="{StaticResource AccentGradientBrushV}"/>
+                            </Grid>
+                            <Label Text="arival city"/>
+                            <toolkit:Expander HorizontalOptions="CenterAndExpand">
+                                <toolkit:Expander.Header>
+                                    <HorizontalStackLayout HorizontalOptions="FillAndExpand">
+                                        <Frame>
+                                            <Label Text="billing name"/>
+                                        </Frame>
+                                        <!--иконка багажа-->
+                                        <Image/>
+                                        <!--иконка возврата-->
+                                        <Image/>
+                                        <!--анимированная стрелка-->
+                                        <Image/>
+                                    </HorizontalStackLayout>
+                                </toolkit:Expander.Header>
+                                <VerticalStackLayout>
+                                    <Label Text="hhluggage placeholder"/>
+                                    <Label Text="luggage placeholder"/>
+                                    <Rectangle BackgroundColor="LightGray"/>
+                                    <Label Text="rebook placeholder"/>
+                                    <Label Text="return placeholder"/>
+                                    <Button Text="About billing button" Background="{StaticResource AccentGradientBrushV}"/>
+                                </VerticalStackLayout>
+                            </toolkit:Expander>
+                            <!--<HorizontalStackLayout>
+                                <Button Text="change billing placeholder"/>
+                                <Button Text="buy this trip"/>
+                            </HorizontalStackLayout>-->
+                        </VerticalStackLayout>
                     </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-            <CollectionView.EmptyView>
+                </VerticalStackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+        <CollectionView.EmptyViewTemplate>
+            <DataTemplate>
                 <VerticalStackLayout>
                     <Label Text="Nothing to see here? Go back."/>
-                    <Button BackgroundColor="{StaticResource Secondary}" Text="GO BACK" Clicked="Button_Clicked"/>
+                    <Button BackgroundColor="{StaticResource Secondary}" Text="GO BACK" Clicked="Return_Clicked"/>
+                    <Button Background="{StaticResource PrimaryGradientBrushV}" Text="Retry" Clicked="Retry_Clicked"/>
                 </VerticalStackLayout>
-            </CollectionView.EmptyView>
-            <CollectionView.EmptyViewTemplate>
-                <DataTemplate>
-                    <VerticalStackLayout>
-                        <Label Text="Nothing to see here? Go back."/>
-                        <Button BackgroundColor="{StaticResource Secondary}" Text="GO BACK" Clicked="Button_Clicked"/>
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.EmptyViewTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+            </DataTemplate>
+        </CollectionView.EmptyViewTemplate>
+        <CollectionView.EmptyView>
+            <Label />
+        </CollectionView.EmptyView>
+    </CollectionView>
 </ContentPage>

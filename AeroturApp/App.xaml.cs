@@ -3,23 +3,12 @@ namespace AeroturApp
 {
     public partial class App : Application
     {
-        //public WebAPIClient Client = new WebAPIClient();
-        public App()
+        public App(AppShell shell)
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
-            //WebAPIClient();
+            MainPage = shell;
 
-            //var assembly = IntrospectionExtensions.GetTypeInfo(typeof(App)).Assembly;
-            //using(Stream stream = assembly.GetManifestResourceStream($"AeroturApp.Services.{StaticDatabase.DatabaseFilename}"))
-            //{
-            //    using (MemoryStream  memoryStream = new MemoryStream())
-            //    {
-            //        stream.CopyTo(memoryStream);
-            //        File.WriteAllBytes(StaticDatabase.DatabasePath, memoryStream.ToArray());    
-            //    }
-            //}
         }
     }
 }

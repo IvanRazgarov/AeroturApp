@@ -3,55 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vm ="clr-namespace:AeroturApp.Models.ViewModels"
-             x:Class="AeroturApp.Views.MainPage">
+             x:Class="AeroturApp.Views.MainPage"
+             x:DataType="vm:MainViewModel">
 
     <ScrollView>
-        <StackLayout Background="{StaticResource PrimaryGradientBrushV}">
-            <StackLayout>
-                <!--<Frame HeightRequest="100" WidthRequest="100" BorderColor="Transparent" BackgroundColor="Transparent">
-                    <Path Stroke="White" >
-                        <Path.Data>
-                            <PathGeometry>
-                                <PathGeometry.Figures>
-                                    <PathFigureCollection>
-                                        <PathFigure IsClosed="True"
-                                StartPoint="5.2,15">
-                                            <PathFigure.Segments>
-                                                <PathSegmentCollection>
-                                                    <LineSegment Point="7.33,12.87"/>
-                                                    <LineSegment Point="3.59,-0.42"/>
-                                                    <LineSegment Point="9.09,-5.92"/>
-                                                    <QuadraticBezierSegment Point1="12.28,-9.11" Point2="10.79,-10.6" />
-                                                    <QuadraticBezierSegment Point1="6.11,-8.9" Point2="6.11,-8.9" />
-                                                    <LineSegment Point="0.61,-3.4"/>
-                                                    <LineSegment Point="-12.68,-7.14"/>
-                                                    <LineSegment Point="-14.81,-5.01"/>
-                                                    <LineSegment Point="-18.2,4.25"/>
-                                                    <LineSegment Point="-37.3,23.35"/>
-                                                    <LineSegment Point="-59.9,24.7"/>
-                                                    <LineSegment Point="-70.6,35.35"/>
-                                                    <LineSegment Point="-43.95,44.9"/>
-                                                    <LineSegment Point="-34.4,71.55"/>
-                                                    <LineSegment Point="-23.75,60.9"/>
-                                                    <LineSegment Point="-22.4,38.25"/>
-                                                    <LineSegment Point="-3.3,19.15"/>
-                                                </PathSegmentCollection>
-                                            </PathFigure.Segments>
-                                        </PathFigure>
-                                    </PathFigureCollection>
-                                </PathGeometry.Figures>
-                            </PathGeometry>
-                        </Path.Data>
-                    </Path>
-                </Frame>-->
-                <StackLayout VerticalOptions="StartAndExpand" Margin="0,0,0,0">
-                    <Label Text="Дешёвые" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
-                    <Label Text="авиабилеты" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
-                    <Label Text="онлайн" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="50"/>
-                </StackLayout>
-                <Frame BackgroundColor="Transparent" BorderColor="Transparent"/>
-                <StackLayout>
-                    <Button Text="Промокод Uzbekistan Airways" 
+        <VerticalStackLayout Background="{StaticResource PrimaryGradientBrushV}">
+            <VerticalStackLayout>
+                <!--<Path Data="M2.5 7.5l1.05-1.05-1.85-6.65 2.75-2.75s1.6-1.6.85-2.35-2.35.85-2.35.85l-2.75 2.75-6.65-1.85-1.05 1.05 5.6 2.95-1.9 1.9-2.25.15-1.05 1.05 2.65.95.95 2.65 1.05-1.05.15-2.25 1.9-1.9Z"
+                      Stroke="#6cf"
+                      Aspect="Uniform"
+                      StrokeThickness="10"
+                      Scale="1"
+                      MaximumHeightRequest="90"
+                      MaximumWidthRequest="90"
+                      />-->
+                <VerticalStackLayout>
+                    <Label Text="Дешёвые авиабилеты" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="22"/>
+                    <!--<Label Text="" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="22"/>-->
+                    <Label Text="онлайн" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="22" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <!--<Button Text="Промокод Uzbekistan Airways" 
                             BackgroundColor="Transparent" 
                             TextColor="White" 
                             FontAttributes="Bold" 
@@ -59,76 +31,117 @@
                             Background="{StaticResource AccentGradientBrushV}"
                             Margin="15,0,15,0"
                             />
-                    <Frame BackgroundColor="Transparent" BorderColor="Transparent"/>
-                    <StackLayout >
-                        <StackLayout BackgroundColor="Transparent">
-                            <StackLayout>
-                                <!--<StackLayout RadioButtonGroup.GroupName="Direction">
+                    <Frame BackgroundColor="Transparent" BorderColor="Transparent"/>-->
+                    <VerticalStackLayout MinimumHeightRequest="445" MinimumWidthRequest="345" Padding="0,0,0,0" > <!--search zone-->
+                        <VerticalStackLayout MinimumHeightRequest="270" MinimumWidthRequest="345" Spacing="8">
+                            <!--input elements-->
+                            <!--<StackLayout RadioButtonGroup.GroupName="Direction">
                                         <RadioButton Value="DirectionOneWay" Content="В одну сторону" IsChecked="True"/>
                                         <RadioButton Value="DirectionTwoWay" Content="Туда и обратно"/>
                                         <RadioButton Value="DirectionComplexWay" Content="Сложный маршрут"/>
                                     </StackLayout>-->
-                                <Picker x:Name="VayVariantPicker" 
+                            <!--<Picker x:Name="VayVariantPicker" 
                                         SelectedIndex="0" 
                                         Title="Вид пути" 
                                         BackgroundColor="White" 
-                                        Margin="15,15"/>
+                                        Margin="15,15"/>-->
+                            <Frame MinimumHeightRequest="270" MinimumWidthRequest="345" BackgroundColor="Transparent" BorderColor="Transparent">
+                                <VerticalStackLayout>
+                                    <VerticalStackLayout>
+                                        <Frame MinimumHeightRequest="53" BackgroundColor="Transparent" BorderColor="Transparent">
+                                            <Entry x:Name="fromPointEntry" BackgroundColor="White" />
+                                        </Frame>
+                                        <Rectangle WidthRequest="345" HeightRequest="2" BackgroundColor="Transparent"/>
+                                        <Frame MinimumHeightRequest="53" >
+                                            <Entry x:Name="toPointEntry" BackgroundColor="White"/>
+                                        </Frame>
+                                    </VerticalStackLayout>
+                                    <Rectangle/>
+                                    <HorizontalStackLayout MinimumHeightRequest="53">
+                                        <Frame MinimumHeightRequest="53" MinimumWidthRequest="159" HorizontalOptions="Fill" >
+                                            <DatePicker x:Name="fromDatePicker" BackgroundColor="White" TextColor="Black" Margin="0" />
+                                        </Frame>
+                                        <Rectangle />
+                                        <Frame MinimumHeightRequest="53" MinimumWidthRequest="159" HorizontalOptions="Fill" >
+                                            <DatePicker x:Name="toDatePicker" BackgroundColor="White" TextColor="Black" Margin="0"/>
+                                        </Frame>
+                                    </HorizontalStackLayout>
+                                    <Rectangle/>
+                                    <Frame>
+                                        <toolkit:Expander MinimumHeightRequest="53" BackgroundColor="White" >
+                                            <toolkit:Expander.Header>
+                                                <VerticalStackLayout MinimumHeightRequest="53">
+                                                    <Label Text="Пассажиры"/>
+                                                    <Rectangle BackgroundColor="Black"/>
+                                                </VerticalStackLayout>
+                                            </toolkit:Expander.Header>
+                                            <toolkit:Expander.Frame>
+                                                <OnPlatform>
+                                                   
+                                                </OnPlatform>
+                                            </toolkit:Expander.Frame>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="90" />
+                                                    <ColumnDefinition Width="1*" />
+                                                    <ColumnDefinition Width="0.5*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="50" />
+                                                    <RowDefinition Height="50" />
+                                                    <RowDefinition Height="50" />
+                                                    <RowDefinition Height="50" />
+                                                </Grid.RowDefinitions>
+                                                <Label Text="Взрослые(старше 12 лет)" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                                <Label Grid.Row="1" Text="Дети(2-12 лет)" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                                <Label Grid.Row="2" Text="Младенци(до 2 лет)" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                                <Label Grid.Row="3" Text="Младенци с местом( до 2 лет)" VerticalOptions="Center" HorizontalOptions="Center"/>
 
-                                <Entry x:Name="StartPointEntry" BackgroundColor="White" Margin="15,15"/>
-                                <Entry x:Name="EndPointEntry" BackgroundColor="White" Margin="15,15"/>
-                                <DatePicker x:Name="StartDatePicker" BackgroundColor="White" Margin="15,15"/>
-                                <CheckBox x:Name="DeltaSearch" BackgroundColor="White" Margin="15,15"/>
-                                <DatePicker x:Name="EndDatePicker" BackgroundColor="White" Margin="15,15"/>
-                            </StackLayout>
-                            <toolkit:Expander BackgroundColor="White" Margin="15,15">
-                                <toolkit:Expander.Header>
-                                    <StackLayout>
-                                        <Label Text="Пассажиры" HeightRequest="15"/>
-                                        <Rectangle BackgroundColor="Black"/>
-                                    </StackLayout>
-                                </toolkit:Expander.Header>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="90" />
-                                        <ColumnDefinition Width="1*" />
-                                        <ColumnDefinition Width="0.5*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="50" />
-                                        <RowDefinition Height="50" />
-                                        <RowDefinition Height="50" />
-                                        <RowDefinition Height="50" />
-                                    </Grid.RowDefinitions>
-                                    <Label Text="Взрослые(старше 12 лет)" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                    <Label Grid.Row="1" Text="Дети(2-12 лет)" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                    <Label Grid.Row="2" Text="Младенци(до 2 лет)" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                    <Label Grid.Row="3" Text="Младенци с местом( до 2 лет)" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                                <Stepper x:Name="adults" Value="{Binding Adults}" Grid.Column="1" Maximum="12" Minimum="1"/>
+                                                <Stepper x:Name="children" Value="{Binding Children}" Grid.Column="1" Grid.Row="1" Maximum="4" Minimum="0"/>
+                                                <Stepper x:Name="infants" Value="{Binding Infants}" Grid.Column="1" Grid.Row="2" Maximum="2" Minimum="0"/>
+                                                <Stepper x:Name="infants_seat" Value="{Binding Infants_seat}" Grid.Column="1" Grid.Row="3" Maximum="4" Minimum="0"/>
 
-                                    <Stepper x:Name="over12_stepper" Grid.Column="1" Maximum="12" Minimum="1"/>
-                                    <Stepper x:Name="twoto12_stepper" Grid.Column="1" Grid.Row="1" Maximum="4" Minimum="0"/>
-                                    <Stepper x:Name="under2_stepper" Grid.Column="1" Grid.Row="2" Maximum="2" Minimum="0"/>
-                                    <Stepper x:Name="under2seat_stepper" Grid.Column="1" Grid.Row="3" Maximum="4" Minimum="0"/>
-
-                                    <Label Grid.Column="2" BindingContext="{x:Reference over12_stepper}" Text="{Binding Path=Value}"/>
-                                    <Label Grid.Column="2" Grid.Row="1" BindingContext="{x:Reference twoto12_stepper}" Text="{Binding Path=Value}"/>
-                                    <Label Grid.Column="2" Grid.Row="2" BindingContext="{x:Reference under2_stepper}" Text="{Binding Path=Value}"/>
-                                    <Label Grid.Column="2" Grid.Row="3" BindingContext="{x:Reference under2seat_stepper}" Text="{Binding Path=Value}"/>
-                                </Grid>
-                            </toolkit:Expander>
-                            <Picker x:Name="PricingPicker" 
-                                    SelectedIndex="0" 
-                                    Title="Класс полёта" 
-                                    BackgroundColor="White" 
-                                    Margin="15,15"/>
-                            <Button Text="Найти" 
-                                    TextColor="White" 
-                                    BackgroundColor="LightGreen" 
-                                    Margin="15,15" 
-                                    Clicked="OnButtonClicked"/>
-                        </StackLayout>
-                    </StackLayout>
-                </StackLayout>
-            </StackLayout>
-        </StackLayout>
+                                                <Label Grid.Column="2"  Text="{Binding Adults}"/>
+                                                <Label Grid.Column="2" Grid.Row="1" Text="{Binding Children}"/>
+                                                <Label Grid.Column="2" Grid.Row="2" Text="{Binding Infants}"/>
+                                                <Label Grid.Column="2" Grid.Row="3" Text="{Binding Infants_seat}"/>
+                                            </Grid>
+                                        </toolkit:Expander>
+                                    </Frame>
+                                    <Rectangle/>
+                                    <Frame>
+                                        <Picker x:Name="flight_class" 
+                                        SelectedIndex="0" 
+                                        Title="Класс полёта" 
+                                        BackgroundColor="White"
+                                        TextColor="Black"
+                                        TitleColor="Black"/>
+                                    </Frame>
+                                    <Rectangle/>
+                                    <Button Text="Найти" 
+                                        MinimumHeightRequest="53"
+                                        MinimumWidthRequest="345"
+                                        TextColor="White" 
+                                        Background="{StaticResource AccentGradientBrushV}"  
+                                        Command="{Binding NavigateCommand}"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                            <!--<CheckBox x:Name="DeltaSearch" BackgroundColor="White" Margin="15,15"/>-->
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+                <HorizontalStackLayout>
+                    <Path Stroke="White" Data="M8.27557 0.25H23.7244C27.1152 0.25 27.9915 0.601828 28.8383 1.0547C29.7525 1.54359 30.4564 2.24756 30.9453 3.16172C31.3982 4.00849 31.75 4.88482 31.75 8.27557V8.80958C31.75 9.05515 31.5531 9.25504 31.3078 9.26543C31.2323 9.26863 31.156 9.27227 31.0791 9.27633C29.0271 9.38441 27.434 11.3429 27.3296 13.7407C27.3175 14.0181 27.3062 14.2473 27.2962 14.4509L27.296 14.4533L27.296 14.4545C27.2683 15.0175 27.25 15.3884 27.25 16.0635C27.25 16.7665 27.2698 17.2044 27.2995 17.8603C27.3055 17.994 27.312 18.1367 27.3188 18.2927C27.4224 20.6758 29.0121 22.6125 31.0515 22.7222C31.1377 22.7268 31.2233 22.731 31.3078 22.7346C31.5531 22.745 31.75 22.9448 31.75 23.1904V23.7244C31.75 27.1152 31.3982 27.9915 30.9453 28.8383C30.4564 29.7525 29.7525 30.4564 28.8383 30.9453C27.9915 31.3982 27.1152 31.75 23.7244 31.75H8.27557C4.88482 31.75 4.00849 31.3982 3.16172 30.9453C2.24756 30.4564 1.54359 29.7525 1.0547 28.8383C0.601828 27.9915 0.25 27.1152 0.25 23.7244V23.1904C0.25 22.9448 0.446853 22.745 0.69217 22.7346C0.788614 22.7305 0.886372 22.7257 0.984967 22.7202C3.00764 22.6084 4.58863 20.7002 4.68695 18.3362C4.692 18.2149 4.69686 18.1015 4.70145 17.9939L4.70167 17.9884C4.73069 17.309 4.75 16.8574 4.75 16.0635C4.75 15.2589 4.73231 14.8704 4.70531 14.278C4.69735 14.1033 4.68857 13.9108 4.67921 13.6846C4.58103 11.3114 2.99837 9.38972 0.967831 9.27884C0.875041 9.2738 0.783025 9.2693 0.692179 9.26543C0.446861 9.25504 0.25 9.05515 0.25 8.80958V8.27557C0.25 4.88482 0.601828 4.00849 1.0547 3.16172C1.54359 2.24756 2.24756 1.54359 3.16172 1.0547C4.00849 0.601828 4.88482 0.25 8.27557 0.25ZM14.6099 5.95384C10.6037 6.13019 7.57847 9.40867 7.383 13.3016C7.3038 14.8794 7.24003 16.3252 7.24003 17.6799C7.24003 18.9461 7.29569 20.2051 7.36733 21.6147C7.56461 25.4978 10.591 28.7458 14.5744 28.9244C15.0646 28.9464 15.5484 28.9599 16 28.9599C16.4657 28.9599 16.9657 28.9456 17.4719 28.9223C21.4262 28.7409 24.4514 25.5308 24.6423 21.6582C24.7094 20.2968 24.7601 19.0562 24.7601 17.6799C24.7601 16.1481 24.704 14.7404 24.6312 13.2445C24.4426 9.36556 21.4188 6.13663 17.4503 5.95654C16.9516 5.9339 16.4591 5.91995 16 5.91995C15.5593 5.91995 15.0879 5.93278 14.6099 5.95384Z"
+                          Fill="White"
+                          >
+                    </Path>
+                    <Label Text="Партнёр Aviasales с 2016 г." TextColor="White"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                
+            </VerticalStackLayout>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

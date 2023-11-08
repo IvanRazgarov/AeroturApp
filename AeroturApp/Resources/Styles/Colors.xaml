@@ -45,12 +45,12 @@
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
 
     <LinearGradientBrush x:Key="PrimaryGradientBrushV" EndPoint="0,1">
-        <GradientStop Color="{StaticResource Tertiary}" Offset="0.1"/>
-        <GradientStop Color="{StaticResource Primary}" Offset="1"/>
+        <GradientStop Color="#0070D3" Offset="0.1"/>
+        <GradientStop Color="#14589E" Offset="1"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="AccentGradientBrushV" EndPoint="0,1">
-        <GradientStop Color="{StaticResource Secondary}" Offset="0.1"/>
-        <GradientStop Color="{StaticResource Yellow100Accent}" Offset="1"/>
+        <GradientStop Color="#FFA04E" Offset="0.1"/>
+        <GradientStop Color="#FD6C4F" Offset="1"/>
     </LinearGradientBrush>
 
 </ResourceDictionary>

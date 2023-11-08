@@ -24,5 +24,4 @@ namespace AeroturApp.Models.DataModels
         public string date2 { get; set; }
         public int asGrouped { get; set; }
     }
-
 }
