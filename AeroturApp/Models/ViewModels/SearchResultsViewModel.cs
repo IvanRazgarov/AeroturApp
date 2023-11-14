@@ -3,22 +3,24 @@ using AeroturApp.Services;
 using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Animations;
 using System.Collections.ObjectModel;
 
 namespace AeroturApp.Models.ViewModels;
-[QueryProperty(nameof(SearchParams), nameof(SearchParams))]
+
+[QueryProperty("searchParams", "SearchParams")]
 public partial class SearchResultsViewModel : ObservableObject
 {
+    public SearchParams searchParams { get; set; }
+
+    private SearchReturn results;
+
+    private List<Variant> variants = new();
+
     [ObservableProperty]
-    SearchParams searchParams;
-
-    private SearchReturn results=new();
-
-    private List<Variant> variants=new();
-
+    private bool isBusy = false;
+    
     [ObservableProperty]
-    private ObservableCollection<Variant> _flights = [];
+    private ObservableCollection<Variant> _flights = new();
 
     [ObservableProperty]
     private Variant _flight = new();
@@ -28,40 +30,87 @@ public partial class SearchResultsViewModel : ObservableObject
     public SearchResultsViewModel(WebAPIClient client)
     {
         _client = client;
-        SearchForFlights(SearchParams);
+        searchParams = new SearchParams()
+        {
+            locale = "RU",
+            instance = "aerotur.aero.dev",
+            adults = 1,
+            children = 0,
+            infants = 0,
+            infants_seat = 0,
+            flight_class = "Economy",
+            from = "LED",
+            fromType = "city",
+            to = "OSS",
+            toType = "city",
+            date1 = "2023-11-14",//DateTime.Now.ToString("yyyy'-'mm'-'dd"),
+            date2 = null,
+            asGrouped = 0
+        };
+        GetSearchForFlights(searchParams);
         //AddPartToCollection(8);
     }
 
     [RelayCommand]
-    Task ReturnToPrevious() => Shell.Current.GoToAsync($"///..");
+    Task ReturnToPrevious() => Shell.Current.GoToAsync($"..");
 
-    public async void SearchForFlights(SearchParams pars)
+    //[RelayCommand]
+    //void LoadMoreItems() => AddPartToCollection();
+
+    [RelayCommand]
+    void RetrySearch() => GetSearchForFlights(searchParams);
+
+    public async void GetSearchForFlights(SearchParams pars)
     {
+        IsBusy = true;
         var res = await _client.SearchForFlights(pars);
-        if (res != null)
+        //if (res != null)
+        //{
+        //    throw new Exception("Null in results");
+        //}
+        results = res;
+        if (res.variants == null) 
         {
-            results = res;
-            if (res.variants == null) return;
-            variants = new List<Variant>(res.variants);
+            throw new Exception("Null in variants");
         }
+        variants = new List<Variant>(res.variants);
+        Flights = new ObservableCollection<Variant>(variants);
+
+        IsBusy = false;
+        await Task.Yield();
+        
     }
     public void AddPartToCollection()
     {
-        var length = variants.Count;
-        var len = (int)length / 4;
-        if (len <= 0) { return; }
-        var part = variants[0..^len];
-        variants.RemoveRange(0, len);
-        Flights.Concat(part.ToObservableCollection());
+        if (variants != null)
+        {
+            var length = variants.Count;
+            var len = (int)length / 4;
+            if (len <= 0) { return; }
+            var part = variants[0..^len];
+            variants.RemoveRange(0, len);
+            foreach (var item in part)
+            {
+                Flights.Add(item);
+            }
+        }
     }
-    public void AddPartToCollection(int leng)
+    public void AddPartToCollection(int partSize)
     {
-        var length = variants.Count;
-        var len = (int)length / leng;
-        if (len <= 0) { return; }
-        var part = variants[0..^len];
-        variants.RemoveRange(0, len);
-        Flights.Concat(part.ToObservableCollection());
+        if (variants != null)
+        {
+            var length = variants.Count;
+            var len = (int)length / partSize;
+            if (len <= 0) { return; }
+            var part = variants[0..^len];
+            variants.RemoveRange(0, len);
+            foreach (var item in part)
+            {
+                Flights.Add(item);
+            }
+        }
     }
+
+    
 }
 

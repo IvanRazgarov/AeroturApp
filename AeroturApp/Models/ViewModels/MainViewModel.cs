@@ -15,9 +15,12 @@ namespace AeroturApp.Models.ViewModels
             { "Бизнес", "Business" },
             { "Первый", "First"}
         };
+        private SearchParams searchParams;
 
         [ObservableProperty]
-        private SearchParams searchParams;
+        List<string> pricingTypes = ["Эконом", "Бизнес", "Первый"];
+        [ObservableProperty]
+        string pricingType;
 
         [ObservableProperty]
         int adults;
@@ -43,7 +46,7 @@ namespace AeroturApp.Models.ViewModels
                 fromType = "city",
                 to = "OSS",
                 toType = "city",
-                date1 = DateTime.Now.ToString("yyyy'-'mm'-'dd"),
+                date1 = "2023-11-14",//DateTime.Now.ToString("yyyy'-'mm'-'dd"),
                 date2 = null,
                 asGrouped = 0
             };
@@ -51,25 +54,26 @@ namespace AeroturApp.Models.ViewModels
 
         [RelayCommand]
         Task Navigate() 
-            => Shell.Current.GoToAsync($"///{nameof(SearchResultPage)}",new Dictionary<string, object>()
+            => Shell.Current.GoToAsync($"{nameof(SearchResultPage)}"/*,new Dictionary<string, object>()
         {
-            [nameof(SearchResultPage)] = new SearchParams()
-            {
-                locale = "RU",
-                instance = "aerotur.aero.dev",
-                adults = 1,
-                children = 0,
-                infants = 0,
-                infants_seat = 0,
-                flight_class = "Economy",
-                from = "LED",
-                fromType = "city",
-                to = "OSS",
-                toType = "city",
-                date1 = "2023-11-9",//DateTime.Now.ToString("yyyy'-'mm'-'dd"),
-                date2 = null,
-                asGrouped = 0
-            }
-        });
+                {"SearchParams", searchParams new SearchParams()
+                    {
+                        locale = "RU",
+                        instance = "aerotur.aero.dev",
+                        adults = 1,
+                        children = 0,
+                        infants = 0,
+                        infants_seat = 0,
+                        flight_class = "Economy",
+                        from = "LED",
+                        fromType = "city",
+                        to = "OSS",
+                        toType = "city",
+                        date1 = "2023-11-10",//DateTime.Now.ToString("yyyy'-'mm'-'dd"),
+                        date2 = null,
+                        asGrouped = 0
+                    }
+                }
+        }*/);
     }
 }

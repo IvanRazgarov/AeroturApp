@@ -8,12 +8,7 @@
     Title="AeroturApp">
 
     <ShellContent
-        Title="Поиск билетов"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage"/>
-    <ShellContent 
-        Title="Результаты поиска" 
-        ContentTemplate="{DataTemplate local:SearchResultPage}"
-        Route="SearchResultPage"/>
-
+            Title="Поиск билетов"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage"/>
 </Shell>
