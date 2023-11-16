@@ -88,9 +88,16 @@ namespace AeroturApp.Services
                 //throw new Exception("Status code: "+searchRes.StatusCode+' '+searchRes.Content.ReadAsStringAsync().Result);
             }
             var resText = await searchRes.Content.ReadAsStringAsync();
-            var res = JsonSerializer.Deserialize<SearchReturn>(resText);
-            if (res == null) return new SearchReturn();
-            return res;
+            var res = new SearchReturn();
+            try
+            {
+                res = JsonSerializer.Deserialize<SearchReturn>(resText);
+            }catch (Exception ex)
+            {
+                res.is_valid=false;
+                res.error_msg =creterias.date1 +" , "+ resText;
+            }            
+            return res;           
         }
     }
 }

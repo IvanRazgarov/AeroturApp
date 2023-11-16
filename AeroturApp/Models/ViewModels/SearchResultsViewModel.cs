@@ -17,6 +17,9 @@ public partial class SearchResultsViewModel : ObservableObject
     private List<Variant> variants = new();
 
     [ObservableProperty]
+    public string debugInfo="no info";
+
+    [ObservableProperty]
     private bool isBusy = false;
     
     [ObservableProperty]
@@ -43,7 +46,7 @@ public partial class SearchResultsViewModel : ObservableObject
             fromType = "city",
             to = "OSS",
             toType = "city",
-            date1 = "2023-11-14",//DateTime.Now.ToString("yyyy'-'mm'-'dd"),
+            date1 = DateTime.Now.AddDays(1).ToString("yyyy'-'MM'-'dd"),
             date2 = null,
             asGrouped = 0
         };
@@ -68,17 +71,18 @@ public partial class SearchResultsViewModel : ObservableObject
         //{
         //    throw new Exception("Null in results");
         //}
-        results = res;
-        if (res.variants == null) 
+        //results = res;
+        if (!res.is_valid || res.variants == null) 
         {
-            throw new Exception("Null in variants");
+            DebugInfo="";
+            IsBusy = false;
+            return;
         }
         variants = new List<Variant>(res.variants);
         Flights = new ObservableCollection<Variant>(variants);
 
-        IsBusy = false;
         await Task.Yield();
-        
+        IsBusy = false;     
     }
     public void AddPartToCollection()
     {

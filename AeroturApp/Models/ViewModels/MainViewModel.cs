@@ -46,7 +46,7 @@ namespace AeroturApp.Models.ViewModels
                 fromType = "city",
                 to = "OSS",
                 toType = "city",
-                date1 = "2023-11-14",//DateTime.Now.ToString("yyyy'-'mm'-'dd"),
+                date1 = DateTime.Now.ToString("yyyy'-'mm'-'dd"),
                 date2 = null,
                 asGrouped = 0
             };

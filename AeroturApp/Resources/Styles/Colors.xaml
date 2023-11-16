@@ -19,7 +19,21 @@
     <Color x:Key="Gray600">#404040</Color>
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
-    
+
+    <Color x:Key="Primary_50T">#80297AC6</Color>
+    <Color x:Key="Secondary_50T">#80F69747</Color>
+    <Color x:Key="Tertiary_50T">#8014589E</Color>
+    <Color x:Key="White_50T">#80FFFFFF</Color>
+    <Color x:Key="Black_50T">#80000000</Color>
+    <Color x:Key="Gray100_50T">#80E1E1E1</Color>
+    <Color x:Key="Gray200_50T">#80C8C8C8</Color>
+    <Color x:Key="Gray300_50T">#80ACACAC</Color>
+    <Color x:Key="Gray400_50T">#80919191</Color>
+    <Color x:Key="Gray500_50T">#806E6E6E</Color>
+    <Color x:Key="Gray600_50T">#80404040</Color>
+    <Color x:Key="Gray900_50T">#80212121</Color>
+    <Color x:Key="Gray950_50T">#80141414</Color>
+
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
@@ -52,5 +66,9 @@
         <GradientStop Color="#FFA04E" Offset="0.1"/>
         <GradientStop Color="#FD6C4F" Offset="1"/>
     </LinearGradientBrush>
+    <RadialGradientBrush x:Key="PrimaryRadialGBrush" >
+        <GradientStop Color="#FFA04E" Offset="0.1"/>
+        <GradientStop Color="#FD6C4F" Offset="1"/>
+    </RadialGradientBrush>
 
 </ResourceDictionary>

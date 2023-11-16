@@ -12,29 +12,47 @@
     <Shell.BackButtonBehavior >
         <BackButtonBehavior Command="{Binding ReturnToPreviousCommand}"/>
     </Shell.BackButtonBehavior>
-
-    <CollectionView x:Name="ResultsView" 
+    <AbsoluteLayout>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                           IsVisible="{Binding IsBusy}" 
+                           Color="Orange" 
+                           BackgroundColor="Transparent" 
+                           AbsoluteLayout.LayoutFlags="PositionProportional"
+                           AbsoluteLayout.LayoutBounds="0.49,0.33,100,34"
+                           HorizontalOptions="Center"
+                           ZIndex="1"
+                           InputTransparent="True"/>
+        
+        <CollectionView x:Name="ResultsView" 
                     ItemsSource="{Binding Flights}" 
-                    ItemsUpdatingScrollMode="KeepLastItemInView" 
+                    ItemsUpdatingScrollMode="KeepScrollOffset" 
                     RemainingItemsThreshold="3" 
                     Background="{StaticResource PrimaryGradientBrushV}"
-                    ItemTemplate="{StaticResource Flight}">
-        
-        <CollectionView.Header>
-            <VerticalStackLayout Spacing="5">
-                <ActivityIndicator IsVisible="{Binding IsBusy}" Color="Orange"/>
-                <Label Text="{Binding Flights.Count}" TextColor="White" HorizontalOptions="Center"/>
-                <Button Text="Retry" Background="{StaticResource AccentGradientBrushV}" Command="{Binding RetrySearchCommand}" TextColor="White"/>
-                <!--<Button Text="Return to main page" Background="{StaticResource PrimaryGradientBrushV}" Command="{Binding ReturnToPreviousCommand}" TextColor="White"/>-->
-            </VerticalStackLayout>
-        </CollectionView.Header>
-        <!--<CollectionView.ItemTemplate>
+                    ItemTemplate="{OnPlatform Android={StaticResource FlightCard_small}, iOS={StaticResource FlightCard_small}, WinUI={StaticResource FlightCard_big}, MacCatalyst={StaticResource FlightCard_big}}"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    ZIndex="0">
+
+            <CollectionView.Header>
+                <VerticalStackLayout Spacing="5">
+                    <!--<Label Text="{Binding DebugInfo}" TextColor="White" HorizontalOptions="Center"/>-->
+                    <Button Text="Refresh" 
+                            Command="{Binding RetrySearchCommand}" 
+                            TextColor="White"
+                            />
+
+                    <!--<Button Text="Return to main page" Background="{StaticResource PrimaryGradientBrushV}" Command="{Binding ReturnToPreviousCommand}" TextColor="White"/>-->
+                </VerticalStackLayout>
+            </CollectionView.Header>
+            <!--<CollectionView.ItemTemplate>
             <DataTemplate DataTemplate.DataTemplateContent="Flight"/>
         </CollectionView.ItemTemplate>-->
-        
-        <!--<DataTemplate x:DataType="m:Variant">
+
+            <!--<DataTemplate x:DataType="m:Variant">
                 <VerticalStackLayout>
-                    --><!--<Image BackgroundColor="{StaticResource Gray200}"/>--><!--
+                    -->
+            <!--<Image BackgroundColor="{StaticResource Gray200}"/>-->
+            <!--
                     <Frame CornerRadius="6">
                         <VerticalStackLayout>
                             <VerticalStackLayout Spacing="10">
@@ -43,22 +61,26 @@
                             </VerticalStackLayout>
                             <Frame Padding="0" Margin="0">
                                 <VerticalStackLayout>
-                                    --><!--<Grid.RowDefinitions>
+                                    -->
+            <!--<Grid.RowDefinitions>
                                         <RowDefinition Height="0.5*"/>
                                         <RowDefinition Height="0.5*"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="0.75*"/>
                                         <ColumnDefinition Width="0.25*"/>
-                                    </Grid.ColumnDefinitions>--><!--
+                                    </Grid.ColumnDefinitions>-->
+            <!--
                                     <Label Text="{Binding legs[0].segments[0].arrival_date_time}"/>
                                     <Label Text="delta time placeholder" Grid.Row="1"/>
-                                    --><!--<Button Text="other trips" 
+                                    -->
+            <!--<Button Text="other trips" 
                                                     Grid.Column="1" 
                                                     Grid.RowSpan="2" 
                                                     HorizontalOptions="CenterAndExpand" 
                                                     VerticalOptions="Center"
-                                            Background="{StaticResource AccentGradientBrushV}"/>--><!--
+                                            Background="{StaticResource AccentGradientBrushV}"/>-->
+            <!--
                                 </VerticalStackLayout>
                             </Frame>
                             <HorizontalStackLayout>
@@ -72,11 +94,17 @@
                                         <Frame>
                                             <Label Text="billing name"/>
                                         </Frame>
-                                        --><!--иконка багажа--><!--
+                                        -->
+            <!--иконка багажа-->
+            <!--
                                         <Image/>
-                                        --><!--иконка возврата--><!--
+                                        -->
+            <!--иконка возврата-->
+            <!--
                                         <Image/>
-                                        --><!--анимированная стрелка--><!--
+                                        -->
+            <!--анимированная стрелка-->
+            <!--
                                         <Image/>
                                     </HorizontalStackLayout>
                                 </toolkit:Expander.Header>
@@ -89,23 +117,26 @@
                                     <Button Text="About billing button" Background="{StaticResource AccentGradientBrushV}"/>
                                 </VerticalStackLayout>
                             </toolkit:Expander>
-                            --><!--<HorizontalStackLayout>
+                            -->
+            <!--<HorizontalStackLayout>
                                 <Button Text="change billing placeholder"/>
                                 <Button Text="buy this trip"/>
-                            </HorizontalStackLayout>--><!--
+                            </HorizontalStackLayout>-->
+            <!--
                         </VerticalStackLayout>
                     </Frame>
                 </VerticalStackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>-->
-        <CollectionView.EmptyView>
-            <DataTemplate>
-                <VerticalStackLayout>
-                    <Label Text="Nothing to see here? Go back."/>
-                    <Button BackgroundColor="{StaticResource Secondary}" Text="GO BACK" Command="{Binding ReturnToPreviousCommand}"/>
-                    <Button Background="{StaticResource PrimaryGradientBrushV}" Text="Retry" Command="{Binding RetrySearchCommand}"/>
-                </VerticalStackLayout>
-            </DataTemplate>
-        </CollectionView.EmptyView>
-    </CollectionView>
+            <CollectionView.EmptyView>
+                <DataTemplate>
+                    <VerticalStackLayout>
+                        <Label Text="Nothing to see here? Go back."/>
+                        <Button BackgroundColor="{StaticResource Secondary}" Text="GO BACK" Command="{Binding ReturnToPreviousCommand}"/>
+                        <Button Background="{StaticResource PrimaryGradientBrushV}" Text="Retry" Command="{Binding RetrySearchCommand}"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </AbsoluteLayout>
 </ContentPage>

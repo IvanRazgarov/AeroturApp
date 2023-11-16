@@ -5,18 +5,26 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:m="clr-namespace:AeroturApp.Models.DataModels">
 
-    <DataTemplate x:Key="Flight" x:DataType="m:Variant">
-        <VerticalStackLayout>
-            <Frame CornerRadius="6">
-                <VerticalStackLayout>
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="{Binding legs[0].segments[0].departure_airport}" HorizontalOptions="Start"/>
-                        <Label Text="{Binding expected_ticket_count}" HorizontalOptions="Start" TextColor="white"/>
-                    </VerticalStackLayout>
-                    <Frame Padding="0" Margin="0">
-                        <VerticalStackLayout>
-
-                            <!--<Grid.RowDefinitions>
+    <DataTemplate x:Key="FlightCard_big" x:DataType="m:Variant">
+        <Frame Padding="1" Margin="5" BackgroundColor="{AppThemeBinding Light={StaticResource Gray100_50T}, Dark={StaticResource Gray600_50T}, Default={StaticResource White}}">
+            <VerticalStackLayout>
+                <Frame CornerRadius="6" >
+                    <VerticalStackLayout >
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Padding="0" Spacing="10">
+                            <VerticalStackLayout Spacing="10" HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding legs[0].segments[0].departure_airport}" HorizontalOptions="Center"/>
+                                <Label Text="{Binding legs[0].segments[0].ddt, StringFormat='{0:dd} {0:MMM}'}" HorizontalOptions="Center"/>
+                            <!--<Label Text="{Binding expected_ticket_count}" HorizontalOptions="Start" TextColor="white"/>-->
+                            </VerticalStackLayout>
+                            <Label Text="{Binding delta_travel_time, StringFormat='Время в пути: {0:%h} ч. {0:%m} м.'}"/>
+                            <VerticalStackLayout Spacing="10" HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding arrival_city}" HorizontalOptions="Center"/>
+                                <Label Text="{Binding arrival_date_time, StringFormat='{0:dd} {0:MMM}'}" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                        <Frame Padding="0" Margin="0">
+                            <VerticalStackLayout>
+                                <!--<Grid.RowDefinitions>
                                 <RowDefinition Height="0.5*"/>
                                 <RowDefinition Height="0.5*"/>
                             </Grid.RowDefinitions>
@@ -24,68 +32,160 @@
                                 <ColumnDefinition Width="0.75*"/>
                                 <ColumnDefinition Width="0.25*"/>
                             </Grid.ColumnDefinitions>-->
+                                
 
-                            <Label Text="{Binding arrival_date_time}"/>
-                            <Label Text="delta time placeholder" Grid.Row="1"/>
+                                
 
-                            <!--<Button Text="other trips" 
+                                <!--<Button Text="other trips" 
                                             Grid.Column="1" 
                                             Grid.RowSpan="2" 
                                             HorizontalOptions="CenterAndExpand" 
                                             VerticalOptions="Center"
                                     Background="{StaticResource AccentGradientBrushV}"/>-->
 
-                        </VerticalStackLayout>
-                    </Frame>
-                    <HorizontalStackLayout>
-                        <Label Text="transit delta time placeholder" HorizontalOptions="Start"/>
-                        <!--<Button Text="details placeholder" Background="{StaticResource AccentGradientBrushV}"/>-->
-                    </HorizontalStackLayout>
-                    <Label Text="{Binding arrival_city}"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <HorizontalStackLayout>
+                            <Label Text="transit delta time placeholder" HorizontalOptions="Start"/>
+                            <!--<Button Text="details placeholder" Background="{StaticResource AccentGradientBrushV}"/>-->
+                        </HorizontalStackLayout>
 
-                    <VerticalStackLayout HorizontalOptions="CenterAndExpand">
-                        <!--<toolkit:Expander.Header>
+                        <VerticalStackLayout HorizontalOptions="CenterAndExpand">
+                            <!--<toolkit:Expander.Header>
                             <HorizontalStackLayout HorizontalOptions="FillAndExpand">
                                 <Frame>
                                     <Label Text="billing name"/>
                                 </Frame>
 
                                 -->
-                        <!--иконка багажа-->
-                        <!--
+                            <!--иконка багажа-->
+                            <!--
 
                                 <Image/>
 
                                 -->
-                        <!--иконка возврата-->
-                        <!--
+                            <!--иконка возврата-->
+                            <!--
 
                                 <Image/>
 
                                 -->
-                        <!--анимированная стрелка-->
-                        <!--
+                            <!--анимированная стрелка-->
+                            <!--
 
                                 <Image/>
                             </HorizontalStackLayout>
                         </toolkit:Expander.Header>
                         <VerticalStackLayout>-->
-                        <Label Text="hhluggage placeholder"/>
-                        <Label Text="luggage placeholder"/>
-                        <Rectangle BackgroundColor="LightGray"/>
-                        <Label Text="rebook placeholder"/>
-                        <Label Text="return placeholder"/>
-                        <!--<Button Text="About billing button" Background="{StaticResource AccentGradientBrushV}"/>-->
-                    </VerticalStackLayout>
+                            <Label Text="hhluggage placeholder"/>
+                            <Label Text="luggage placeholder"/>
+                            <Rectangle BackgroundColor="LightGray"/>
+                            <Label Text="rebook placeholder"/>
+                            <Label Text="return placeholder"/>
+                            <!--<Button Text="About billing button" Background="{StaticResource AccentGradientBrushV}"/>-->
+                        </VerticalStackLayout>
 
-                    <!--<HorizontalStackLayout>
+                        <!--<HorizontalStackLayout>
                         <Button Text="change billing placeholder"/>
                         <Button Text="buy this trip"/>
                     </HorizontalStackLayout>-->
 
-                </VerticalStackLayout>
-            </Frame>
-        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </Frame>
+    </DataTemplate>
+
+    <DataTemplate x:Key="FlightCard_small" x:DataType="m:Variant">
+        <Frame Padding="1" Margin="5" BackgroundColor="{AppThemeBinding Light={StaticResource Gray100_50T}, Dark={StaticResource Gray600_50T}, Default={StaticResource White}}">
+            <VerticalStackLayout>
+                <Frame CornerRadius="6" >
+                    <VerticalStackLayout >
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Padding="0" Spacing="10">
+                            <VerticalStackLayout Spacing="10" HorizontalOptions="StartAndExpand">
+                                <Label Text="{Binding legs[0].segments[0].departure_airport}" HorizontalOptions="Center"/>
+                                <Label Text="{Binding legs[0].segments[0].ddt, StringFormat='{0:%d} {0:MMM}'}" HorizontalOptions="Center"/>
+                                <!--<Label Text="{Binding expected_ticket_count}" HorizontalOptions="Start" TextColor="white"/>-->
+                            </VerticalStackLayout>
+                            <VerticalStackLayout HorizontalOptions="CenterAndExpand">
+                                <AbsoluteLayout HorizontalOptions="Center">
+                                    <Image AbsoluteLayout.LayoutBounds="0,0"
+                                           AbsoluteLayout.LayoutFlags="All"/>
+                                    <Image AbsoluteLayout.LayoutBounds="0.5,0"
+                                           AbsoluteLayout.LayoutFlags="All"/>
+                                </AbsoluteLayout>
+                                <Label Text="{Binding legs[0].segments[0].operating_company}" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Spacing="10" HorizontalOptions="EndAndExpand">
+                                <Label Text="{Binding arrival_city}" HorizontalOptions="Center"/>
+                                <Label Text="{Binding arrival_date_time, StringFormat='{0:%d} {0:MMM}'}" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                        <Label Text="{Binding delta_travel_time, StringFormat='Время в пути: {0:%h} ч. {0:%m} м.'}" HorizontalOptions="CenterAndExpand"/>
+                        <!--<Frame Padding="0" Margin="0">
+                            <VerticalStackLayout>
+                                <Grid.RowDefinitions>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.75*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                        </Grid.ColumnDefinitions>
+                                <Button Text="other trips" 
+                                        Grid.Column="1" 
+                                        Grid.RowSpan="2" 
+                                        HorizontalOptions="CenterAndExpand" 
+                                        VerticalOptions="Center"
+                                Background="{StaticResource AccentGradientBrushV}"/>
+
+                            </VerticalStackLayout>
+                        </Frame>-->
+                        <Label Text="transit delta time placeholder" HorizontalOptions="Center"/>
+                            <!--<Button Text="details placeholder" Background="{StaticResource AccentGradientBrushV}"/>-->
+                        <VerticalStackLayout HorizontalOptions="CenterAndExpand">
+                            <!--<toolkit:Expander.Header>
+                        <HorizontalStackLayout HorizontalOptions="FillAndExpand">
+                            <Frame>
+                                <Label Text="billing name"/>
+                            </Frame>
+
+                            
+                            иконка багажа
+                            
+
+                            <Image/>
+
+                            
+                            иконка возврата
+                            
+                            <Image/>
+
+                            
+                            анимированная стрелка
+                            
+
+                            <Image/>
+                        </HorizontalStackLayout>
+                    </toolkit:Expander.Header>
+                    <VerticalStackLayout>-->
+                            <Label Text="hhluggage placeholder"/>
+                            <Label Text="luggage placeholder"/>
+                            <!--<Rectangle BackgroundColor="LightGray"/>-->
+                            <Label Text="rebook placeholder"/>
+                            <Label Text="return placeholder"/>
+                            <!--<Button Text="About billing button" Background="{StaticResource AccentGradientBrushV}"/>-->
+                        </VerticalStackLayout>
+
+                        <!--<HorizontalStackLayout>
+                    <Button Text="change billing placeholder"/>
+                    <Button Text="buy this trip"/>
+                </HorizontalStackLayout>-->
+
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </Frame>
     </DataTemplate>
 
 </ResourceDictionary>
