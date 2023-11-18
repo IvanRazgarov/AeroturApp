@@ -369,3 +369,6 @@ FodyWeavers.xsd
 /WebTests/RequestApiClient.cs
 /WebTests/SearchReturnNew.cs
 /WebTests/SearchReturnOld.cs
+/WebTests/IATA_codes.cs
+/WebTests/IataCodesService.cs
+/WebTests/cities.json
