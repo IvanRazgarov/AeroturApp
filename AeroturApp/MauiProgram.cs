@@ -23,12 +23,14 @@ namespace AeroturApp
 
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<WebAPIClient>();
+            //builder.Services.AddSingleton<IataCodesService>();
 
             builder.Services.AddTransient<SearchResultsViewModel>();
-            builder.Services.AddSingleton<SearchResultPage>();
+            builder.Services.AddTransient<SearchResultPage>();
 
-            builder.Services.AddSingleton<MainViewModel>();
-            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<MainViewModel>();
+            builder.Services.AddTransient<MainPage>();
+
 
 #if DEBUG
     		builder.Logging.AddDebug();

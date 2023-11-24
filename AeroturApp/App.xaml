@@ -9,7 +9,7 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <!--<ResourceDictionary Source="Resources/Styles/Templates.xaml"/>-->
-                <ResourceDictionary Source="Resources/Cards/FlightCard.xaml"/>
+                <ResourceDictionary Source="Views/Cards/FlightCard.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

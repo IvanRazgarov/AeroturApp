@@ -1,39 +1,50 @@
 ﻿using AeroturApp.Models.DataModels;
 using AeroturApp.Services;
-using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
 namespace AeroturApp.Models.ViewModels;
 
-[QueryProperty("searchParams", "SearchParams")]
-public partial class SearchResultsViewModel : ObservableObject
+//[QueryProperty(nameof(DebugInfo), nameof(DebugInfo))]
+public partial class SearchResultsViewModel : ObservableObject, IQueryAttributable
 {
-    public SearchParams searchParams { get; set; }
+    [ObservableProperty]
+    private SearchParams searchParams;
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        SearchParams = query[nameof(SearchParams)] as SearchParams;
+        Task.Run(()=>GetSearchForFlights(SearchParams));
+    }
 
-    private SearchReturn results;
+    //private SearchReturn results;
+
+    //public void ApplyQueryAttributes(IDictionary<string, object> query)
+    //{
+    //    DebugInfo = query[nameof(DebugInfo)].ToString();
+    //    OnPropertyChanged(nameof(DebugInfo));
+    //}
 
     private List<Variant> variants = new();
 
     [ObservableProperty]
-    public string debugInfo="no info";
+    public string debugInfo="No debug info";
 
     [ObservableProperty]
     private bool isBusy = false;
     
     [ObservableProperty]
-    private ObservableCollection<Variant> _flights = new();
+    private ObservableCollection<Variant> _flights;
 
     [ObservableProperty]
-    private Variant _flight = new();
+    private Variant _flight=new();
 
     private WebAPIClient _client;
 
     public SearchResultsViewModel(WebAPIClient client)
     {
         _client = client;
-        searchParams = new SearchParams()
+        /*searchParams = new SearchParams()
         {
             locale = "RU",
             instance = "aerotur.aero.dev",
@@ -51,7 +62,7 @@ public partial class SearchResultsViewModel : ObservableObject
             asGrouped = 0
         };
         GetSearchForFlights(searchParams);
-        //AddPartToCollection(8);
+        AddPartToCollection(8);*/
     }
 
     [RelayCommand]
@@ -61,20 +72,16 @@ public partial class SearchResultsViewModel : ObservableObject
     //void LoadMoreItems() => AddPartToCollection();
 
     [RelayCommand]
-    void RetrySearch() => GetSearchForFlights(searchParams);
+    Task RetrySearch() => GetSearchForFlights(SearchParams);
 
-    public async void GetSearchForFlights(SearchParams pars)
+    public async Task GetSearchForFlights(SearchParams pars)
     {
         IsBusy = true;
         var res = await _client.SearchForFlights(pars);
-        //if (res != null)
-        //{
-        //    throw new Exception("Null in results");
-        //}
-        //results = res;
+
         if (!res.is_valid || res.variants == null) 
         {
-            DebugInfo="";
+            DebugInfo=res.error_msg;
             IsBusy = false;
             return;
         }
@@ -83,6 +90,23 @@ public partial class SearchResultsViewModel : ObservableObject
 
         await Task.Yield();
         IsBusy = false;     
+    }
+    public async Task GetSearchForFlights()
+    {
+        IsBusy = true;
+        var res = await _client.SearchForFlights(SearchParams);
+
+        if (!res.is_valid || res.variants == null)
+        {
+            DebugInfo = "";
+            IsBusy = false;
+            return;
+        }
+        variants = new List<Variant>(res.variants);
+        Flights = new ObservableCollection<Variant>(variants);
+
+        await Task.Yield();
+        IsBusy = false;
     }
     public void AddPartToCollection()
     {
@@ -115,6 +139,5 @@ public partial class SearchResultsViewModel : ObservableObject
         }
     }
 
-    
 }
 
