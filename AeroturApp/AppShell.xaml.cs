@@ -7,8 +7,7 @@ namespace AeroturApp
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(SearchResultPage), typeof(SearchResultPage));
-            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+
         }
     }
 }

@@ -9,7 +9,7 @@ namespace AeroturApp.Views
         public MainPage(MainViewModel model)
         {
             InitializeComponent();
-            this.BindingContext = model;
+            BindingContext = model;
         }
         /*async void OnButtonClicked(object sender, EventArgs args)
         {
