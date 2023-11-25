@@ -8,6 +8,7 @@ public partial class SearchResultPage : ContentPage
 	public SearchResultPage(SearchResultsViewModel model)
 	{
         InitializeComponent();
-		this.BindingContext = model;
+		BindingContext = model;
     }
+	
 }

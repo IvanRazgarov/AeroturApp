@@ -14,7 +14,7 @@ public partial class SearchResultsViewModel : ObservableObject, IQueryAttributab
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         SearchParams = query[nameof(SearchParams)] as SearchParams;
-        Task.Run(()=>GetSearchForFlights(SearchParams));
+        Task.Run(() => GetSearchForFlights(SearchParams));
     }
 
     //private SearchReturn results;
@@ -28,16 +28,16 @@ public partial class SearchResultsViewModel : ObservableObject, IQueryAttributab
     private List<Variant> variants = new();
 
     [ObservableProperty]
-    public string debugInfo="No debug info";
+    public string debugInfo = "No debug info";
 
     [ObservableProperty]
     private bool isBusy = false;
-    
+
     [ObservableProperty]
     private ObservableCollection<Variant> _flights;
 
     [ObservableProperty]
-    private Variant _flight=new();
+    private Variant _flight = new();
 
     private WebAPIClient _client;
 
@@ -73,6 +73,13 @@ public partial class SearchResultsViewModel : ObservableObject, IQueryAttributab
 
     [RelayCommand]
     Task RetrySearch() => GetSearchForFlights(SearchParams);
+
+    [RelayCommand]
+    Task NavigateToSelected(string link)
+        => Shell.Current.GoToAsync($"PaymentPage", new Dictionary<string, object>()
+        {
+            ["link"]=link
+        }); 
 
     public async Task GetSearchForFlights(SearchParams pars)
     {

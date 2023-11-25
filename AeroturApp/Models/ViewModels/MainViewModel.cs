@@ -1,17 +1,11 @@
 ﻿using AeroturApp.Models.DataModels;
 using AeroturApp.Services;
 using AeroturApp.Views;
-using CommunityToolkit.Maui.Converters;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
-using static System.Net.Mime.MediaTypeNames;
-
-
 
 namespace AeroturApp.Models.ViewModels;
-
 public partial class MainViewModel : ObservableObject
 {
     private IataCodesService codesService;

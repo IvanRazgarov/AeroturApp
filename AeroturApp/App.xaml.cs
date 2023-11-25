@@ -8,6 +8,7 @@ namespace AeroturApp
             InitializeComponent();
             Routing.RegisterRoute(nameof(SearchResultPage), typeof(SearchResultPage));
             Routing.RegisterRoute(nameof(Views.MainPage), typeof(MainPage));
+            Routing.RegisterRoute(nameof(PaymentPage), typeof(PaymentPage));
             MainPage = main;
 
         }
