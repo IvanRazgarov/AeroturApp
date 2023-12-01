@@ -3,7 +3,12 @@ using CommunityToolkit.Maui;
 using AeroturApp.Services;
 using AeroturApp.Models.ViewModels;
 using AeroturApp.Views;
-
+#if ANDROID
+using DevExpress.Maui;
+#endif
+#if IOS 
+using DevExpress.Maui;
+#endif
 namespace AeroturApp
 {
     public static class MauiProgram
@@ -14,6 +19,12 @@ namespace AeroturApp
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+#if ANDROID
+                .UseDevExpress()
+#endif
+#if ANDROID
+                .UseDevExpress()
+#endif
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

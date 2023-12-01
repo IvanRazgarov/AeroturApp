@@ -95,7 +95,6 @@ public partial class SearchResultsViewModel : ObservableObject, IQueryAttributab
         variants = new List<Variant>(res.variants);
         Flights = new ObservableCollection<Variant>(variants);
 
-        await Task.Yield();
         IsBusy = false;     
     }
     public async Task GetSearchForFlights()

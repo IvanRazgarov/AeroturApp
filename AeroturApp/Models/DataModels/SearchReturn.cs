@@ -144,6 +144,7 @@ public class GenericAircraft
 }
 public class Variant
 {
+    public bool is_expanded { get; set; }
     public string flight_id { get; set; }
     public string ident { get; set; }
     public string booking_url { get; set; }
@@ -214,6 +215,7 @@ public class Leg
 }
 public class Segment
 {
+    public bool is_last { get; set; } = false;
     public string ident { get; set; }
     public string flight_number { get; set; }
     public string flight_number_full { get; set; }
@@ -223,6 +225,7 @@ public class Segment
     public string validating_airline { get; set; }
     public string operating_company { get; set; }
     public string marketing_company { get; set; }
+    public TimeSpan travel_time { get => adt - ddt; }
     public DateTime ddt { get; set; }
     public string departure_date_time {  set
         {

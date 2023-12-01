@@ -107,17 +107,26 @@ namespace AeroturApp.Services
 
                 searchRes = await httpClient.SendAsync(mainReqMessage);
                 resText = await searchRes.Content.ReadAsStringAsync();
-                try
+                res = JsonSerializer.Deserialize<SearchReturn>(resText);
+            }
+            catch
+            {
+                res = new SearchReturn() { error_msg = resText + " No flights for date or tomorrow " + creterias };
+                //res.is_valid=false;
+                //res.error_msg =ex.Message+" , "+creterias.date1 +" , "+ resText;
+            }   
+            foreach(var variant in res.variants)
+            {
+                foreach(var leg in variant.legs)
                 {
-                    res = JsonSerializer.Deserialize<SearchReturn>(resText);
-                }
-                catch (Exception ex2)
-                {
-                    res = new SearchReturn() { error_msg=resText+" No flights for date or tomorrow "+creterias};
-                    //res.is_valid=false;
-                    //res.error_msg =ex.Message+" , "+creterias.date1 +" , "+ resText;
+                    foreach(var segment in leg.segments)
+                    {
+                        var i = 0;
+                        if (i == leg.segments.Count - 1) segment.is_last=true;
+                    }
                 }
             }
+
             return res;           
         }
 
