@@ -84,6 +84,8 @@
 	  <MauiXaml Update="Views\Cards\FlightCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+	<ItemGroup>
 	  <MauiXaml Update="Views\SearchResultPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

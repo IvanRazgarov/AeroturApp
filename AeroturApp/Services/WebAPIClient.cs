@@ -68,23 +68,6 @@ namespace AeroturApp.Services
 
             var mainReqMessage = new HttpRequestMessage(HttpMethod.Post, AEROTUR_API_URL+"flights");
 
-            /*mainReqMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36");
-            mainReqMessage.Headers.Add("accept", "application/json, text/plain, /*");
-            mainReqMessage.Headers.Add("accept-language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
-            mainReqMessage.Headers.Add("sec-ch-ua", "\"Chromium\";v=\"116\", \"Not)A;Brand\";v=\"24\", \"Opera GX\";v=\"102\"");
-            mainReqMessage.Headers.Add("sec-ch-ua-mobile", "?1");
-            mainReqMessage.Headers.Add("sec-ch-ua-platform", "\"Android\"");
-            mainReqMessage.Headers.Add("sec-fetch-dest", "empty");
-            mainReqMessage.Headers.Add("sec-fetch-mode", "cors");
-            mainReqMessage.Headers.Add("sec-fetch-site", "same-origin");
-            mainReqMessage.Headers.Add("x-requested-with", "XMLHttpRequest");*/
-
-            /*if (creterias.date2 != null) 
-            {
-                var dat = DateTime.Parse(creterias.date2);
-                if (dat <= DateTime.Now) creterias.date2 = null;
-            }*/
-
             mainReqMessage.Content = JsonContent.Create(creterias);            
 
             var searchRes = await httpClient.SendAsync(mainReqMessage);

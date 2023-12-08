@@ -89,7 +89,7 @@
                 <Frame BackgroundColor="#31000000" Padding="0" Margin="0">
                     <toolkit:Expander Margin="0" Padding="0" IsClippedToBounds="True" IsExpanded="{Binding is_expanded}">
                         <toolkit:Expander.Header>
-                            <Frame BackgroundColor="White" Padding="0" Margin="0" CornerRadius="0">
+                            <Frame BackgroundColor="White" Padding="0" Margin="0" CornerRadius="0" IsClippedToBounds="True">
                                 <Label Text="Детали"/>
                             </Frame>
                         </toolkit:Expander.Header>
@@ -107,13 +107,11 @@
                                         <Label Text="{Binding arrival_city}"/>
                                     </HorizontalStackLayout>
                                 </VerticalStackLayout>
-                                <VerticalStackLayout BindableLayout.ItemsSource="{Binding legs[0].segments}" Margin="0" Padding="0" Spacing="10">
+                                <VerticalStackLayout BindableLayout.ItemsSource="{Binding legs[0].segments}" Margin="0" Padding="0" Spacing="10" ZIndex="1">
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate x:DataType="m:Segment">
-                                            <AbsoluteLayout Padding="0" Margin="0" VerticalOptions="Fill" HorizontalOptions="Fill">
-                                                <Frame Margin="0" BackgroundColor="White"
-                                                       AbsoluteLayout.LayoutFlags="All"
-                                                       AbsoluteLayout.LayoutBounds="0,0,1,1">
+                                            <VerticalStackLayout Padding="0" Margin="0" VerticalOptions="Fill" HorizontalOptions="Fill">
+                                                <Frame Margin="0" >
                                                     <VerticalStackLayout HorizontalOptions="FillAndExpand" Margin="0" Padding="0" Spacing="10">
                                                         <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="200">
                                                             <Label Text="{Binding operating_company}" HorizontalOptions="Start" VerticalOptions="Center"/>
@@ -168,7 +166,7 @@
                                                     </Frame>
                                                 </Border>
                                                 
-                                            </AbsoluteLayout>
+                                            </VerticalStackLayout>
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>
                                 </VerticalStackLayout>
