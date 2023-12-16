@@ -58,6 +58,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Services\CustomConverters.cs" />
 	  <Compile Remove="Views\SearchResultPage.xaml.cs" />
 	</ItemGroup>
 

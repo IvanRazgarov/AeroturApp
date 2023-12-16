@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:m="clr-namespace:AeroturApp.Models.DataModels"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    xmlns:vm="clr-namespace:AeroturApp.Models.ViewModels">
+    xmlns:vm="clr-namespace:AeroturApp.Models.ViewModels"
+>
 
     <DataTemplate x:Key="FlightCard_big" x:DataType="m:Variant">
         <Frame Padding="1" Margin="5" BackgroundColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}, Default={StaticResource White}}">
@@ -87,7 +88,7 @@
                             CommandParameter="{Binding booking_url}"/>
                 </HorizontalStackLayout>
                 <Frame BackgroundColor="#31000000" Padding="0" Margin="0">
-                    <toolkit:Expander Margin="0" Padding="0" IsClippedToBounds="True" IsExpanded="{Binding is_expanded}">
+                    <toolkit:Expander Margin="0" Padding="0" ZIndex="1" IsExpanded="{Binding is_expanded}">
                         <toolkit:Expander.Header>
                             <Frame BackgroundColor="White" Padding="0" Margin="0" CornerRadius="0" IsClippedToBounds="True">
                                 <Label Text="Детали"/>
@@ -111,7 +112,7 @@
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate x:DataType="m:Segment">
                                             <VerticalStackLayout Padding="0" Margin="0" VerticalOptions="Fill" HorizontalOptions="Fill">
-                                                <Frame Margin="0" >
+                                                <Frame Margin="0" BackgroundColor="White">
                                                     <VerticalStackLayout HorizontalOptions="FillAndExpand" Margin="0" Padding="0" Spacing="10">
                                                         <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="200">
                                                             <Label Text="{Binding operating_company}" HorizontalOptions="Start" VerticalOptions="Center"/>
@@ -120,56 +121,78 @@
                                                                 <Label Text="{Binding flight_number_full}"/>
                                                             </VerticalStackLayout>
                                                         </HorizontalStackLayout>
-                                                        <Grid HorizontalOptions="FillAndExpand">
+                                                        <Grid HorizontalOptions="FillAndExpand" >
                                                             <Grid.RowDefinitions>
                                                                 <RowDefinition/>
                                                                 <RowDefinition/>
                                                                 <RowDefinition/>
                                                             </Grid.RowDefinitions>
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition/>
-                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition Width="3*"/>
+                                                                <ColumnDefinition Width="10"/>
                                                                 <ColumnDefinition Width="auto"/>
                                                             </Grid.ColumnDefinitions>
+                                                            
                                                             <VerticalStackLayout VerticalOptions="Center">
                                                                 <Label Text="{Binding ddt, StringFormat='{0:%h}:{0:mm}'}"/>
                                                                 <Label Text="{Binding ddt, StringFormat='{0:M}'}"/>
                                                             </VerticalStackLayout>
 
-                                                            <Path Grid.Column="1" Grid.RowSpan="3" HorizontalOptions="Center" VerticalOptions="Center"
-                                                                Data=""/>
+                                                            <Path Grid.Column="1" Fill="#EA5400" Opacity="0.75" HorizontalOptions="Center" VerticalOptions="Center"
+                                                                  Data="M0 4.5l6 1.5v-3l-1.5-1.5v-1.5l3 1.5 3-1.5v1.5l-1.5 1.5v3l6-1.5v1.5l-6 3v4.5c0 0 0 3-1.5 3-1.5 0-1.5-3-1.5-3l0 0v-4.5l-6-3z"/>
 
                                                             <Label Grid.Column="2" Text="{Binding departure_airport}" HorizontalOptions="Center" VerticalOptions="Center"/>
 
-                                                            <Label Grid.Row="1" Grid.Column="2" Text="{Binding travel_time, StringFormat='Время перелёта:/n {0:%h} ч. {0:%m} м.'}"
+                                                            <Line Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"
+                                                                Stroke="{StaticResource Primary}" Y1="0" Y2="100"/>
+                                                            
+                                                            <Label Grid.Row="1" Grid.Column="2" Text="{Binding travel_time, StringFormat='Время перелёта: {0:%h} ч. {0:%m} м.'}"
                                                                 HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                                                                                      
                                                             <VerticalStackLayout Grid.Row="2" VerticalOptions="Center">
                                                                 <Label Text="{Binding adt, StringFormat='{0:%h}:{0:mm}'}"/>
                                                                 <Label Text="{Binding adt, StringFormat='{0:M}'}"/>
                                                             </VerticalStackLayout>
 
+                                                            <Ellipse Grid.Column="1" Grid.Row="2" BackgroundColor="{StaticResource Secondary}"
+                                                                     MaximumHeightRequest="8" MaximumWidthRequest="8"/>
+                                                            
                                                             <Label Grid.Row="2" Grid.Column="2" Text="{Binding arrival_airport}"
                                                                 HorizontalOptions="Center" VerticalOptions="Center"/>
                                                         </Grid>
                                                     </VerticalStackLayout>
                                                 </Frame>
-                                                <Border Padding="0" Margin="0" 
-                                                        Stroke="#61B8FF"
-                                                        StrokeShape="RoundRectangle 50"
-                                                        AbsoluteLayout.LayoutFlags="All"
-                                                        AbsoluteLayout.LayoutBounds="0.25,0.875,1,1">
-                                                    <Frame Padding="0" Margin="0">
-                                                        <HorizontalStackLayout>
-                                                            <Path/>
-                                                            <Label Text=""/>
-                                                        </HorizontalStackLayout>
-                                                    </Frame>
-                                                </Border>
-                                                
+
                                             </VerticalStackLayout>
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>
                                 </VerticalStackLayout>
+                                <HorizontalStackLayout HorizontalOptions="Start" Margin="0">
+                                    <AbsoluteLayout HorizontalOptions="Center">
+                                        <Path   Data="M12 3h-10c-1 0-2 1-2 2v5c0 1 1 2 2 2h10c1 0 2-1 2-2v-5c0-1-1-2-2-2zM10 1c0-.5-.5-1-1-1h-4c-.5 0-1 .5-1 1 0 1 0 1 1 1 0-1 0-1 1-1h2c1 0 1 0 1 1 1 0 1 0 1-1" 
+                                                Fill="#28D16B" 
+                                                IsEnabled="{Binding carry_on.is_baggage}"/>
+                                        <Path   Data="M12 3h-10c-1 0-2 1-2 2v5c0 1 1 2 2 2h10c1 0 2-1 2-2v-5c0-1-1-2-2-2zM10 1c0-.5-.5-1-1-1h-4c-.5 0-1 .5-1 1 0 1 0 1 1 1 0-1 0-1 1-1h2c1 0 1 0 1 1 1 0 1 0 1-1"
+                                                Fill="#3F1864B0"/>
+                                        <Path   Data=""/>
+                                    </AbsoluteLayout>
+                                    
+                                    <Label Text="Ручная кладь"/>
+                                    <AbsoluteLayout HorizontalOptions="Center">
+                                        <Path   Data="M11 3h-9a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-9a2 2 0 00-2-2zM10 2l0-1c0 0 0-1-1-1l-5 0c-1 0-1 1-1 1l0 1 1 0c0-1 1-1 1-1l3 0c0 0 1 0 1 1zM1 19a1 1 0 000-2 1 1 0 000 2zM12 19a1 1 0 000-2 1 1 0 000 2z"
+                                                Fill="#28D16B"
+                                                IsEnabled="{Binding baggage.is_baggage}"
+                                                ZIndex="1"/>
+                                        <Path   Data="M11 3h-9a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-9a2 2 0 00-2-2zM10 2l0-1c0 0 0-1-1-1l-5 0c-1 0-1 1-1 1l0 1 1 0c0-1 1-1 1-1l3 0c0 0 1 0 1 1zM1 19a1 1 0 000-2 1 1 0 000 2zM12 19a1 1 0 000-2 1 1 0 000 2z"
+                                                Fill="#3F1864B0"/>
+                                        <Path   Data="M9 7l-2.5 2.5-2.5-2.5M9 12l-2.5-2.5-2.5 2.5"
+                                                Stroke="White"
+                                                StrokeThickness=".75"
+                                                StrokeMiterLimit="10"
+                                                StrokeLineCap="Round"/>
+                                    </AbsoluteLayout>
+                                    <Label Text="С багажом"/>
+                                </HorizontalStackLayout>
                             </VerticalStackLayout>
                         </Frame>
                     </toolkit:Expander>

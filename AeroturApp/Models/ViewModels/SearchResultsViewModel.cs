@@ -11,10 +11,10 @@ public partial class SearchResultsViewModel : ObservableObject, IQueryAttributab
 {
     [ObservableProperty]
     private SearchParams searchParams;
-    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         SearchParams = query[nameof(SearchParams)] as SearchParams;
-        Task.Run(() => GetSearchForFlights(SearchParams));
+        await GetSearchForFlights(SearchParams);
     }
 
     //private SearchReturn results;
@@ -88,7 +88,7 @@ public partial class SearchResultsViewModel : ObservableObject, IQueryAttributab
         { 
             var res = await _client.SearchForFlights(pars);
             variants = new List<Variant>(res.variants);
-            Flights = new ObservableCollection<Variant>(variants);
+            Flights = new ObservableCollection<Variant>(variants.OrderBy((x)=>x.price));
         }
         catch
         {
