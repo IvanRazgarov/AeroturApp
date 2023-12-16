@@ -4,42 +4,14 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vm="clr-namespace:AeroturApp.Models.ViewModels"
              xmlns:m="clr-namespace:AeroturApp.Models.DataModels"
-             xmlns:dx="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
              xmlns:local="clr-namespace:AeroturApp"
              x:Class="AeroturApp.Views.SearchResultPage"
              Title="Результаты поиска"
              x:DataType="vm:SearchResultsViewModel"
              >
 
-    <Shell.BackButtonBehavior >
+    <!--<Shell.BackButtonBehavior >
         <BackButtonBehavior Command="{Binding ReturnToPreviousCommand}"/>
-    </Shell.BackButtonBehavior>
-    <!--<VerticalStackLayout Padding="0" Margin="0" Spacing="0">
-        <RefreshView
-            IsEnabled="{OnPlatform Android=false, iOS=false, Default=true}"
-            IsVisible="{OnPlatform Android=false, iOS=false, Default=true}"
-            IsRefreshing="{Binding IsBusy}" 
-            Command="{Binding RetrySearchCommand}"
-            RefreshColor="{StaticResource Secondary}"
-            Background="{StaticResource PrimaryGradientBrushV}"
-            ZIndex="1">
-            <CollectionView IsEnabled="{OnPlatform Android=false, iOS=false, Default=true}"
-                            IsVisible="{OnPlatform Android=false, iOS=false, Default=true}"
-                            ItemsSource="{Binding Flights}"
-                            ItemTemplate="{StaticResource FlightCard_big}"
-                            ItemSizingStrategy="MeasureFirstItem"
-                            VerticalScrollBarVisibility="Always"
-                            />
-        </RefreshView>-->
-        <dx:DXCollectionView
-                    ItemsSource="{Binding Flights}" 
-                    IsPullToRefreshEnabled="True"
-                    IndicatorColor="Orange"
-                    IsRefreshing="{Binding IsBusy}"
-                    PullToRefreshCommand="{Binding RetrySearchCommand}"
-                    Background="{StaticResource PrimaryGradientBrushV}"
-                    ItemTemplate="{StaticResource FlightCard_small}"
-                    >
-        </dx:DXCollectionView>
-    <!--</VerticalStackLayout>-->
+    </Shell.BackButtonBehavior>-->
+    
 </ContentPage>

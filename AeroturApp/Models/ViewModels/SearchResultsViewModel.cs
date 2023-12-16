@@ -31,7 +31,7 @@ public partial class SearchResultsViewModel : ObservableObject, IQueryAttributab
     public string debugInfo = "No debug info";
 
     [ObservableProperty]
-    private bool isBusy = false;
+    private bool isBusy = true;
 
     [ObservableProperty]
     private ObservableCollection<Variant> _flights;
@@ -84,65 +84,19 @@ public partial class SearchResultsViewModel : ObservableObject, IQueryAttributab
     public async Task GetSearchForFlights(SearchParams pars)
     {
         IsBusy = true;
-        var res = await _client.SearchForFlights(pars);
-
-        if (!res.is_valid || res.variants == null) 
+        try 
+        { 
+            var res = await _client.SearchForFlights(pars);
+            variants = new List<Variant>(res.variants);
+            Flights = new ObservableCollection<Variant>(variants);
+        }
+        catch
         {
-            DebugInfo=res.error_msg;
+            //DebugInfo=res.error_msg;
             IsBusy = false;
             return;
         }
-        variants = new List<Variant>(res.variants);
-        Flights = new ObservableCollection<Variant>(variants);
-
-        IsBusy = false;     
-    }
-    public async Task GetSearchForFlights()
-    {
-        IsBusy = true;
-        var res = await _client.SearchForFlights(SearchParams);
-
-        if (!res.is_valid || res.variants == null)
-        {
-            DebugInfo = "";
-            IsBusy = false;
-            return;
-        }
-        variants = new List<Variant>(res.variants);
-        Flights = new ObservableCollection<Variant>(variants);
-
-        await Task.Yield();
-        IsBusy = false;
-    }
-    public void AddPartToCollection()
-    {
-        if (variants != null)
-        {
-            var length = variants.Count;
-            var len = (int)length / 4;
-            if (len <= 0) { return; }
-            var part = variants[0..^len];
-            variants.RemoveRange(0, len);
-            foreach (var item in part)
-            {
-                Flights.Add(item);
-            }
-        }
-    }
-    public void AddPartToCollection(int partSize)
-    {
-        if (variants != null)
-        {
-            var length = variants.Count;
-            var len = (int)length / partSize;
-            if (len <= 0) { return; }
-            var part = variants[0..^len];
-            variants.RemoveRange(0, len);
-            foreach (var item in part)
-            {
-                Flights.Add(item);
-            }
-        }
+        finally { IsBusy = false; }
     }
 
 }

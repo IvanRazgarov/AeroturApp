@@ -58,8 +58,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Views\SearchResultPage.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiAsset Remove="Resources\Raw\airports.json" />
 	  <MauiAsset Remove="Resources\Raw\cities.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Remove="Views\SearchResultPage.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -85,11 +93,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
-	<ItemGroup>
-	  <MauiXaml Update="Views\SearchResultPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
 	  <PackageReference Include="DevExpress.Maui.CollectionView">
@@ -103,6 +106,11 @@
 	  </PackageReference>
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
+		<MauiXaml Remove="Views\Cards\CollectionViewMobile.xaml" />
+		<Compile Remove="View\Cards\CollectionViewMobile.xaml.cs" />
+	</ItemGroup>
+	
 	<!-- Build Properties must be defined within these property groups to ensure successful publishing
        to the Mac App Store. See: https://aka.ms/maui-publish-app-store#define-build-properties-in-your-project-file -->
   <PropertyGroup Condition="$(TargetFramework.Contains('-maccatalyst')) and '$(Configuration)' == 'Debug'">

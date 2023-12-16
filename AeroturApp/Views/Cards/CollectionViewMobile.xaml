@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AeroturApp.Views.Cards.CollectionViewMobile"
+             xmlns:vm="clr-namespace:AeroturApp.Models.ViewModels"
+             xmlns:dx="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             x:DataType="vm:SearchResultsViewModel"
+             >
+    <dx:DXCollectionView
+                    ItemsSource="{Binding Flights}" 
+                    IsPullToRefreshEnabled="True"
+                    IndicatorColor="Orange"
+                    IsRefreshing="{Binding IsBusy}"
+                    PullToRefreshCommand="{Binding RetrySearchCommand}"
+                    Background="{StaticResource PrimaryGradientBrushV}"
+                    ItemTemplate="{StaticResource FlightCard_small}"
+                    >
+    </dx:DXCollectionView>
+</ContentView>

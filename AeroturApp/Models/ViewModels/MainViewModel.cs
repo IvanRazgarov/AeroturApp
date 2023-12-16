@@ -108,7 +108,7 @@ public partial class MainViewModel : ObservableObject
 
     [RelayCommand]
     Task Navigate()
-        => Shell.Current.GoToAsync($"{nameof(SearchResultPage)}", new Dictionary<string, object>()
+        => Shell.Current.GoToAsync($"{nameof(ResultsPage)}", new Dictionary<string, object>()
     {
             {"SearchParams", new SearchParams()
                 {
