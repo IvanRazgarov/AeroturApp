@@ -1,5 +1,5 @@
 ﻿namespace AeroturApp.Models.DataModels;
-public class IATA_City
+public class IATA_Citi
 {
     public Dictionary<string,string> name_translations { get; set; }
     public Dictionary<string,string> cases { get; set; }

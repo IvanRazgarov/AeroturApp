@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 namespace AeroturApp.Models.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
-    private IataCodesService codesService;
+    private IataCodesService codeService;
     private Dictionary<string, string> translatePricingName = new()
     {
         { "Эконом", "Economy" },
@@ -23,14 +23,14 @@ public partial class MainViewModel : ObservableObject
     string pricingType = "Эконом";
 
     [ObservableProperty]
-    ObservableCollection<IATA_City> suggestionsFrom = new();
+    ObservableCollection<IATA_Citi> suggestionsFrom = new();
     [ObservableProperty]
-    IATA_City suggestionFrom = new();
+    IATA_Citi suggestionFrom = new();
 
     [ObservableProperty]
-    ObservableCollection<IATA_City> suggestionsTo = new();
+    ObservableCollection<IATA_Citi> suggestionsTo = new();
     [ObservableProperty]
-    IATA_City suggestionTo = new();
+    IATA_Citi suggestionTo = new();
 
     [ObservableProperty]
     int adults = 1;
@@ -62,9 +62,9 @@ public partial class MainViewModel : ObservableObject
     int total_people=1;
 
     [ObservableProperty]
-    string from_iata = "MOW";
+    string from_iata = "Москва";
     [ObservableProperty]
-    string to_iata = "TAS";
+    string to_iata = "Ташкент";
     [ObservableProperty]
     DateTime dep = DateTime.Now;
     //[ObservableProperty]
@@ -84,9 +84,10 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     string date2 = DateTime.Now.ToString("dd'.'MM'.'yyyy");
 
-    public MainViewModel()
+    public MainViewModel(IataCodesService serve)
     {
-        //codesService = iataCodesService;
+        codeService = serve;
+        //codeService = iataCodesService;
         /*searchParams = new SearchParams()
         {
             locale = "RU",
@@ -119,9 +120,9 @@ public partial class MainViewModel : ObservableObject
                     infants = Infants,
                     infants_seat = Infants_seat,
                     flight_class = translatePricingName[PricingType??"Эконом"],
-                    from = From_iata,
+                    from = codeService.Cities.Find((x)=>x.name.Contains(From_iata)).code,
                     fromType = "city",
-                    to = To_iata,
+                    to = codeService.Cities.Find((x)=>x.name.Contains(To_iata)).code,
                     toType = "city",
                     date1 = Dep.ToString("yyyy'-'MM'-'dd"),//DateTime.Now.AddDays(1).ToString("yyyy'-'MM'-'dd"),
                     date2 = Arr?.ToString("yyyy'-'MM'-'dd") ?? null,
@@ -130,13 +131,4 @@ public partial class MainViewModel : ObservableObject
             }
     });
 
-    [RelayCommand]
-    Task GetSuggestions(string input)
-        => GetIataCode(input);
-
-    private async Task GetIataCode(string input)
-    {
-        SuggestionsFrom = await codesService.GetCityCodeByPart(input);
-        SuggestionsTo = await codesService.GetCityCodeByPart(input);
-    }
 }

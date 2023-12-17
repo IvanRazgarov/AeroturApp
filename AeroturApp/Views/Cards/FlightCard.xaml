@@ -167,8 +167,8 @@
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>
                                 </VerticalStackLayout>
-                                <HorizontalStackLayout HorizontalOptions="Start" Margin="0">
-                                    <AbsoluteLayout HorizontalOptions="Center">
+                                <HorizontalStackLayout HorizontalOptions="Start" Margin="0" Spacing="5">
+                                    <AbsoluteLayout VerticalOptions="Center">
                                         <Path   Data="M12 3h-10c-1 0-2 1-2 2v5c0 1 1 2 2 2h10c1 0 2-1 2-2v-5c0-1-1-2-2-2zM10 1c0-.5-.5-1-1-1h-4c-.5 0-1 .5-1 1 0 1 0 1 1 1 0-1 0-1 1-1h2c1 0 1 0 1 1 1 0 1 0 1-1" 
                                                 Fill="#28D16B" 
                                                 IsEnabled="{Binding carry_on.is_baggage}"/>
@@ -178,7 +178,7 @@
                                     </AbsoluteLayout>
                                     
                                     <Label Text="Ручная кладь"/>
-                                    <AbsoluteLayout HorizontalOptions="Center">
+                                    <AbsoluteLayout VerticalOptions="Center">
                                         <Path   Data="M11 3h-9a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-9a2 2 0 00-2-2zM10 2l0-1c0 0 0-1-1-1l-5 0c-1 0-1 1-1 1l0 1 1 0c0-1 1-1 1-1l3 0c0 0 1 0 1 1zM1 19a1 1 0 000-2 1 1 0 000 2zM12 19a1 1 0 000-2 1 1 0 000 2z"
                                                 Fill="#28D16B"
                                                 IsEnabled="{Binding baggage.is_baggage}"

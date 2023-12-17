@@ -31,7 +31,7 @@ namespace AeroturApp.Services
 #endif
 
         private const string AEROTUR_API_URL = "https://api-dev.aerotur.aero/api/";
-        private const string AVIASALES_API_URL = "https://api.travelpayouts.com";
+        private const string AVIASALES_API_URL = "https://api.travelpayouts.com/";
 
         public WebAPIClient()
         {
@@ -122,7 +122,7 @@ namespace AeroturApp.Services
             var payload = new Dictionary<Type, Action>()
             {
                 {typeof(IATA_Airport),()=>tail="airports.json?_gl=1*ajmg2k*_ga*MjEzNDk5MDg2MC4xNjk3NTY5NDQ0*_ga_1WLL0NEBEH*MTcwMDMzOTg3OC4xNC4wLjE3MDAzMzk4NzguNjAuMC4w" },
-                {typeof(IATA_City), ()=>tail="cities.json?_gl=1*1o8h4ms*_ga*MjEzNDk5MDg2MC4xNjk3NTY5NDQ0*_ga_1WLL0NEBEH*MTcwMDMzOTg3OC4xNC4xLjE3MDAzNDA2MDIuNjAuMC4w" }
+                {typeof(IATA_Citi), ()=>tail="cities.json?_gl=1*1o8h4ms*_ga*MjEzNDk5MDg2MC4xNjk3NTY5NDQ0*_ga_1WLL0NEBEH*MTcwMDMzOTg3OC4xNC4xLjE3MDAzNDA2MDIuNjAuMC4w" }
             };
             var request = new HttpRequestMessage(HttpMethod.Get, AVIASALES_API_URL+tail+payload);
 

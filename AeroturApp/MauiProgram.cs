@@ -34,7 +34,7 @@ namespace AeroturApp
 
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<WebAPIClient>();
-            //builder.Services.AddSingleton<IataCodesService>();
+            builder.Services.AddSingleton<IataCodesService>();
 
             builder.Services.AddTransient<SearchResultsViewModel>();
             builder.Services.AddTransient<ResultsPage>();

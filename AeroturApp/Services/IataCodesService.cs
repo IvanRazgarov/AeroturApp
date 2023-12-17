@@ -1,65 +1,79 @@
 ﻿using AeroturApp.Models.DataModels;
-using CommunityToolkit.Maui.Core.Extensions;
-using System.Collections.ObjectModel;
 using System.Text.Json;
 
 namespace AeroturApp.Services;
 
-public class IataCodesService : IDisposable
+public class IataCodesService 
 {
-    public static List<IATA_City> cities { get; set; }
-    public static List<IATA_Airport> airports { get; set; }
+    private DateTime lastUpdate = DateTime.MinValue;
+    private static WebAPIClient client;
 
-    private WebAPIClient client;
-    
-    private static DateTime? lastUpdate = DateTime.Parse(SecureStorage.GetAsync("LastIATAUpdate").Result);
+    private string fullPathCities = Path.Combine(FileSystem.Current.AppDataDirectory, "Cities_IATA");
+    private string fullPathAirports = Path.Combine(FileSystem.Current.AppDataDirectory, "Airports_IATA");
 
-    private string path_cities = "cities.json";//Path.Combine(FileSystem.Current.AppDataDirectory, "cities.json");
-    private string path_airports = "airports.json"; //Path.Combine(FileSystem.Current.AppDataDirectory, "airports.json");
-    public IataCodesService(WebAPIClient cli)
+    private List<IATA_Citi> cities;
+    private List<IATA_Airport> airports;
+
+    public List<IATA_Citi> Cities { get { return cities; } }
+    public List<IATA_Airport> Airports { get { return airports; } }
+
+    public IataCodesService(WebAPIClient web)
     {
-        client = cli;
-        //cities = LoadContentIATA<IATA_City>(path_cities).Result;
-        //airports = LoadContentIATA<IATA_Airport>(path_airports).Result;
+        client = web;
+        //Task.Run(LoadIATA);
+        //Task.Run(UpdateIATA);
     }
-    async Task<List<T>> LoadContentIATA<T>(string path)
+    private async Task LoadIATA()
     {
-        using var stream = await FileSystem.OpenAppPackageFileAsync(path);
+        try 
+        { 
+        var citiesJson = await File.ReadAllTextAsync(fullPathCities);
+        var airportsJson = await File.ReadAllTextAsync(fullPathAirports);
 
-        var result = await JsonSerializer.DeserializeAsync<List<T>>(stream);
-        return result;
-    }
-    async void SaveContentIATA<T>(List<T> contents, string path)
-    {
-        if (contents != null)
+        cities = JsonSerializer.Deserialize<List<IATA_Citi>>(citiesJson);
+        airports = JsonSerializer.Deserialize<List<IATA_Airport>>(airportsJson);
+
+        lastUpdate = DateTime.Parse(Preferences.Default.Get(nameof(lastUpdate), DateTime.Now.ToString()));
+        }
+        catch
         {
-            using var stream = File.Create(path);
-            await JsonSerializer.SerializeAsync(stream, contents);
+            await UpdateIATA();
         }
     }
-
-    public void Dispose()
+    private async Task SaveIATA()
     {
-        SaveContentIATA(cities, path_cities);
-        SaveContentIATA(airports, path_airports);
+        var citiesJson = JsonSerializer.Serialize(cities);
+        var airportsJson = JsonSerializer.Serialize(airports);
+
+        await File.WriteAllTextAsync(fullPathCities, citiesJson);
+        await File.WriteAllTextAsync(fullPathAirports, airportsJson);
+
+        Preferences.Default.Set(nameof(lastUpdate), lastUpdate);
     }
-
-    public async void UpdateLocalCodes()
+    public string GetCitiName(string code)
     {
-        var delta = lastUpdate - DateTime.Now;
-        if (delta.Value.TotalDays < 30) return;
-        await SecureStorage.SetAsync(DateTime.Now.ToString(), "LastIATAUpdate");
-
-        cities = await client.GetIATAFromNet<IATA_City>();
-        airports = await client.GetIATAFromNet<IATA_Airport>();
+        return cities.Find((x)=>x.code == code).name;
     }
-
-    public ValueTask<ObservableCollection<IATA_City>> GetCityCodeByPart(string part)
+    public IATA_Citi GetCitiIATA(string code)
     {
-        return new ValueTask<ObservableCollection<IATA_City>>(cities.Where((IATA_City s)=> s.name.Contains(part)).ToObservableCollection());
+        return cities.Find((x) =>x.code==code);
     }
-    public ValueTask<ObservableCollection<IATA_Airport>> GetAirportCodeByPart(string part)
+    public string GetAirportName(string code)
     {
-        return new ValueTask<ObservableCollection<IATA_Airport>>(airports.Where((IATA_Airport s) => s.name.Contains(part)).ToObservableCollection());
+        return airports.Find((x) => x.code == code).name;   
+    }
+    public IATA_Airport GetAirportIATA(string code)
+    {
+        return airports.Find((x) => x.code == code); 
+    }
+    public async Task UpdateIATA()
+    {
+        if ((DateTime.Now - lastUpdate).TotalDays >= 30)
+        {
+            cities = await client.GetIATAFromNet<IATA_Citi>();
+            airports = await client.GetIATAFromNet<IATA_Airport>();
+            await SaveIATA();
+            lastUpdate = DateTime.Now;
+        }
     }
 }

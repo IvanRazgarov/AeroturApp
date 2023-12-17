@@ -1,4 +1,4 @@
-﻿using System.Data;
+﻿
 
 namespace AeroturApp.Models.DataModels;
 
