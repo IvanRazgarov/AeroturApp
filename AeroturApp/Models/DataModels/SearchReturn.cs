@@ -1,5 +1,7 @@
 ﻿
 
+using AeroturApp.Services;
+
 namespace AeroturApp.Models.DataModels;
 
 
@@ -165,7 +167,7 @@ public class Variant
     public List<Leg> legs { get; set; }
     public string arrival_city { get                
         {
-            return legs.Last().segments.Last().arrival_airport;
+            return legs.Last().segments.Last().aa;
         }
     }
     public DateTime arrival_date_time { get
@@ -232,6 +234,7 @@ public class Segment
             ddt = DateTime.Parse(value);
         }
     }
+    public string da { get => IataCodesService.GetAirportName(departure_airport); }
     public string departure_airport { get; set; }
     public string departure_terminal { get; set; }
     public string departure_utc { get; set; }
@@ -241,6 +244,7 @@ public class Segment
             adt = DateTime.Parse(value);
         }
     }
+    public string aa { get => IataCodesService.GetAirportName(arrival_airport); }
     public string arrival_airport { get; set; }
     public string arrival_terminal { get; set; }
     public string arrival_utc { get; set; }

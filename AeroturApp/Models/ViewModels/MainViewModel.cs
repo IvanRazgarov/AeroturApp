@@ -23,6 +23,9 @@ public partial class MainViewModel : ObservableObject
     string pricingType = "Эконом";
 
     [ObservableProperty]
+    bool isLoaded = false;
+
+    [ObservableProperty]
     ObservableCollection<IATA_Citi> suggestionsFrom = new();
     [ObservableProperty]
     IATA_Citi suggestionFrom = new();
@@ -120,9 +123,19 @@ public partial class MainViewModel : ObservableObject
                     infants = Infants,
                     infants_seat = Infants_seat,
                     flight_class = translatePricingName[PricingType??"Эконом"],
-                    from = codeService.Cities.Find((x)=>x.name.Contains(From_iata)).code,
+                    from = codeService.Cities.Find(x => 
+                    {
+                        if (x.name!=null)
+                        {return x.name.ToUpper().Contains(From_iata.ToUpper()); }
+                        else{return false; }
+                    }).code,
                     fromType = "city",
-                    to = codeService.Cities.Find((x)=>x.name.Contains(To_iata)).code,
+                    to = codeService.Cities.Find(x =>
+                    {
+                        if (x.name!=null)
+                        {return x.name.ToUpper().Contains(To_iata.ToUpper()); }
+                        else{return false; } 
+                    }).code,
                     toType = "city",
                     date1 = Dep.ToString("yyyy'-'MM'-'dd"),//DateTime.Now.AddDays(1).ToString("yyyy'-'MM'-'dd"),
                     date2 = Arr?.ToString("yyyy'-'MM'-'dd") ?? null,

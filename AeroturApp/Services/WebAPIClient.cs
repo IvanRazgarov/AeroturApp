@@ -31,7 +31,7 @@ namespace AeroturApp.Services
 #endif
 
         private const string AEROTUR_API_URL = "https://api-dev.aerotur.aero/api/";
-        private const string AVIASALES_API_URL = "https://api.travelpayouts.com/";
+        private const string IATA_API_URL = "https://api.travelpayouts.com/data/ru/";
 
         public WebAPIClient()
         {
@@ -42,30 +42,12 @@ namespace AeroturApp.Services
         }
 
         /// <summary>
-        /// Пармаметры поиска, кроме date2 не должны быть пустыми. Возвращает объект результатов.
+        /// Пармаметры поиска в критериях, кроме date2, не должны быть пустыми. Возвращает объект результатов.
         /// </summary>
         /// <param name="creterias"></param>
         /// <returns></returns>
-        public async Task<SearchReturn> SearchForFlights(SearchParams creterias)
+        public async ValueTask<SearchReturn> SearchForFlights(SearchParams creterias)
         {
-            /*var searchParams = new SearchParams()
-            {
-                locale = "RU",
-                instance = "aerotur.aero.dev",
-                adults = 1,
-                children = 0,
-                infants = 0,
-                infants_seat = 0,
-                flight_class = "Economy",
-                from = "LED",
-                fromType = "city",
-                to = "OSS",
-                toType = "city",
-                date1 = "2023-11-04",
-                date2 = null,
-                asGrouped = 0
-            };*/
-
             var mainReqMessage = new HttpRequestMessage(HttpMethod.Post, AEROTUR_API_URL+"flights");
 
             mainReqMessage.Content = JsonContent.Create(creterias);            
@@ -115,22 +97,25 @@ namespace AeroturApp.Services
 
             return res;           
         }
-
+        /// <summary>
+        /// Возвращает лист элементов Т.
+        /// Возможные элементы: IATA_Citi, IATA_Airport
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public async Task<List<T>> GetIATAFromNet<T>()
         {
-            var tail = "/data/ru/";
-            var payload = new Dictionary<Type, Action>()
+            var payload = new Dictionary<Type, string>()
             {
-                {typeof(IATA_Airport),()=>tail="airports.json?_gl=1*ajmg2k*_ga*MjEzNDk5MDg2MC4xNjk3NTY5NDQ0*_ga_1WLL0NEBEH*MTcwMDMzOTg3OC4xNC4wLjE3MDAzMzk4NzguNjAuMC4w" },
-                {typeof(IATA_Citi), ()=>tail="cities.json?_gl=1*1o8h4ms*_ga*MjEzNDk5MDg2MC4xNjk3NTY5NDQ0*_ga_1WLL0NEBEH*MTcwMDMzOTg3OC4xNC4xLjE3MDAzNDA2MDIuNjAuMC4w" }
+                {typeof(IATA_Airport),"airports.json" },
+                {typeof(IATA_Citi), "cities.json" }
             };
-            var request = new HttpRequestMessage(HttpMethod.Get, AVIASALES_API_URL+tail+payload);
+            var request = new HttpRequestMessage(HttpMethod.Get, IATA_API_URL+payload[typeof(T)]);
 
             var searchRes = await httpClient.SendAsync(request);
             if (!searchRes.IsSuccessStatusCode)
             {
                 return new List<T>();
-                //throw new Exception("Status code: "+searchRes.StatusCode+' '+searchRes.Content.ReadAsStringAsync().Result);
             }
             var resText = await searchRes.Content.ReadAsStringAsync();
             var res = new List<T>();
@@ -141,6 +126,7 @@ namespace AeroturApp.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                return new List<T>();
             }
             return res;
 
