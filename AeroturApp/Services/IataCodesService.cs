@@ -1,4 +1,5 @@
 ﻿using AeroturApp.Models.DataModels;
+using CommunityToolkit.Mvvm.Messaging;
 using System.Text.Json;
 
 namespace AeroturApp.Services;
@@ -21,7 +22,6 @@ public class IataCodesService
     {
         client = web;
         Task.Run(LoadIATA);
-        //LoadIATA().GetAwaiter().GetResult();
     }
     private async Task LoadIATA()
     {
@@ -41,7 +41,8 @@ public class IataCodesService
         }
         catch
         {
-             UpdateIATA();
+            UpdateIATA();
+            WeakReferenceMessenger.Default.Send(new LoadingConfirmationMessage(true));
             await SaveIATA();
         }
     }

@@ -65,31 +65,31 @@
                     <VerticalStackLayout CompressedLayout.IsHeadless="True">
                         <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Padding="0" Spacing="10" CompressedLayout.IsHeadless="True">
                             <VerticalStackLayout Spacing="1" HorizontalOptions="StartAndExpand" CompressedLayout.IsHeadless="True">
-                                <Label Text="{Binding legs[0].segments[0].da}" FontSize="25" HorizontalOptions="Center"/>
-                                <Label Text="{Binding legs[0].segments[0].ddt, StringFormat='{0:%d} {0:MMM}'}" FontSize="18" HorizontalOptions="Center"/>
+                                <Label Text="{Binding legs[0].segments[0].da, Mode=OneTime}" FontSize="25" HorizontalOptions="Center"/>
+                                <Label Text="{Binding legs[0].segments[0].ddt, StringFormat='{0:%d} {0:MMM}', Mode=OneTime}" FontSize="18" HorizontalOptions="Center"/>
                             </VerticalStackLayout>
                             <VerticalStackLayout HorizontalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
-                                <Label Text="{Binding legs[0].segments[0].operating_company}" FontSize="25" HorizontalOptions="Center"/>
+                                <Label Text="{Binding legs[0].segments[0].operating_company, Mode=OneTime}" FontSize="25" HorizontalOptions="Center"/>
                             </VerticalStackLayout>
                             <VerticalStackLayout Spacing="1" HorizontalOptions="EndAndExpand" CompressedLayout.IsHeadless="True">
-                                <Label Text="{Binding arrival_city}" FontSize="25" HorizontalOptions="Center"/>
-                                <Label Text="{Binding arrival_date_time, StringFormat='{0:%d} {0:MMM}'}" FontSize="18" HorizontalOptions="Center"/>
+                                <Label Text="{Binding arrival_city, Mode=OneTime}" FontSize="25" HorizontalOptions="Center"/>
+                                <Label Text="{Binding arrival_date_time, StringFormat='{0:%d} {0:MMM}', Mode=OneTime}" FontSize="18" HorizontalOptions="Center"/>
                             </VerticalStackLayout>
                         </HorizontalStackLayout>
-                        <Label Text="{Binding delta_travel_time, StringFormat='Время в пути: {0:%h} ч. {0:%m} м.'}" HorizontalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding delta_travel_time, StringFormat='Время в пути: {0:%h} ч. {0:%m} м.', Mode=OneTime}" HorizontalOptions="CenterAndExpand"/>
                     </VerticalStackLayout>
                 </Frame>
                 <HorizontalStackLayout Spacing="5" HorizontalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
-                    <Label Text="{Binding price, StringFormat='{0:C}'}" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Label Text="{Binding price, StringFormat='{0:C}', Mode=OneTime}" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Button Text="Купить" 
                             HorizontalOptions="End" 
                             FontSize="30" 
                             Background="{StaticResource AccentGradientBrushV}"
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SearchResultsViewModel}}, Path=NavigateToSelectedCommand}"
-                            CommandParameter="{Binding booking_url}"/>
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SearchResultsViewModel}}, Path=NavigateToSelectedCommand, Mode=OneTime}"
+                            CommandParameter="{Binding booking_url, Mode=OneTime}"/>
                 </HorizontalStackLayout>
                 <Frame BackgroundColor="#31000000" Padding="0" Margin="0">
-                    <toolkit:Expander Margin="0" Padding="0" ZIndex="1" IsExpanded="{Binding is_expanded, Mode=OneTime}">
+                    <toolkit:Expander Margin="0" Padding="0" ZIndex="1" IsExpanded="{Binding is_expanded}">
                         <toolkit:Expander.Header>
                             <Frame BackgroundColor="White" Padding="0" Margin="0" CornerRadius="0" IsClippedToBounds="True">
                                 <Label Text="Детали"/>
@@ -101,12 +101,12 @@
                                     <HorizontalStackLayout CompressedLayout.IsHeadless="True">
                                         <Label Text="Туда "/>
                                         <Path VerticalOptions="Center" Opacity="0.25" Fill="#1864B0" Data="M2.408 8.719l1.108-3.586H1.898l-1.002.896H0L.72 4.5 0 2.97h.896l1.002.897h1.618L2.408.281h.897l2.004 3.586h2.46c.07.012.176.024.317.035.234.035.375.07.422.106.105.07.21.135.316.193.164.07.211.17.14.299 0 .188-.11.334-.333.44-.211.093-.434.152-.668.175l-.334.018h-2.32L3.305 8.719h-.897z"/>
-                                        <Label Text="{Binding delta_travel_time, StringFormat='{0:%h} ч. {0:%m} м.'}"/>
+                                        <Label Text="{Binding delta_travel_time, StringFormat='{0:%h} ч. {0:%m} м.', Mode=OneTime}"/>
                                     </HorizontalStackLayout>
                                     <HorizontalStackLayout CompressedLayout.IsHeadless="True">
-                                        <Label Text="{Binding legs[0].segments[0].da}"/>
+                                        <Label Text="{Binding legs[0].segments[0].da, Mode=OneTime}"/>
                                         <Path Fill="Black" Data="M0 9l10 0c1 0 1 0-2-3l1-1 3 3c2 1 2 2 0 3l-3 3-1-1c3-3 3-3 2-3l-10 0Z"/>
-                                        <Label Text="{Binding arrival_city}"/>
+                                        <Label Text="{Binding arrival_city, Mode=OneTime}"/>
                                     </HorizontalStackLayout>
                                 </VerticalStackLayout>
                                 <VerticalStackLayout BindableLayout.ItemsSource="{Binding legs[0].segments, Mode=OneTime}" Margin="0" Padding="0" Spacing="10" ZIndex="1" CompressedLayout.IsHeadless="True">
@@ -116,10 +116,11 @@
                                                 <Frame Margin="0" BackgroundColor="White">
                                                     <VerticalStackLayout HorizontalOptions="FillAndExpand" Margin="0" Padding="0" Spacing="10" CompressedLayout.IsHeadless="True">
                                                         <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="200" CompressedLayout.IsHeadless="True">
-                                                            <Label Text="{Binding operating_company}" HorizontalOptions="Start" VerticalOptions="Center"/>
-                                                            <VerticalStackLayout HorizontalOptions="End" VerticalOptions="Center">
-                                                                <Label Text="{Binding aircraft_type}"/>
-                                                                <Label Text="{Binding flight_number_full}"/>
+                                                            <!--<Image Source="{Binding operating_company_logo}" HorizontalOptions="Start" VerticalOptions="Center"/>-->
+                                                            <Label Text="{Binding operating_company, Mode=OneTime}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                                            <VerticalStackLayout HorizontalOptions="End" VerticalOptions="Center" CompressedLayout.IsHeadless="True">
+                                                                <Label Text="{Binding aircraft_type, Mode=OneTime}"/>
+                                                                <Label Text="{Binding flight_number_full, Mode=OneTime}"/>
                                                             </VerticalStackLayout>
                                                         </HorizontalStackLayout>
                                                         <Grid HorizontalOptions="FillAndExpand" >
@@ -142,7 +143,7 @@
                                                             <Path Grid.Column="1" Fill="#EA5400" Opacity="0.75" HorizontalOptions="Center" VerticalOptions="Center"
                                                                   Data="M0 4.5l6 1.5v-3l-1.5-1.5v-1.5l3 1.5 3-1.5v1.5l-1.5 1.5v3l6-1.5v1.5l-6 3v4.5c0 0 0 3-1.5 3-1.5 0-1.5-3-1.5-3l0 0v-4.5l-6-3z"/>
 
-                                                            <Label Grid.Column="2" Text="{Binding departure_airport, Mode=OneTime}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                            <Label Grid.Column="2" Text="{Binding da, Mode=OneTime}" HorizontalOptions="Center" VerticalOptions="Center"/>
 
                                                             <Line Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"
                                                                 Stroke="{StaticResource Primary}" Y1="0" Y2="100"/>
@@ -158,7 +159,7 @@
                                                             <Ellipse Grid.Column="1" Grid.Row="2" BackgroundColor="{StaticResource Secondary}"
                                                                      MaximumHeightRequest="8" MaximumWidthRequest="8"/>
 
-                                                            <Label Grid.Row="2" Grid.Column="2" Text="{Binding arrival_airport, Mode=OneTime}"
+                                                            <Label Grid.Row="2" Grid.Column="2" Text="{Binding aa, Mode=OneTime}"
                                                                 HorizontalOptions="Center" VerticalOptions="Center"/>
                                                         </Grid>
                                                     </VerticalStackLayout>

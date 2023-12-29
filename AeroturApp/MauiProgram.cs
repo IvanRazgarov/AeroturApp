@@ -3,6 +3,8 @@ using CommunityToolkit.Maui;
 using AeroturApp.Services;
 using AeroturApp.Models.ViewModels;
 using AeroturApp.Views;
+using Mopups.Hosting;
+
 #if ANDROID
 using DevExpress.Maui;
 #endif
@@ -30,7 +32,7 @@ namespace AeroturApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-
+            builder.ConfigureMopups();
 
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<WebAPIClient>();

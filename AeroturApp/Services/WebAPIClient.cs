@@ -77,8 +77,6 @@ namespace AeroturApp.Services
             catch
             {
                 res = new SearchReturn() { error_msg = resText + " No flights for date or tomorrow " + creterias };
-                //res.is_valid=false;
-                //res.error_msg =ex.Message+" , "+creterias.date1 +" , "+ resText;
             }  
             
             if (res == null||res.variants == null) { throw new Exception("Invalid response. Flights missing?"); }

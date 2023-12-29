@@ -5,25 +5,14 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
 namespace AeroturApp.Models.ViewModels;
-
-//[QueryProperty(nameof(DebugInfo), nameof(DebugInfo))]
 public partial class SearchResultsViewModel : ObservableObject, IQueryAttributable
 {
-    [ObservableProperty]
     private SearchParams searchParams;
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        SearchParams = query[nameof(SearchParams)] as SearchParams;
-        await GetSearchForFlights(SearchParams);
+        searchParams = query[nameof(SearchParams)] as SearchParams;
+        await GetSearchForFlights(searchParams);
     }
-
-    //private SearchReturn results;
-
-    //public void ApplyQueryAttributes(IDictionary<string, object> query)
-    //{
-    //    DebugInfo = query[nameof(DebugInfo)].ToString();
-    //    OnPropertyChanged(nameof(DebugInfo));
-    //}
 
     private List<Variant> variants = new();
 
@@ -68,11 +57,8 @@ public partial class SearchResultsViewModel : ObservableObject, IQueryAttributab
     [RelayCommand]
     Task ReturnToPrevious() => Shell.Current.GoToAsync($"..");
 
-    //[RelayCommand]
-    //void LoadMoreItems() => AddPartToCollection();
-
     [RelayCommand]
-    Task RetrySearch() => GetSearchForFlights(SearchParams);
+    Task RetrySearch() => GetSearchForFlights(searchParams);
 
     [RelayCommand]
     Task NavigateToSelected(string link)
@@ -92,8 +78,6 @@ public partial class SearchResultsViewModel : ObservableObject, IQueryAttributab
         }
         catch
         {
-            //DebugInfo=res.error_msg;
-            IsBusy = false;
             return;
         }
         finally { IsBusy = false; }

@@ -137,7 +137,7 @@ public partial class MainViewModel : ObservableObject
                         else{return false; } 
                     }).code,
                     toType = "city",
-                    date1 = Dep.ToString("yyyy'-'MM'-'dd"),//DateTime.Now.AddDays(1).ToString("yyyy'-'MM'-'dd"),
+                    date1 = Dep.ToString("yyyy'-'MM'-'dd"),
                     date2 = Arr?.ToString("yyyy'-'MM'-'dd") ?? null,
                     asGrouped = 0
                 }
