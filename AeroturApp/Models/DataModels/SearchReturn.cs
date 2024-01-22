@@ -1,20 +1,28 @@
-﻿
-
-using AeroturApp.Services;
+﻿using AeroturApp.Services;
 
 namespace AeroturApp.Models.DataModels;
-
-
 public class SearchReturn
 {
     public string request_id { get; set; }
     public bool is_valid { get; set; } = true;
     public string error_msg { get; set; }
     public List<Variant> variants { get; set; }
+    public List<Segment> segments { get; set;
+        /*
+        {
+            var list = new List<Segment>();
+            foreach(var v in variants)
+            {
+                list.AddRange(v.segments);
+            }
+            return list;
+        }
+        */
+    }=new List<Segment>();
     public Info info { get; set; }
-    public static Dictionary<string,GenericCompany> airlines { get; set; }
-    public static Dictionary<string,GenericAirport> airports { get; set; }
-    public static Dictionary<string,GenericAircraft> aircraft { get; set; }
+    public Dictionary<string, GenericCompany> airlines { get; set; }
+    public Dictionary<string, GenericAirport> airports { get; set; }
+    public Dictionary<string, GenericAircraft> aircraft { get; set; }
 }
 
 public class Info
@@ -121,7 +129,6 @@ public class GenericAircraft
 }
 public class Variant
 {
-    public bool is_expanded { get; set; }
     public string flight_id { get; set; }
     public string ident { get; set; }
     public string booking_url { get; set; }
@@ -134,12 +141,6 @@ public class Variant
     public string supplier_id { get; set; }
     public int price { get; set; }
     public string currency { get; set; }
-    public List<string> price_detail { get; set; }
-    public Baggage baggage { get; set; }
-    public Baggage carry_on { get; set; }
-    public TiketActions exchange { get; set; }
-    public TiketActions refund { get; set; }
-    public List<Leg> legs { get; set; }
     public string arrival_city { get                
         {
             return legs.Last().segments.Last().aa;
@@ -156,8 +157,45 @@ public class Variant
             return time;
         } 
     }
+    public List<string> price_detail { get; set; }
+    public Baggage baggage { get; set; }
+    public Baggage carry_on { get; set; }
+    public TiketActions exchange { get; set; }
+    public TiketActions refund { get; set; }
+    public List<Leg> legs { get; set; }
 
 }
+//public class VariantHeader
+//{
+//    public string flight_id { get; set; }
+//    public string ident { get; set; }
+//    public string booking_url { get; set; }
+//    public string flight_type { get; set; }
+//    public string flight_direction_type { get; set; }
+//    public bool is_direct_flight { get; set; }
+//    public int? seats { get; set; }
+//    public int? expected_ticket_count { get; set; }
+//    public string supplier_name { get; set; }
+//    public string supplier_id { get; set; }
+//    public int price { get; set; }
+//    public string currency { get; set; }
+//    public string first_departure_airport { get; set; }
+//    public string last_arrival_airport { get; set; }
+//    public string first_daparture_date_time { get; set; }
+//    public string last_arrival_date_time { get; set; }
+//    public string delta_travel_time { get; set; }
+//    public string marketing_company { get; set; }
+
+//    public string data_string { get=>
+
+//            ""+flight_id+","+ident+","+booking_url+","+flight_type+","
+//            +flight_direction_type+","+is_direct_flight+","+seats+","+expected_ticket_count+","
+//            +supplier_id+","+supplier_name+","+price+","+currency+","+first_departure_airport+","
+//            +last_arrival_airport+","+first_daparture_date_time+","+last_arrival_date_time+","
+//            +delta_travel_time+","+marketing_company;
+//            //12items [11indexes]
+//    }
+//}
 public class Baggage
 {
     public bool is_baggage { get; set; }
@@ -180,7 +218,7 @@ public class Leg
 }
 public class Segment
 {
-    public bool is_last { get; set; } = false;
+    public string parent_data { get; set; } = "";
     public string ident { get; set; }
     public string flight_number { get; set; }
     public string flight_number_full { get; set; }

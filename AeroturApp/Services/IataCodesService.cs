@@ -7,7 +7,7 @@ namespace AeroturApp.Services;
 public class IataCodesService 
 {
     private DateTime lastUpdate = DateTime.MinValue;
-    private static WebAPIClient client;
+    private static WebAPIService client;
 
     private string fullPathCities = Path.Combine(FileSystem.Current.CacheDirectory, "Cities_IATA");
     private string fullPathAirports = Path.Combine(FileSystem.Current.CacheDirectory, "Airports_IATA");
@@ -18,7 +18,7 @@ public class IataCodesService
     public List<IATA_Citi> Cities { get { return cities; } }
     public List<IATA_Airport> Airports { get { return airports; } }
 
-    public IataCodesService(WebAPIClient web)
+    public IataCodesService(WebAPIService web)
     {
         client = web;
         Task.Run(LoadIATA);

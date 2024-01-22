@@ -5,10 +5,7 @@ using AeroturApp.Models.ViewModels;
 using AeroturApp.Views;
 using Mopups.Hosting;
 
-#if ANDROID
-using DevExpress.Maui;
-#endif
-#if IOS 
+#if ANDROID || IOS
 using DevExpress.Maui;
 #endif
 namespace AeroturApp
@@ -21,11 +18,8 @@ namespace AeroturApp
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
-#if ANDROID
-                .UseDevExpress()
-#endif
-#if ANDROID
-                .UseDevExpress()
+#if ANDROID || IOS
+                .UseDevExpress()               
 #endif
                 .ConfigureFonts(fonts =>
                 {
@@ -33,9 +27,11 @@ namespace AeroturApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
             builder.ConfigureMopups();
-
+//#if ANDROID || IOS
+////            DevExpress.Maui.CollectionView.Initializer.Init();
+//#endif
             builder.Services.AddSingleton<AppShell>();
-            builder.Services.AddSingleton<WebAPIClient>();
+            builder.Services.AddSingleton<WebAPIService>();
             builder.Services.AddSingleton<IataCodesService>();
 
             builder.Services.AddTransient<SearchResultsViewModel>();

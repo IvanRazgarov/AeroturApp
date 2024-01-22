@@ -16,7 +16,6 @@ public class ResultsPage : ContentPage
         //	.SetBinding(BackButtonBehavior.CommandProperty, nameof(model.ReturnToPreviousCommand));
 
         Shell.SetBackButtonBehavior(this, beh);
-        ;
 
 #if ANDROID || IOS
         Content = new CollectionViewMobile();
