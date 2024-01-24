@@ -187,6 +187,7 @@ namespace AeroturApp.Services
 
         private static void PrepareDatastring(SearchReturn result)
         {
+            var images = "";
             foreach (var v in result.variants)
             {
                 foreach (var l in v.legs)
@@ -200,12 +201,13 @@ namespace AeroturApp.Services
                         s.parent_data += v.currency + ",";//4
                         s.parent_data += IataCodesService.GetAirportName(l.segments.First().departure_airport) + ",";//5
                         s.parent_data += l.segments.First().ddt +",";//6
-                        s.parent_data += l.segments.First().ddt + ",";//7
-                        s.parent_data += IataCodesService.GetAirportName(l.segments.Last().arrival_airport) + ",";//8
-                        s.parent_data += l.segments.Last().adt + ",";//9
-                        s.parent_data += l.segments.Last().adt + ",";//10
-                        s.parent_data += l.segments.Last().adt - l.segments.FirstOrDefault().ddt;//11    
+                        s.parent_data += IataCodesService.GetAirportName(l.segments.Last().arrival_airport) + ",";//7
+                        s.parent_data += l.segments.Last().adt + ",";//8
+                        s.parent_data += (l.segments.Last().adt - l.segments.First().ddt)+",";//9
+                        s.parent_data += (l.segments.Count <= 1) ? "Без пересадок" : $"Пересадки: {l.segments.Count}"+",";//10
+                        //images += result.airlines[s.operating_company].logo_url+"*";
                     }
+                    //foreach(var s in l.segments) { s.parent_data += images; }//11
                     result.segments.AddRange(l.segments);
                 }
             }

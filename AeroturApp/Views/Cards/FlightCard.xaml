@@ -61,11 +61,10 @@
     </DataTemplate>
 
     <DataTemplate x:Key="FlightCard_small" x:DataType="dx:GroupInfo" >
-    <VerticalStackLayout>
-        <Frame Padding="5" Margin="5" 
+            <Border Padding="5" StrokeShape="RoundRectangle 8" Margin="0"
                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}, Default={StaticResource White}}"
-               ZIndex="0">
-            <!--<StackLayout>
+               ZIndex="-1">
+                <!--<StackLayout>
                 <Label Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=0, Mode=OneTime}"/>
                 <Label Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=1, Mode=OneTime}"/>
                 <Label Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=2, Mode=OneTime}"/>
@@ -79,71 +78,71 @@
                 <Label Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=10, Mode=OneTime}"/>
                 <Label Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=11, Mode=OneTime}"/>
             </StackLayout>-->
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                
-            <!--region Row 0-->
-            <Label 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--#region Row 0-->
+                    <Label 
                         Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter='6,{0:hh}:{0:mm},true', Mode=OneTime}" 
                         FontSize="25" HorizontalOptions="Start" />
-            <!--<Image Grid.Column="1"/>-->
-            <Label  Grid.Column="2"
-                        Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter='9,{0:hh}:{0:mm},true', Mode=OneTime}" 
+                    <!--<Image Grid.Column="1" Grid.ColumnSpan="2"/>-->
+                    <Label  Grid.Column="4"
+                        Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter='8,{0:hh}:{0:mm},true', Mode=OneTime}" 
                         FontSize="25" HorizontalOptions="End" HorizontalTextAlignment="End"/>
-            <!--#endregion-->
-            <!--#region Row 1-->
-            <Label  Grid.Row="1"
-                        Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter='7,{0:%d} {0:MMM},true', Mode=OneTime}"                        
+                    <!--#endregion-->
+                    <!--#region Row 1-->
+                    <Label  Grid.Row="1"
+                        Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter='6,{0:%d} {0:MMM},true', Mode=OneTime}"                        
                         FontSize="18" HorizontalOptions="Start"/>
-            <Label  Grid.Row="1"
-                        Grid.Column="1"
-                        Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter='11,{0:%h} ч. {0:%m} м.,true', Mode=OneTime}"
+                    <Label  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                        Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter='9,{0:%h} ч. {0:%m} м.,true', Mode=OneTime}"
                         FontSize="18" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
-            <Label  Grid.Row="1"
-                        Grid.Column="2"
-                        Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter='10,{0:%d} {0:MMM},true', Mode=OneTime}" 
+                    <Label  Grid.Row="1"
+                        Grid.Column="4"
+                        Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter='8,{0:%d} {0:MMM},true', Mode=OneTime}" 
                         FontSize="18" HorizontalOptions="End" HorizontalTextAlignment="End"/>
-            <!--#endregion-->
-            <!--#region Row 2-->
-                <Label  Grid.Row="2"
+                    <!--#endregion-->
+                    <!--#region Row 2-->
+                    <Label  Grid.Row="2"
                         Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=5, Mode=OneTime}" 
                         FontSize="16" HorizontalOptions="Start" HorizontalTextAlignment="Start"/>
-                <Label  Grid.Row="2"
-                        Grid.Column="1"
-                        Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=2, Mode=OneTime}" 
+                    <Label  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                        Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=10, Mode=OneTime}" 
                         FontSize="16" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
-                <Label  Grid.Row="2"
-                        Grid.Column="2"
-                        Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=8, Mode=OneTime}" 
+                    <Label  Grid.Row="2"
+                        Grid.Column="4"
+                        Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=7, Mode=OneTime}" 
                         FontSize="16" HorizontalOptions="End" HorizontalTextAlignment="End"/>
-                <!--#endregion-->
-            <!--#region Row 3-->
-
-            <!--#endregion-->
-            <!--#region Row 4-->
-            <Label  Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                    <!--#endregion-->
+                    <!--#region Row 3-->
+                    <Label  Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="2"
                         Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter='3,{0:C},false', Mode=OneTime}" 
                         FontSize="30" VerticalOptions="Center"/>
-            <Button Grid.Row="3" Grid.Column="2" Grid.RowSpan="2"
+                    <Button Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="3"
                             Text="Купить" 
-                            HorizontalOptions="End" 
                             FontSize="30" 
+                            InputTransparent="False"
                             Background="{StaticResource AccentGradientBrushV}"
                             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SearchResultsViewModel}}, Path=NavigateToSelectedCommand, Mode=OneTime}"
                             CommandParameter="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=0, Mode=OneTime}"/>
-            <!--#endregion-->
-            </Grid>
+                <!--#endregion-->
+                <!--#region Row 4-->
+                    <Label Text="Подробнее" Grid.Row="5" Grid.ColumnSpan="4" HorizontalOptions="Center" InputTransparent="False"/>
+                <!--#endregion-->
+                </Grid>
 
 
 
@@ -152,26 +151,26 @@
                     <VerticalStackLayout CompressedLayout.IsHeadless="True">
                         <HorizontalStackLayout HorizontalOptions="Center" Padding="0" Spacing="10" CompressedLayout.IsHeadless="True">
                             <VerticalStackLayout Spacing="1" HorizontalOptions="Start" CompressedLayout.IsHeadless="True">
-                                --><!--<Label Text="{Binding GroupValue.da, Mode=OneTime}" FontSize="25" HorizontalOptions="Center"/>
-                                <Label Text="{Binding GroupValue.ddt, StringFormat='{0:%d} {0:MMM}', Mode=OneTime}" FontSize="18" HorizontalOptions="Center"/>--><!--
+                                <Label Text="{Binding GroupValue.da, Mode=OneTime}" FontSize="25" HorizontalOptions="Center"/>
+                                <Label Text="{Binding GroupValue.ddt, StringFormat='{0:%d} {0:MMM}', Mode=OneTime}" FontSize="18" HorizontalOptions="Center"/>
                                 <Label Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=11, Mode=OneTime}" FontSize="25" HorizontalOptions="Center"/>
                                 <Label Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=12, Mode=OneTime}" FontSize="18" HorizontalOptions="Center"/>
                             </VerticalStackLayout>
                             <VerticalStackLayout Spacing="1" HorizontalOptions="End" CompressedLayout.IsHeadless="True">
-                                --><!--<Label Text="{Binding GroupValue.arrival_airport, Mode=OneTime}" FontSize="25" HorizontalOptions="Center"/>
-                                <Label Text="{Binding GroupValue.adt, StringFormat='{0:%d} {0:MMM}', Mode=OneTime}" FontSize="18" HorizontalOptions="Center"/>--><!--
+                                <Label Text="{Binding GroupValue.arrival_airport, Mode=OneTime}" FontSize="25" HorizontalOptions="Center"/>
+                                <Label Text="{Binding GroupValue.adt, StringFormat='{0:%d} {0:MMM}', Mode=OneTime}" FontSize="18" HorizontalOptions="Center"/>
                                 <Label Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=13, Mode=OneTime}" FontSize="25" HorizontalOptions="Center"/>
                                 <Label Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=14, Mode=OneTime}" FontSize="18" HorizontalOptions="Center"/>
                             </VerticalStackLayout>
                         </HorizontalStackLayout>
-                        --><!--<Label Text="{Binding GroupValue.operating_company, Mode=OneTime}" HorizontalOptions="Center"/>--><!--
+                        <Label Text="{Binding GroupValue.operating_company, Mode=OneTime}" HorizontalOptions="Center"/>
                         <Label Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=8, Mode=OneTime}" HorizontalOptions="Center"/>
-                        --><!--<Label Text="{Binding delta_travel_time, StringFormat='Время в пути: {0:%h} ч. {0:%m} м.', Mode=OneTime}" HorizontalOptions="Center"/>--><!--
+                        <Label Text="{Binding delta_travel_time, StringFormat='Время в пути: {0:%h} ч. {0:%m} м.', Mode=OneTime}" HorizontalOptions="Center"/>
                         <Label Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=15, Mode=OneTime}" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Frame>
                 <HorizontalStackLayout Spacing="5" HorizontalOptions="Center" CompressedLayout.IsHeadless="True">
-                    --><!--<Label Text="{Binding GroupValue.price, StringFormat='{0:C}', Mode=OneTime}" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center"/>--><!--
+                    <Label Text="{Binding GroupValue.price, StringFormat='{0:C}', Mode=OneTime}" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Label Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=9, Mode=OneTime}" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Button Text="Купить" 
                             HorizontalOptions="End" 
@@ -180,7 +179,7 @@
                             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SearchResultsViewModel}}, Path=NavigateToSelectedCommand, Mode=OneTime}"
                             CommandParameter="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=1, Mode=OneTime}"/>
                 </HorizontalStackLayout>
-                --><!--<Frame BackgroundColor="#31000000" Padding="0" Margin="0">
+                <Frame BackgroundColor="#31000000" Padding="0" Margin="0">
                     <toolkit:Expander Margin="0" Padding="0" ZIndex="1" IsExpanded="{Binding is_expanded}">
                         <toolkit:Expander.Header>
                             <Frame BackgroundColor="White" Padding="0" Margin="0" CornerRadius="0" IsClippedToBounds="True">
@@ -292,11 +291,9 @@
                             </VerticalStackLayout>
                         </Frame>
                     </toolkit:Expander>
-                </Frame>--><!--
+                </Frame>
             </VerticalStackLayout>-->
-        </Frame>
-        <Label Text="Details" TextColor="Black"/>
-        </VerticalStackLayout>
+            </Border>
     </DataTemplate>
     
     <DataTemplate x:Key="FlightCardSegment" x:DataType="m:Segment">

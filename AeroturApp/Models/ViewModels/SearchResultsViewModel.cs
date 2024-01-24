@@ -90,7 +90,7 @@ public partial class SearchResultsViewModel : ObservableObject, IQueryAttributab
 
             //Flights = new ObservableCollection<Segment>(res.segments);
 
-            Flights = new ObservableCollection<Segment>(res.segments.OrderBy((x) => int.Parse(x.parent_data.Split(',')[3])));
+            Flights = new ObservableCollection<Segment>(res.segments.OrderBy(x => int.Parse(x.parent_data.Split(',')[3])));
 
             /*variants = new List<Variant>(res.variants);
 

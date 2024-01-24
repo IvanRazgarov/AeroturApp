@@ -18,7 +18,6 @@
                     ItemTemplate="{StaticResource FlightCardSegment}"
                     GroupHeaderTemplate="{StaticResource FlightCard_small}"
                     ItemSize="290"
-                    GroupHeaderSize="160"
                     IsPullToRefreshEnabled="True"
                     IndicatorColor="Orange"
                     IsRefreshing="{Binding IsBusy}"

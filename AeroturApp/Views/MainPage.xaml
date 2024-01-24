@@ -45,22 +45,28 @@
                         <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="0" Margin="0">
 
                             <Frame BackgroundColor="White" Margin="0" HorizontalOptions="Start" >
-                                <DatePicker x:Name="fromDatePicker" 
+                                <VerticalStackLayout Spacing="0" Margin="0" Padding="0">
+                                    <Label Text="Туда"/>
+                                    <DatePicker x:Name="fromDatePicker" 
                                                         BackgroundColor="White" 
                                                         TextColor="Black" 
                                                         FontSize="21"
                                                         Date="{Binding Dep}"
                                                         Format="dd'.'MM'.'yyyy"/>
+                                </VerticalStackLayout>
                             </Frame>
 
                             <Frame BackgroundColor="White" Margin="0" HorizontalOptions="Start" >
-                                <DatePicker x:Name="toDatePicker" 
+                                <VerticalStackLayout Spacing="0" Margin="0" Padding="0">
+                                    <Label Text="Обратно"/>
+                                    <DatePicker x:Name="toDatePicker" 
                                                         BackgroundColor="White" 
                                                         TextColor="White" 
                                                         FontSize="21"
                                                         Date="{Binding Arr}"
                                                         Format="dd'.'MM'.'yyyy"
                                                         DateSelected="toDatePicker_DateSelected"/>
+                                </VerticalStackLayout>
                             </Frame>
                         </HorizontalStackLayout>
                         <Frame BackgroundColor="White">
