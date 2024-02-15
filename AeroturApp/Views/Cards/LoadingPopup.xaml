@@ -8,8 +8,7 @@
     CloseWhenBackgroundIsClicked="False">
     <Frame
         BackgroundColor="WhiteSmoke"
-        CornerRadius="10"
-        >
+        CornerRadius="0">
     <VerticalStackLayout            
             HorizontalOptions="Center"
             VerticalOptions="Center">

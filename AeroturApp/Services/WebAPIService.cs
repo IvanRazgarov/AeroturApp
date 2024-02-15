@@ -195,8 +195,10 @@ namespace AeroturApp.Services
                     foreach (var s in l.segments)
                     {
                         s.parent_data += v.booking_url + ",";//0
-                        s.parent_data += v.supplier_id + ",";//1
-                        s.parent_data += v.supplier_name + ",";//2
+                        s.parent_data += v.baggage.is_baggage + ",";//1
+                        //s.parent_data += "False" + ",";//1
+                        s.parent_data += v.carry_on.is_baggage + ",";//2
+                        //s.parent_data += "True" + ",";//2
                         s.parent_data += v.price + ",";//3
                         s.parent_data += v.currency + ",";//4
                         s.parent_data += IataCodesService.GetAirportName(l.segments.First().departure_airport) + ",";//5

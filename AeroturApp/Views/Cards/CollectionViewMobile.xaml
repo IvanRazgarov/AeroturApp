@@ -5,14 +5,9 @@
              xmlns:vm="clr-namespace:AeroturApp.Models.ViewModels"
              xmlns:m="clr-namespace:AeroturApp.Models.DataModels"
              xmlns:dx="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
-             xmlns:c="clr-namespace:AeroturApp.Services"
              x:DataType="vm:SearchResultsViewModel"
              >
 
-    <ContentView.Resources>
-        <c:StringSplitConverter x:Key="Split"/>
-    </ContentView.Resources>
-    
     <dx:DXCollectionView
                     ItemsSource="{Binding Flights}"
                     ItemTemplate="{StaticResource FlightCardSegment}"

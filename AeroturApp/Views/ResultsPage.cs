@@ -17,10 +17,11 @@ public class ResultsPage : ContentPage
 
         Shell.SetBackButtonBehavior(this, beh);
 
-#if ANDROID || IOS
-        Content = new CollectionViewMobile();
-#elif WINDOWS || MACCATALYST
-		Content = new CollectionViewPC();
-#endif
+        //#if ANDROID || IOS
+        //        Content = new CollectionViewMobile();
+        //#elif WINDOWS || MACCATALYST
+        //		Content = new CollectionViewPC();
+        //#endif
+        Content = new CollectionViewCommon();
     }
 }

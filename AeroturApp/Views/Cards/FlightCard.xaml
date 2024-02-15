@@ -86,7 +86,8 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="*"/>
@@ -128,19 +129,51 @@
                         FontSize="16" HorizontalOptions="End" HorizontalTextAlignment="End"/>
                     <!--#endregion-->
                     <!--#region Row 3-->
-                    <Label  Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="2"
+                    <Label Grid.Row="3" 
+                           Text="Ручная кладь"/>
+                    <Path   Grid.Row="3" Grid.Column="1"
+                            Data="M12 3h-10c-1 0-2 1-2 2v5c0 1 1 2 2 2h10c1 0 2-1 2-2v-5c0-1-1-2-2-2zM10 1c0-.5-.5-1-1-1h-4c-.5 0-1 .5-1 1 0 1 0 1 1 1 0-1 0-1 1-1h2c1 0 1 0 1 1 1 0 1 0 1-1" 
+                            Fill="#28D16B" 
+                            IsEnabled="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=2, Mode=OneTime}"
+                            IsVisible="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=2, Mode=OneTime}"
+                            ZIndex="1"/>
+                    <Path   Grid.Row="3" Grid.Column="1"
+                            Data="M12 3h-10c-1 0-2 1-2 2v5c0 1 1 2 2 2h10c1 0 2-1 2-2v-5c0-1-1-2-2-2zM10 1c0-.5-.5-1-1-1h-4c-.5 0-1 .5-1 1 0 1 0 1 1 1 0-1 0-1 1-1h2c1 0 1 0 1 1 1 0 1 0 1-1"
+                            Fill="#1864B0"
+                            />
+                    <Label Grid.Row="3" Grid.Column="2"
+                           Text="Багаж"/>
+                    <Path   Grid.Row="3" Grid.Column="3"
+                            Data="M11 3h-9a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-9a2 2 0 00-2-2zM10 2l0-1c0 0 0-1-1-1l-5 0c-1 0-1 1-1 1l0 1 1 0c0-1 1-1 1-1l3 0c0 0 1 0 1 1zM1 19a1 1 0 000-2 1 1 0 000 2zM12 19a1 1 0 000-2 1 1 0 000 2z"
+                            Fill="#28D16B"
+                            IsEnabled="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=1, Mode=OneTime}"
+                            IsVisible="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=1, Mode=OneTime}"
+                            ZIndex="1"/>
+                    <Path   Grid.Row="3" Grid.Column="3"
+                            Data="M11 3h-9a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-9a2 2 0 00-2-2zM10 2l0-1c0 0 0-1-1-1l-5 0c-1 0-1 1-1 1l0 1 1 0c0-1 1-1 1-1l3 0c0 0 1 0 1 1zM1 19a1 1 0 000-2 1 1 0 000 2zM12 19a1 1 0 000-2 1 1 0 000 2z"
+                            Fill="#1864B0"
+                            />
+                    <Path   Grid.Row="3" Grid.Column="3"
+                            Data="M9 7l-2.5 2.5-2.5-2.5M9 12l-2.5-2.5-2.5 2.5"
+                            Stroke="White"
+                            StrokeThickness=".75"
+                            StrokeMiterLimit="10"
+                            StrokeLineCap="Round"/>
+                    <!--#endregion-->
+                    <!--#region Row 4-->
+                    <Label  Grid.Row="4" Grid.ColumnSpan="3" Grid.RowSpan="2"
                         Text="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter='3,{0:C},false', Mode=OneTime}" 
                         FontSize="30" VerticalOptions="Center"/>
-                    <Button Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="3"
+                    <Button Grid.Row="4" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="3"
                             Text="Купить" 
-                            FontSize="30" 
+                            FontSize="28" 
                             InputTransparent="False"
                             Background="{StaticResource AccentGradientBrushV}"
                             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SearchResultsViewModel}}, Path=NavigateToSelectedCommand, Mode=OneTime}"
                             CommandParameter="{Binding GroupValue, Converter={StaticResource Split}, ConverterParameter=0, Mode=OneTime}"/>
                 <!--#endregion-->
-                <!--#region Row 4-->
-                    <Label Text="Подробнее" Grid.Row="5" Grid.ColumnSpan="4" HorizontalOptions="Center" InputTransparent="False"/>
+                <!--#region Row 6-->
+                    <Label Text="Подробнее" Grid.Row="6" Grid.ColumnSpan="4" HorizontalOptions="Center" InputTransparent="False"/>
                 <!--#endregion-->
                 </Grid>
 
@@ -200,17 +233,17 @@
                                         <Label Text="{Binding arrival_city, Mode=OneTime}"/>
                                     </HorizontalStackLayout>
                                 </VerticalStackLayout>
-                                -->
-                <!--<VerticalStackLayout BindableLayout.ItemsSource="{Binding legs[0].segments, Mode=OneTime}" Margin="0" Padding="0" Spacing="10" ZIndex="1" CompressedLayout.IsHeadless="True">
+                                
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding legs[0].segments, Mode=OneTime}" Margin="0" Padding="0" Spacing="10" ZIndex="1" CompressedLayout.IsHeadless="True">
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate x:DataType="m:Segment">
                                             <VerticalStackLayout Padding="0" Margin="0" VerticalOptions="Fill" HorizontalOptions="Fill" CompressedLayout.IsHeadless="True">
                                                 <Frame Margin="0" BackgroundColor="White">
                                                     <VerticalStackLayout HorizontalOptions="Fill" Margin="0" Padding="0" Spacing="10" CompressedLayout.IsHeadless="True">
                                                         <VerticalStackLayout VerticalOptions="Center" CompressedLayout.IsHeadless="True">
-                                                            -->
-                <!--<Image Source="{Binding operating_company_logo}" HorizontalOptions="Start" VerticalOptions="Center"/>-->
-                <!--
+                                                            
+                <Image Source="{Binding operating_company_logo}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                
                                                             <Label Text="{Binding operating_company, Mode=OneTime}" FontSize="15" VerticalOptions="Center"/>
                                                             <Label Text="{Binding aircraft_type, Mode=OneTime}"/>
                                                             <Label Text="{Binding flight_number_full, Mode=OneTime}"/>
@@ -260,8 +293,8 @@
                                             </VerticalStackLayout>
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>
-                                </VerticalStackLayout>-->
-                <!--
+                                </VerticalStackLayout>
+                
                                 <HorizontalStackLayout HorizontalOptions="Start" Margin="0" Spacing="5" CompressedLayout.IsHeadless="True">
                                     <AbsoluteLayout VerticalOptions="Center">
                                         <Path   Data="M12 3h-10c-1 0-2 1-2 2v5c0 1 1 2 2 2h10c1 0 2-1 2-2v-5c0-1-1-2-2-2zM10 1c0-.5-.5-1-1-1h-4c-.5 0-1 .5-1 1 0 1 0 1 1 1 0-1 0-1 1-1h2c1 0 1 0 1 1 1 0 1 0 1-1" 

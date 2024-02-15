@@ -5,19 +5,19 @@
              xmlns:vm="clr-namespace:AeroturApp.Models.ViewModels"
              x:DataType="vm:SearchResultsViewModel"
              >
-    <VerticalStackLayout Padding="0" Margin="0" Spacing="0">
-        <RefreshView
+    <RefreshView
+        Margin="0"
+        Padding="0"
+        
             IsRefreshing="{Binding IsBusy}" 
             Command="{Binding RetrySearchCommand}"
             RefreshColor="{StaticResource Secondary}"
             Background="{StaticResource PrimaryGradientBrushV}"
             ZIndex="1">
-            <CollectionView ItemsSource="{Binding Flights}"
+        <CollectionView ItemsSource="{Binding Flights}"
                             ItemTemplate="{StaticResource FlightCard_big}"
                             ItemSizingStrategy="MeasureFirstItem"
                             VerticalScrollBarVisibility="Always"
                             />
-        </RefreshView>
-
-    </VerticalStackLayout>
+    </RefreshView>
 </ContentView>
