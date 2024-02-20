@@ -80,8 +80,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="epj.Expander.Maui" Version="1.0.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.6" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Mopups" Version="1.3.0" />
 	</ItemGroup>
@@ -137,6 +136,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.6" />
+    <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
   </ItemGroup>
 </Project>
