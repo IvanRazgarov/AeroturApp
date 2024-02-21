@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿
+
+using AeroturApp.Services;
 
 namespace AeroturApp.Models.DataModels;
 
@@ -10,9 +12,9 @@ public class SearchReturn
     public string error_msg { get; set; }
     public List<Variant> variants { get; set; }
     public Info info { get; set; }
-    public Dictionary<string,GenericCompany> airlines { get; set; }
-    public Dictionary<string,GenericAirport> airports { get; set; }
-    public Dictionary<string,GenericAircraft> aircraft { get; set; }
+    public static Dictionary<string,GenericCompany> airlines { get; set; }
+    public static Dictionary<string,GenericAirport> airports { get; set; }
+    public static Dictionary<string,GenericAircraft> aircraft { get; set; }
 }
 
 public class Info
@@ -29,13 +31,18 @@ public class Msg
     public string code { get; set; }
     public string message { get; set; }
 }
-/*public class Airlines
+public class Name
 {
-    public GenericCompany S7 { get; set; }
-    public GenericCompany SU { get; set; }
-    public GenericCompany U6 { get; set; }
-    public GenericCompany YK { get; set; }
-}*/
+    public int id { get; set; }
+    public string locale { get; set; }
+    public string field { get; set; }
+    public string value { get; set; }
+    public object text { get; set; }
+    public string ownerable_type { get; set; }
+    public int ownerable_id { get; set; }
+    public object created_at { get; set; }
+    public object updated_at { get; set; }
+}
 public class GenericCompany
 {
     public int id { get; set; }
@@ -52,26 +59,6 @@ public class GenericCompany
     public string logo_url { get; set; }
     public List<Name> names { get; set; }
 }
-public class Name
-{
-    public int id { get; set; }
-    public string locale { get; set; }
-    public string field { get; set; }
-    public string value { get; set; }
-    public object text { get; set; }
-    public string ownerable_type { get; set; }
-    public int ownerable_id { get; set; }
-    public object created_at { get; set; }
-    public object updated_at { get; set; }
-}
-/*public class Airports
-{
-    public GenericAirport DME { get; set; }
-    public GenericAirport LED { get; set; }
-    public GenericAirport OSS { get; set; }
-    public GenericAirport OVB { get; set; }
-    public GenericAirport SVO { get; set; }
-}*/
 public class GenericAirport
 {
     public int id { get; set; }
@@ -116,16 +103,6 @@ public class GenericCountry
     public string name { get; set; }
     public List<Name> names { get; set; }
 }
-public class AircraftModel
-{
-    public GenericAircraft _320 { get; set; }
-    public GenericAircraft _32A { get; set; }
-    public GenericAircraft _32B { get; set; }
-    public GenericAircraft _32N { get; set; }
-    public GenericAircraft _32Q { get; set; }
-    public GenericAircraft _733 { get; set; }
-    public GenericAircraft _73H { get; set; }
-}
 public class GenericAircraft
 {
     public int id { get; set; }
@@ -144,6 +121,7 @@ public class GenericAircraft
 }
 public class Variant
 {
+    public bool is_expanded { get; set; }
     public string flight_id { get; set; }
     public string ident { get; set; }
     public string booking_url { get; set; }
@@ -164,7 +142,7 @@ public class Variant
     public List<Leg> legs { get; set; }
     public string arrival_city { get                
         {
-            return legs.Last().segments.Last().arrival_airport;
+            return legs.Last().segments.Last().aa;
         }
     }
     public DateTime arrival_date_time { get
@@ -187,23 +165,11 @@ public class Baggage
     public string measure { get; set; }
     public object[] descriptions { get; set; }
 }
-/*public class Baggage
-{
-    public bool is_baggage { get; set; }
-    public int value { get; set; }
-    public string measure { get; set; }
-    public object[] descriptions { get; set; }
-}*/
 public class TiketActions
 {
     public string type { get; set; }
     public object[] descriptions { get; set; }
 }
-/*public class Refund
-{
-    public string type { get; set; }
-    public object[] descriptions { get; set; }
-}*/
 public class Leg
 {
     public List<Segment> segments { get; set; }
@@ -214,6 +180,7 @@ public class Leg
 }
 public class Segment
 {
+    public bool is_last { get; set; } = false;
     public string ident { get; set; }
     public string flight_number { get; set; }
     public string flight_number_full { get; set; }
@@ -222,13 +189,17 @@ public class Segment
     public int flight_time { get; set; }
     public string validating_airline { get; set; }
     public string operating_company { get; set; }
+    public string operating_company_logo { get; set; }
     public string marketing_company { get; set; }
+    public string marketing_company_logo { get; set; }
+    public TimeSpan travel_time { get => adt - ddt; }
     public DateTime ddt { get; set; }
     public string departure_date_time {  set
         {
             ddt = DateTime.Parse(value);
         }
     }
+    public string da { get => IataCodesService.GetAirportName(departure_airport); }
     public string departure_airport { get; set; }
     public string departure_terminal { get; set; }
     public string departure_utc { get; set; }
@@ -238,6 +209,7 @@ public class Segment
             adt = DateTime.Parse(value);
         }
     }
+    public string aa { get => IataCodesService.GetAirportName(arrival_airport); }
     public string arrival_airport { get; set; }
     public string arrival_terminal { get; set; }
     public string arrival_utc { get; set; }

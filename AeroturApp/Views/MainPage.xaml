@@ -8,168 +8,119 @@
 
     <ScrollView>
         <VerticalStackLayout Background="{StaticResource PrimaryGradientBrushV}" Padding="0" Margin="0">
-                <!--<Path Data="M2.5 7.5l1.05-1.05-1.85-6.65 2.75-2.75s1.6-1.6.85-2.35-2.35.85-2.35.85l-2.75 2.75-6.65-1.85-1.05 1.05 5.6 2.95-1.9 1.9-2.25.15-1.05 1.05 2.65.95.95 2.65 1.05-1.05.15-2.25 1.9-1.9Z"
-                      Stroke="#6cf"
-                      Aspect="Uniform"
-                      StrokeThickness="10"
-                      Scale="1"
-                      MaximumHeightRequest="90"
-                      MaximumWidthRequest="90"
-                      />-->
-                <!--<VerticalStackLayout>
-                    <Label Text="Дешёвые авиабилеты" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Large"/>
-                    --><!--<Label Text="" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="22"/>--><!--
-                    <Label Text="онлайн" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Header" />
-                </VerticalStackLayout>-->
-            <VerticalStackLayout>
-                <!--<Button Text="Промокод Uzbekistan Airways" 
-                            BackgroundColor="Transparent" 
-                            TextColor="White" 
-                            FontAttributes="Bold" 
-                            FontSize="20" 
-                            Background="{StaticResource AccentGradientBrushV}"
-                            Margin="15,0,15,0"
-                            />
-                    <Frame BackgroundColor="Transparent" BorderColor="Transparent"/>-->
-                <VerticalStackLayout Padding="0" >
-                    <!--search zone-->
-                    <VerticalStackLayout Spacing="8" IsClippedToBounds="True">
-                        <!--input elements-->
-                        <!--<StackLayout RadioButtonGroup.GroupName="Direction">
-                                        <RadioButton Value="DirectionOneWay" Content="В одну сторону" IsChecked="True"/>
-                                        <RadioButton Value="DirectionTwoWay" Content="Туда и обратно"/>
-                                        <RadioButton Value="DirectionComplexWay" Content="Сложный маршрут"/>
-                                    </StackLayout>-->
-                        <!--<Picker x:Name="VayVariantPicker" 
-                                        SelectedIndex="0" 
-                                        Title="Вид пути" 
-                                        BackgroundColor="White" 
-                                        Margin="15,15"/>-->
-                        <Frame BackgroundColor="Transparent" BorderColor="Transparent">
-                            <VerticalStackLayout Spacing="5">
-                                <VerticalStackLayout Spacing="5">
-                                    <Frame BackgroundColor="White" >
-                                        <VerticalStackLayout Padding="0">
-                                            <Label Text="Откуда" TextColor="Black" FontSize="30"/>
-                                            <Frame Padding="0">
-                                                <SearchBar x:Name="fromPointEntry"
-                                                                   Placeholder="Город вылета" 
-                                                                   BackgroundColor="White" 
-                                                                   TextColor="Black" 
-                                                                   HorizontalOptions="StartAndExpand"
-                                                                   Text="{Binding From_iata}">
-                                                    <!--<SearchBar.Behaviors>
-            <toolkit:EventToCommandBehavior EventName="OnTextChanging" 
-                                            Command="{Binding GetSuggestionsCommand}" 
-                                            CommandParameter="{Binding Text, Source={x:Reference fromPointEntry}}"/>
-        </SearchBar.Behaviors>-->
-                                                </SearchBar>
-                                            </Frame>
-                                        </VerticalStackLayout>
-                                    </Frame>
-                                    <Frame BackgroundColor="White">
-                                        <VerticalStackLayout Padding="0">
-                                            <Label Text="Куда" TextColor="Black" FontSize="30"/>
-                                            <Frame Padding="0">
-                                                <SearchBar Placeholder="Город прилёта" 
-                                                               BackgroundColor="White" 
-                                                               TextColor="Black" 
-                                                               HorizontalOptions="FillAndExpand"
-                                                               Text="{Binding To_iata}">
-                                                    <!--<SearchBar.Behaviors>
-                                                            <toolkit:EventToCommandBehavior EventName="OnTextChanging" 
-                                                                                            Command="{Binding GetSuggestionsCommand}" 
-                                                                                            CommandParameter="{Binding Text, Source={x:Reference fromPointEntry}}"/>
-                                                        </SearchBar.Behaviors>-->
-                                                </SearchBar>
-                                            </Frame>
-                                        </VerticalStackLayout>
+            <VerticalStackLayout Spacing="8" IsClippedToBounds="True">
+                <Frame Content="{StaticResource CompanyLogo}" Scale="1.55" BackgroundColor="Transparent"/>
+                <Frame BackgroundColor="Transparent" BorderColor="Transparent">
+                    <VerticalStackLayout Spacing="5">
+                        <VerticalStackLayout Spacing="5">
+                            <Frame BackgroundColor="White" >
+                                <VerticalStackLayout Padding="0">
+                                    <Label Text="Откуда" TextColor="Black" FontSize="30"/>
+                                    <Frame Padding="0">
+                                        <SearchBar Placeholder="Город вылета" 
+                                                   BackgroundColor="White" 
+                                                   TextColor="Black" 
+                                                   HorizontalOptions="StartAndExpand"
+                                                   Text="{Binding From_iata}"
+                                                   TextTransform="Uppercase">
+                                        </SearchBar>
                                     </Frame>
                                 </VerticalStackLayout>
-                                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="0" Margin="0">
-                                    <!--<VerticalStackLayout>-->
-                                        <!--<Label Text="{Binding Date1}"/>-->
-                                        <Frame BackgroundColor="White" Margin="0" HorizontalOptions="Start" >
-                                            <DatePicker x:Name="fromDatePicker" 
+                            </Frame>
+                            <Frame BackgroundColor="White">
+                                <VerticalStackLayout Padding="0">
+                                    <Label Text="Куда" TextColor="Black" FontSize="30"/>
+                                    <Frame Padding="0">
+                                        <SearchBar Placeholder="Город прилёта" 
+                                                   BackgroundColor="White" 
+                                                   TextColor="Black" 
+                                                   HorizontalOptions="FillAndExpand"
+                                                   Text="{Binding To_iata}"
+                                                   TextTransform="Uppercase">
+                                        </SearchBar>
+                                    </Frame>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </VerticalStackLayout>
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="0" Margin="0">
+
+                            <Frame BackgroundColor="White" Margin="0" HorizontalOptions="Start" >
+                                <DatePicker x:Name="fromDatePicker" 
                                                         BackgroundColor="White" 
                                                         TextColor="Black" 
                                                         FontSize="21"
                                                         Date="{Binding Dep}"
                                                         Format="dd'.'MM'.'yyyy"/>
-                                        </Frame>
-                                    <!--</VerticalStackLayout>-->
-                                    <!--<VerticalStackLayout>-->
-                                        <!--<Label Text="{Binding Date2}"/>-->
-                                    <Frame BackgroundColor="White" Margin="0" HorizontalOptions="Start" >
-                                            <DatePicker x:Name="toDatePicker" 
+                            </Frame>
+
+                            <Frame BackgroundColor="White" Margin="0" HorizontalOptions="Start" >
+                                <DatePicker x:Name="toDatePicker" 
                                                         BackgroundColor="White" 
-                                                        TextColor="Black" 
+                                                        TextColor="White" 
                                                         FontSize="21"
                                                         Date="{Binding Arr}"
-                                                        Format="dd'.'MM'.'yyyy"/>
-                                        </Frame>
-                                    <!--</VerticalStackLayout>-->
-                                </HorizontalStackLayout>
-                                <Frame BackgroundColor="White">
-                                    <toolkit:Expander BackgroundColor="White" >
-                                        <toolkit:Expander.Header>
-                                            <VerticalStackLayout Padding="0" Margin="0" Spacing="0">
-                                                <Label Text="Пассажиры" TextColor="Black" FontSize="30" />
-                                                <Label Text="{Binding Total_people, StringFormat='{0} человек(а)'}" TextColor="Black" FontSize="20"/>
-                                            </VerticalStackLayout>
-                                        </toolkit:Expander.Header>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto" />
-                                                <ColumnDefinition Width="1*" />
-                                                <ColumnDefinition Width="0.1*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="35*" />
-                                                <RowDefinition Height="35*" />
-                                                <RowDefinition Height="35*" />
-                                                <RowDefinition Height="35*" />
-                                            </Grid.RowDefinitions>
-                                            <Label Text="Взрослые(старше 12 лет)" TextColor="Black"  VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
-                                            <Label Grid.Row="1" Text="Дети(2-12 лет)" TextColor="Black" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
-                                            <Label Grid.Row="2" Text="Младенцы(до 2 лет)" TextColor="Black" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
-                                            <Label Grid.Row="3" Text="Младенцы с местом( до 2 лет)" TextColor="Black" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                                                        Format="dd'.'MM'.'yyyy"
+                                                        DateSelected="toDatePicker_DateSelected"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+                        <Frame BackgroundColor="White">
+                            <toolkit:Expander BackgroundColor="White" >
+                                <toolkit:Expander.Header>
+                                    <VerticalStackLayout Padding="0" Margin="0" Spacing="0">
+                                        <Label Text="Пассажиры" TextColor="Black" FontSize="30" />
+                                        <Label Text="{Binding Total_people, StringFormat='{0} человек(а)'}" TextColor="Black" FontSize="20"/>
+                                    </VerticalStackLayout>
+                                </toolkit:Expander.Header>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*" />
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="3*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40*" />
+                                        <RowDefinition Height="40*" />
+                                        <RowDefinition Height="40*" />
+                                        <RowDefinition Height="40*" />
+                                    </Grid.RowDefinitions>
+                                    <Label Text="Взрослые(старше 12 лет)" TextColor="Black"  VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                                    <Label Grid.Row="1" Text="Дети(2-12 лет)" TextColor="Black" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                                    <Label Grid.Row="2" Text="Младенцы(до 2 лет)" TextColor="Black" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                                    <Label Grid.Row="3" Text="Младенцы с местом( до 2 лет)" TextColor="Black" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
 
-                                            <Stepper x:Name="adults" Value="{Binding Adults}" Grid.Column="1" Maximum="12" Minimum="1" />
-                                            <Stepper x:Name="children" Value="{Binding Children}" Grid.Column="1" Grid.Row="1" Maximum="4" Minimum="0"/>
-                                            <Stepper x:Name="infants" Value="{Binding Infants}" Grid.Column="1" Grid.Row="2" Maximum="2" Minimum="0"/>
-                                            <Stepper x:Name="infants_seat" Value="{Binding Infants_seat}" Grid.Column="1" Grid.Row="3" Maximum="4" Minimum="0"/>
+                                    <Stepper x:Name="adults" Value="{Binding Adults}" Grid.Column="1" Maximum="12" Minimum="1" />
+                                    <Stepper x:Name="children" Value="{Binding Children}" Grid.Column="1" Grid.Row="1" Maximum="4" Minimum="0"/>
+                                    <Stepper x:Name="infants" Value="{Binding Infants}" Grid.Column="1" Grid.Row="2" Maximum="2" Minimum="0"/>
+                                    <Stepper x:Name="infants_seat" Value="{Binding Infants_seat}" Grid.Column="1" Grid.Row="3" Maximum="4" Minimum="0"/>
 
-                                            <Label Grid.Column="2"  Text="{Binding Adults}" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                            <Label Grid.Column="2" Grid.Row="1" Text="{Binding Children}" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                            <Label Grid.Column="2" Grid.Row="2" Text="{Binding Infants}" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                            <Label Grid.Column="2" Grid.Row="3" Text="{Binding Infants_seat}" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                        </Grid>
-                                    </toolkit:Expander>
-                                </Frame>
-                                <Frame BackgroundColor="White">
-                                    <VerticalStackLayout>
-                                        <Label Text="Класс полёта" TextColor="Black" FontSize="20"/>
-                                        <Picker x:Name="flight_class"
+                                    <Label Grid.Column="2"  Text="{Binding Adults}" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    <Label Grid.Column="2" Grid.Row="1" Text="{Binding Children}" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    <Label Grid.Column="2" Grid.Row="2" Text="{Binding Infants}" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    <Label Grid.Column="2" Grid.Row="3" Text="{Binding Infants_seat}" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </Grid>
+                            </toolkit:Expander>
+                        </Frame>
+                        <Frame BackgroundColor="White">
+                            <VerticalStackLayout>
+                                <Label Text="Класс полёта" TextColor="Black" FontSize="20"/>
+                                <Picker x:Name="flight_class"
                                                 ItemsSource="{Binding PricingTypes}"
                                                 SelectedItem="{Binding PricingType}"
                                                 SelectedIndex="0" 
                                                 BackgroundColor="White"
                                                 TextColor="Black"
-                                                TitleColor="Black"/>
-                                    </VerticalStackLayout>
-                                </Frame>
-                                <Button Text="Найти" 
+                                                TitleColor="Black"
+                                                />
+                            </VerticalStackLayout>
+                        </Frame>
+                        <Button Text="Найти" 
                                         FontSize="30"
                                         TextColor="White" 
                                         Background="{StaticResource AccentGradientBrushV}"  
                                         Command="{Binding NavigateCommand}"
                                         />
-                            </VerticalStackLayout>
-                        </Frame>
-                        <!--<CheckBox x:Name="DeltaSearch" BackgroundColor="White" Margin="15,15"/>-->
                     </VerticalStackLayout>
-                </VerticalStackLayout>
+                </Frame>
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

@@ -1,20 +1,14 @@
 ﻿using AeroturApp.Models.DataModels;
 using AeroturApp.Services;
 using AeroturApp.Views;
-using CommunityToolkit.Maui.Converters;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
-using static System.Net.Mime.MediaTypeNames;
-
-
 
 namespace AeroturApp.Models.ViewModels;
-
 public partial class MainViewModel : ObservableObject
 {
-    private IataCodesService codesService;
+    private IataCodesService codeService;
     private Dictionary<string, string> translatePricingName = new()
     {
         { "Эконом", "Economy" },
@@ -29,14 +23,17 @@ public partial class MainViewModel : ObservableObject
     string pricingType = "Эконом";
 
     [ObservableProperty]
-    ObservableCollection<IATA_City> suggestionsFrom = new();
-    [ObservableProperty]
-    IATA_City suggestionFrom = new();
+    bool isLoaded = false;
 
     [ObservableProperty]
-    ObservableCollection<IATA_City> suggestionsTo = new();
+    ObservableCollection<IATA_Citi> suggestionsFrom = new();
     [ObservableProperty]
-    IATA_City suggestionTo = new();
+    IATA_Citi suggestionFrom = new();
+
+    [ObservableProperty]
+    ObservableCollection<IATA_Citi> suggestionsTo = new();
+    [ObservableProperty]
+    IATA_Citi suggestionTo = new();
 
     [ObservableProperty]
     int adults = 1;
@@ -68,9 +65,9 @@ public partial class MainViewModel : ObservableObject
     int total_people=1;
 
     [ObservableProperty]
-    string from_iata = "MOW";
+    string from_iata = "Москва";
     [ObservableProperty]
-    string to_iata = "TAS";
+    string to_iata = "Ташкент";
     [ObservableProperty]
     DateTime dep = DateTime.Now;
     //[ObservableProperty]
@@ -90,9 +87,10 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     string date2 = DateTime.Now.ToString("dd'.'MM'.'yyyy");
 
-    public MainViewModel()
+    public MainViewModel(IataCodesService serve)
     {
-        //codesService = iataCodesService;
+        codeService = serve;
+        //codeService = iataCodesService;
         /*searchParams = new SearchParams()
         {
             locale = "RU",
@@ -114,7 +112,7 @@ public partial class MainViewModel : ObservableObject
 
     [RelayCommand]
     Task Navigate()
-        => Shell.Current.GoToAsync($"{nameof(SearchResultPage)}", new Dictionary<string, object>()
+        => Shell.Current.GoToAsync($"{nameof(ResultsPage)}", new Dictionary<string, object>()
     {
             {"SearchParams", new SearchParams()
                 {
@@ -125,24 +123,25 @@ public partial class MainViewModel : ObservableObject
                     infants = Infants,
                     infants_seat = Infants_seat,
                     flight_class = translatePricingName[PricingType??"Эконом"],
-                    from = From_iata,
+                    from = codeService.Cities.Find(x => 
+                    {
+                        if (x.name!=null)
+                        {return x.name.ToUpper().Contains(From_iata.ToUpper()); }
+                        else{return false; }
+                    }).code,
                     fromType = "city",
-                    to = To_iata,
+                    to = codeService.Cities.Find(x =>
+                    {
+                        if (x.name!=null)
+                        {return x.name.ToUpper().Contains(To_iata.ToUpper()); }
+                        else{return false; } 
+                    }).code,
                     toType = "city",
-                    date1 = Dep.ToString("yyyy'-'MM'-'dd"),//DateTime.Now.AddDays(1).ToString("yyyy'-'MM'-'dd"),
+                    date1 = Dep.ToString("yyyy'-'MM'-'dd"),
                     date2 = Arr?.ToString("yyyy'-'MM'-'dd") ?? null,
                     asGrouped = 0
                 }
             }
     });
 
-    [RelayCommand]
-    Task GetSuggestions(string input)
-        => GetIataCode(input);
-
-    private async Task GetIataCode(string input)
-    {
-        SuggestionsFrom = await codesService.GetCityCodeByPart(input);
-        SuggestionsTo = await codesService.GetCityCodeByPart(input);
-    }
 }

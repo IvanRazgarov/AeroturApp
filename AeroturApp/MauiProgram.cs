@@ -3,7 +3,14 @@ using CommunityToolkit.Maui;
 using AeroturApp.Services;
 using AeroturApp.Models.ViewModels;
 using AeroturApp.Views;
+using Mopups.Hosting;
 
+#if ANDROID
+using DevExpress.Maui;
+#endif
+#if IOS 
+using DevExpress.Maui;
+#endif
 namespace AeroturApp
 {
     public static class MauiProgram
@@ -14,19 +21,25 @@ namespace AeroturApp
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+#if ANDROID
+                .UseDevExpress()
+#endif
+#if ANDROID
+                .UseDevExpress()
+#endif
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-
+            builder.ConfigureMopups();
 
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<WebAPIClient>();
-            //builder.Services.AddSingleton<IataCodesService>();
+            builder.Services.AddSingleton<IataCodesService>();
 
             builder.Services.AddTransient<SearchResultsViewModel>();
-            builder.Services.AddTransient<SearchResultPage>();
+            builder.Services.AddTransient<ResultsPage>();
 
             builder.Services.AddTransient<MainViewModel>();
             builder.Services.AddTransient<MainPage>();

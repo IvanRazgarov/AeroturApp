@@ -5,39 +5,28 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
 namespace AeroturApp.Models.ViewModels;
-
-//[QueryProperty(nameof(DebugInfo), nameof(DebugInfo))]
 public partial class SearchResultsViewModel : ObservableObject, IQueryAttributable
 {
-    [ObservableProperty]
     private SearchParams searchParams;
-    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        SearchParams = query[nameof(SearchParams)] as SearchParams;
-        Task.Run(()=>GetSearchForFlights(SearchParams));
+        searchParams = query[nameof(SearchParams)] as SearchParams;
+        await GetSearchForFlights(searchParams);
     }
-
-    //private SearchReturn results;
-
-    //public void ApplyQueryAttributes(IDictionary<string, object> query)
-    //{
-    //    DebugInfo = query[nameof(DebugInfo)].ToString();
-    //    OnPropertyChanged(nameof(DebugInfo));
-    //}
 
     private List<Variant> variants = new();
 
     [ObservableProperty]
-    public string debugInfo="No debug info";
+    public string debugInfo = "No debug info";
 
     [ObservableProperty]
-    private bool isBusy = false;
-    
+    private bool isBusy = true;
+
     [ObservableProperty]
     private ObservableCollection<Variant> _flights;
 
     [ObservableProperty]
-    private Variant _flight=new();
+    private Variant _flight = new();
 
     private WebAPIClient _client;
 
@@ -68,75 +57,30 @@ public partial class SearchResultsViewModel : ObservableObject, IQueryAttributab
     [RelayCommand]
     Task ReturnToPrevious() => Shell.Current.GoToAsync($"..");
 
-    //[RelayCommand]
-    //void LoadMoreItems() => AddPartToCollection();
+    [RelayCommand]
+    Task RetrySearch() => GetSearchForFlights(searchParams);
 
     [RelayCommand]
-    Task RetrySearch() => GetSearchForFlights(SearchParams);
+    Task NavigateToSelected(string link)
+        => Shell.Current.GoToAsync($"PaymentPage", new Dictionary<string, object>()
+        {
+            ["link"]=link
+        }); 
 
     public async Task GetSearchForFlights(SearchParams pars)
     {
         IsBusy = true;
-        var res = await _client.SearchForFlights(pars);
-
-        if (!res.is_valid || res.variants == null) 
+        try 
+        { 
+            var res = await _client.SearchForFlights(pars);
+            variants = new List<Variant>(res.variants);
+            Flights = new ObservableCollection<Variant>(variants.OrderBy((x)=>x.price));
+        }
+        catch
         {
-            DebugInfo=res.error_msg;
-            IsBusy = false;
             return;
         }
-        variants = new List<Variant>(res.variants);
-        Flights = new ObservableCollection<Variant>(variants);
-
-        await Task.Yield();
-        IsBusy = false;     
-    }
-    public async Task GetSearchForFlights()
-    {
-        IsBusy = true;
-        var res = await _client.SearchForFlights(SearchParams);
-
-        if (!res.is_valid || res.variants == null)
-        {
-            DebugInfo = "";
-            IsBusy = false;
-            return;
-        }
-        variants = new List<Variant>(res.variants);
-        Flights = new ObservableCollection<Variant>(variants);
-
-        await Task.Yield();
-        IsBusy = false;
-    }
-    public void AddPartToCollection()
-    {
-        if (variants != null)
-        {
-            var length = variants.Count;
-            var len = (int)length / 4;
-            if (len <= 0) { return; }
-            var part = variants[0..^len];
-            variants.RemoveRange(0, len);
-            foreach (var item in part)
-            {
-                Flights.Add(item);
-            }
-        }
-    }
-    public void AddPartToCollection(int partSize)
-    {
-        if (variants != null)
-        {
-            var length = variants.Count;
-            var len = (int)length / partSize;
-            if (len <= 0) { return; }
-            var part = variants[0..^len];
-            variants.RemoveRange(0, len);
-            foreach (var item in part)
-            {
-                Flights.Add(item);
-            }
-        }
+        finally { IsBusy = false; }
     }
 
 }
